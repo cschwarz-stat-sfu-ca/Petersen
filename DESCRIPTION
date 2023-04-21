@@ -39,3 +39,5 @@ VignetteBuilder:
     knitr,
     Rmarkdown,
     R.rsp
+URL: https://github.com/cschwarz-stat-sfu-ca/Petersen
+BugReports: https://github.com/cschwarz-stat-sfu-ca/Petersen/issues
