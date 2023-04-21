@@ -37,7 +37,7 @@ Suggests:
     rmarkdown
 VignetteBuilder: 
     knitr,
-    Rmarkdown,
+    rmarkdown,
     R.rsp
 URL: https://github.com/cschwarz-stat-sfu-ca/Petersen
 BugReports: https://github.com/cschwarz-stat-sfu-ca/Petersen/issues

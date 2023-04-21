@@ -4,7 +4,7 @@ Use of the Petersen Capture-Recapture estimates in fisheries management.
 
 ## Versions and installation
 
-  * **CRAN**  Download the **SPAS** package
+  * **CRAN**  Download the **Petersen** package
 
   * **Github** To install the latest development version from Github, 
     install the newest version of the **devtools** package; then run
@@ -42,7 +42,7 @@ The packages includes functions for the analysis of
 - geographically stratified studies (wrapper to *SPAS*)
 - temporally-stratified studies (wrapper to *BTSPAS*)
 - double tagging studies including reward tagging studies
-- multiple-Petersen studies
+- multiple-Petersen studies (call *RMark/MARK* and use mark-resight methods therein)
 - forward and reverse-Petersen studies and their combination
 
 ## References
