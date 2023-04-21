@@ -1,7 +1,8 @@
 Package: Petersen
 Type: Package
 Title: Petersen estimator for capture-recapture experiments
-Version: 0.2.0
+Version: 2023.5.1
+Date: 2023-05-01
 Author: Carl James Schwarz
 Maintainer: Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>
 Description: A comprehensive implementation of the Petersen estimator

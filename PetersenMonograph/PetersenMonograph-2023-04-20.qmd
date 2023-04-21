@@ -11,6 +11,8 @@ format:
     number-sections: true
     self-contained: true
     df-print: default
+    toc-location: body
+    toc-expand: all
   pdf:
     toc: true
     number-sections: true
@@ -56,11 +58,9 @@ ft_aictab <- function(aictab, widths=NULL){
 
 ```
 
-# Change log and things to do
+# Change log 
 
-## Change log
-
-2023-05-01 First Edition
+2023-05-01 First Release
 
 # Introduction
 
