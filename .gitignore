@@ -1,0 +1,9 @@
+inst/doc
+PetersenMonograph/mark*
+PetersenMonograph/Images/*.Rdata
+*.DS_Store
+.Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store

@@ -1,0 +1,658 @@
+% This template was modified to NOT print the galleylines and
+% other such stuff for the initial drafts of the paper.
+%
+% When you want the final draft, use the template.tex.old file.
+%
+
+
+%%%Macros for Biometrics articles
+%%%created Dec. 1995 by Larisa Martin for
+%%%Allen Press, Inc.
+
+%%% The file EXAMPLE.TEX shows the use of the Template
+
+%%% For any questions on how to use this template
+%%% please contact Larisa Martin at lmartin@allenpress.com
+%%% or (913)843-1234 (ext. 45)
+
+%%%PARAMETERS%%%
+
+\catcode`@=11
+\vbadness=10000
+\hbadness=10000
+\hsize=38pc
+\vsize=54pc
+\voffset=-.1in
+%\hoffset=-.5in
+\topskip=12pt
+\parindent=2em
+\parskip=0pt
+\widowpenalty=10000
+\clubpenalty=10000
+\hfuzz=10pt
+\abovedisplayskip=6pt plus 1pt
+\abovedisplayshortskip=6pt plus 1pt
+\belowdisplayskip=6pt plus 1pt
+\belowdisplayshortskip=6pt plus 1pt
+\frenchspacing
+
+
+%%%%FONTS AND FAMILIES%%%%%
+
+% AMS fonts are included, but commented out with
+% the symbol "%.%", since not everyone has them.
+% If you have them and need them,
+% you can remove the %.%.
+
+
+\font\authorfont=cmbx12
+\font\smc=cmcsc10 at 12pt
+\font\smcnine=cmcsc10
+
+
+\font\fourteenrm=cmbx10 at 14.40pt
+\font\fourteenit=cmbxti10 at 14.40pt
+\font\fourteeni=cmmib10 at 14.40pt
+\font\fourteensy=cmbsy10 at 14.40pt
+\font\fourteenex=cmex10 at 14.40pt
+%\font\fourteenmsa=msam10 at 14.40pt
+%\font\fourteenmsb=msbm10 at 14.40pt
+%\font\fourteeneuf=eufm10 at 14.40pt
+
+\font\twelverm=cmr10 at 12pt
+\font\twelveit=cmti10 at 12pt
+\font\twelvebf=cmbx10 at 12pt
+\font\twelvei=cmmi10 at 12pt
+\font\twelveib=cmmib10 at 12pt
+\font\twelvesy=cmsy10 at 12pt
+\font\twelvebsy=cmbsy10 at 12pt
+\font\twelveex=cmex10 at 12pt
+%\font\twelvemsa=msam10 at 12pt
+%\font\twelvemsb=msbm10 at 12pt
+%\font\twelveeuf=eufm10 at 12pt
+
+\font\tenrm=cmr10
+\font\tenit=cmti10
+\font\tenbf=cmbx10
+\font\tenib=cmmib10 %bold-italic 10-pt font
+\font\teni=cmmi10
+\font\tensy=cmsy10
+\font\tenbsy=cmbsy10
+\font\tenex=cmex10
+%\font\tenmsa=msam10
+%\font\tenmsb=msbm10
+%\font\teneuf=eufm10 %gothic letters
+
+\font\ninerm=cmr9
+\font\nineit=cmti9
+\font\ninebf=cmbx9
+\font\ninei=cmmi9
+\font\nineib=cmmib9  %bold-italic 9-pt font
+\font\ninesy=cmsy9
+\font\nineex=cmex10 at 9pt
+%\font\ninemsa=msam9
+%\font\ninemsb=msbm9
+%\font\nineeuf=eufm9
+
+\font\eightrm=cmr8
+\font\eightit=cmti8
+\font\eightbf=cmbx8
+\font\eighti=cmmi8
+\font\eightib=cmmib10 at 8pt
+\font\eightsy=cmsy8
+\font\eightsy=cmbsy10 at 8pt
+\font\eightex=cmex10 at 8pt
+%\font\eightmsa=msam8
+%\font\eightmsb=msbm8
+%\font\eighteuf=eufm8
+
+\font\sevenrm=cmr7 
+% roman superscipt & subscript font (to be used as footnote markers in tables)
+\font\sevenit=cmti7
+\font\sevenbf=cmbx7
+\font\seveni=cmmi7
+\font\sevenib=cmmib7
+\font\sevensy=cmsy7
+\font\sevenex=cmex10 at 7pt
+%\font\sevenmsa=msam7
+%\font\sevenmsb=msbm7
+%\font\seveneuf=eufm7
+
+\font\fiverm=cmr5
+\font\fivebf=cmbx5
+\font\fivesy=cmsy5
+\font\fivei=cmmi5
+%\font\fivemsa=msam5
+%\font\fivemsb=msbm5
+%\font\fiveeuf=eufm5
+
+% BOLD-ITALIC GREEK LETTERS
+%
+\newfam\cmmibfam%Family 8
+\font\ninecmmib=cmmib10 at 12 pt \skewchar\ninecmmib='177
+\font\sevencmmib=cmmib10 \skewchar\sevencmmib='177
+\font\fivecmmib=cmmib8 \skewchar\fivecmmib='177
+\textfont\cmmibfam=\ninecmmib \scriptfont\cmmibfam\sevencmmib
+\scriptscriptfont\cmmibfam=\fivecmmib
+
+\def\bGamma{\mathchar"0800}
+\def\bDelta{\mathchar"0801}
+\def\bTheta{\mathchar"0802}
+\def\bLambda{\mathchar"0803}
+\def\bXi{\mathchar"0804}
+\def\bPi{\mathchar"0805}
+\def\bSigma{\mathchar"0806}
+\def\bUpsilon{\mathchar"0807}
+\def\bPhi{\mathchar"0808}
+\def\bPsi{\mathchar"0809}
+\def\bOmega{\mathchar"080A}
+\def\balpha{\mathchar"080B}
+\def\bbeta{\mathchar"080C}
+\def\bgamma{\mathchar"080D}
+\def\bdelta{\mathchar"080E}
+\def\bepsilon{\mathchar"080F}
+\def\bzeta{\mathchar"0810}
+\def\bfeta{\mathchar"0811}
+\def\btheta{\mathchar"0812}
+\def\biota{\mathchar"0813}
+\def\bkappa{\mathchar"0814}
+\def\blambda{\mathchar"0815}
+\def\bmu{\mathchar"0816}
+\def\bnu{\mathchar"0817}
+\def\bxi{\mathchar"0818}
+\def\bpi{\mathchar"0819}
+\def\brho{\mathchar"081A}
+\def\bsigma{\mathchar"081B}
+\def\btau{\mathchar"081C}
+\def\bupsilon{\mathchar"081D}
+\def\bphi{\mathchar"081E}
+\def\bchi{\mathchar"080F}
+\def\bpsi{\mathchar"0820}
+\def\bomega{\mathchar"0821}
+\def\bvarepsilon{\mathchar"0822}
+\def\bvartheta{\mathchar"0823}
+\def\bvarpi{\mathchar"0824}
+\def\bvarrho{\mathchar"0825}
+\def\bvarsigma{\mathchar"0826}
+\def\bvarphi{\mathchar"0827}
+
+
+% GOTHIC LETTERS
+
+%\def\gn{\mathchar"0B4E} %(Gothic N)
+%\def\M{\mathchar"0A4D} %(Blackboard bold M)
+%\def\B{\mathchar"0A42} %(Blackboard bold B)
+
+%\newfam\msafam%Family 9
+%\newfam\msbfam%Family 10 (A)
+%\newfam\euffam%Family 11 (B)
+
+\def\fourteenpoint{\def\rm{\fam0\fourteenrm}%
+\textfont0=\fourteenrm\scriptfont0=\twelverm%
+\scriptscriptfont0=\tenbf%
+\textfont1=\fourteeni\scriptfont1=\twelvei%
+\scriptscriptfont1=\tenib%
+\def\mit{\fam1\fourteeni}\def\oldstyle{\fam1\fourteeni}%
+\textfont2=\fourteensy\scriptfont2=\twelvesy%
+\scriptscriptfont2=\tenbsy%
+\def\cal{\fam2\fourteensy}%
+\textfont3=\fourteenex\scriptfont3=\twelveex%
+\scriptscriptfont3=\tenex%
+\def\it{\fam\itfam\fourteenit}%
+\textfont\itfam=\fourteenit%
+\def\bf{\rm}
+%\def\msa{\fam\msafam\fourteenmsa}%
+%\textfont0=\fourteenmsa\scriptfont0=\twelvemsa%
+%\scriptscriptfont0=\tenmsa%
+%\def\msb{\fam\msbfam\fourteenmsb}%
+%\textfont0=\fourteenmsb\scriptfont0=\twelvemsb%
+%\scriptscriptfont0=\tenmsb%
+%\def\euf{\fam\euffam\fourteeneuf}%
+%\textfont0=\fourteeneuf\scriptfont0=\twelveeuf%
+%\scriptscriptfont0=\teneuf%
+\setbox\strutbox=\hbox{\vrule height13pt depth4pt width0pt}%
+\baselineskip=16pt\fourteenrm}
+
+\def\tenpoint{\def\rm{\fam0\tenrm}%
+\textfont0=\tenrm\scriptfont0=\sevenrm%
+\scriptscriptfont0=\fiverm%
+\textfont1=\teni\scriptfont1=\seveni%
+\scriptscriptfont1=\fivei%
+\def\mit{\fam1\teni}\def\oldstyle{\fam1\teni}%
+\textfont2=\tensy\scriptfont2=\sevensy%
+\scriptscriptfont2=\fivesy%
+\def\cal{\fam2\tensy}%
+\textfont3=\tenex\scriptfont3=\tenex%
+\scriptscriptfont3=\tenex%
+\def\it{\fam\itfam\tenit}%
+\textfont\itfam=\tenit%
+\def\bf{\fam\bffam\tenbf}%
+\textfont\bffam=\tenbf\scriptfont\bffam=\sevenbf%
+\scriptscriptfont\bffam=\fivebf%
+%\def\msa{\fam\msafam\tenmsa}%
+%\textfont\msafam=\tenmsa \scriptfont\msafam=\sevenmsa
+%\scriptscriptfont\msafam=\fivemsa%
+%\def\msb{\fam\msbfam\tenmsb}%
+%\textfont\msbfam=\tenmsb \scriptfont\msbfam=\sevenmsb%
+%\scriptscriptfont\msbfam=\fivemsb%
+%\def\euf{\fam\euffam\teneuf}%
+%\textfont\euffam=\teneuf \scriptfont\euffam=\seveneuf%
+%\scriptscriptfont\euffam=\fiveeuf%
+\setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt width0pt}%
+\baselineskip=12pt\rm}
+
+
+\def\ninepoint{\def\rm{\fam0\twelverm}%
+\textfont0=\twelverm \scriptfont0=\tenrm \scriptscriptfont0=\eightrm
+\textfont1=\twelvei\scriptfont1=\teni \scriptscriptfont1=\eighti
+\def\mit{\fam1\twelvei}\def\oldstyle{\fam1\twelvei}%
+\textfont2=\twelvesy \scriptfont2=\tensy \scriptscriptfont2=\eightsy
+\def\cal{\fam2\twelvesy}%
+\textfont3=\twelveex \scriptfont3=\tenex \scriptscriptfont3=\eightex
+\def\it{\fam\itfam\twelveit}%
+\textfont\itfam=\twelveit
+\def\bf{\fam\bffam\twelvebf}%
+\textfont\bffam=\twelvebf \scriptfont\bffam=\tenbf
+\scriptscriptfont\bffam=\eightbf
+%\def\msa{\fam\msafam\twelvemsa}%
+%\textfont\msafam=\twelvemsa \scriptfont\msafam=\tenmsa
+%\scriptscriptfont\msafam=\eightmsa
+%\def\msb{\fam\msbfam\twelvemsb}%
+%\textfont\msbfam=\twelvemsb \scriptfont\msbfam=\tenmsb
+%\scriptscriptfont\msbfam=\eightmsb
+%\def\euf{\fam\euffam\twelveeuf}%
+%\textfont\euffam=\twelveeuf \scriptfont\euffam=\teneuf
+%\scriptscriptfont\euffam=\eighteuf%
+\setbox\strutbox=\hbox{\vrule height7pt depth3pt width0pt}%
+\baselineskip=23pt plus 1pt minus 1pt \rm}
+
+\def\eightpoint{\def\rm{\fam0\eightrm}%
+\textfont0=\eightrm \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
+\textfont1=\eighti\scriptfont1=\seveni \scriptscriptfont1=\fivei
+\def\mit{\fam1\eighti}\def\oldstyle{\fam1\eighti}%
+\textfont2=\eightsy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
+\def\cal{\fam2\eightsy}%
+\textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
+\def\it{\fam\itfam\eightit}%
+\textfont\itfam=\eightit
+\def\bf{\fam\bffam\eightbf}%
+\textfont\bffam=\eightbf \scriptfont\bffam=\sevenbf
+\scriptscriptfont\bffam=\fivebf
+%\def\msa{\fam\msafam\eightmsa}%
+%\textfont\msafam=\eightmsa \scriptfont\msafam=\sevenmsa
+%\scriptscriptfont\msafam=\fivemsa
+%\def\msb{\fam\msbfam\eightmsb}%
+%\textfont\msbfam=\eightmsb \scriptfont\msbfam=\sevenmsb
+%\scriptscriptfont\msbfam=\fivemsb
+%\def\euf{\fam\euffam\eighteuf}% 
+%\textfont\euffam=\eighteuf \scriptfont\euffam=\seveneuf
+%\scriptscriptfont\euffam=\fiveeuf%
+\setbox\strutbox=\hbox{\vrule height7pt depth3pt width0pt}%
+\baselineskip=10pt\rm}
+
+\skewchar\teni='177
+\skewchar\ninei='177
+\skewchar\eighti='177
+\skewchar\seveni='177
+\skewchar\fivei='177
+\skewchar\tensy='60
+\skewchar\ninesy='60
+\skewchar\eightsy='60
+\skewchar\sevensy='60
+\skewchar\fivesy='60
+
+
+%%%%headings
+
+\long\def\Title#1\par{%
+\global\titlepagetrue
+\hbox{}\vskip2pc{\parindent=0pt
+\raggedcenter\pretolerance=10000
+\fourteenpoint #1\par}
+\vskip24pt}
+
+\long\def\Author#1\par{%
+{\parindent=0pt
+\raggedcenter\pretolerance=10000
+\tenpoint {\authorfont #1}\par}
+\vskip4pt\tenpoint\noindent}
+
+\long\def\Authorlast#1\par{%
+\removelastskip\centerline{\tenpoint\bf and}\par\vskip6pt
+\centerline{\tenpoint\authorfont #1}
+\vskip4pt}
+
+\long\def\Affiliation#1\par{%
+{\parindent=0pt
+\raggedcenter\pretolerance=10000
+\tenpoint #1\par}
+\vskip8pt\tenpoint\noindent}
+
+\def\Summary#1\par{\removelastskip
+\goodbreak\vskip24pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc Summary}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint\baselineskip=18pt\rm}
+
+\def\resume#1\par{\removelastskip
+\goodbreak\vskip12pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc R\'esum\'e}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint\baselineskip=18pt\rm}
+
+\def\Acknowledgments#1\par{\removelastskip
+\goodbreak\vskip12pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc Acknowledgements}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint}
+
+\def\Acknowledgment#1\par{\removelastskip
+\goodbreak\vskip12pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc Acknowledgement}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint}
+
+\def\Appendix#1\par{\removelastskip
+\goodbreak\vskip18pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc #1}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint\rm\parindent=1em}
+
+\def\Appendixtitle#1#2\par{\removelastskip
+\goodbreak\vskip18pt plus 1pt minus 6pt
+{\raggedcenter
+\interlinepenalty=10000\pretolerance=10000
+\noindent{\smc #1}\nobreak\par\nobreak
+\vskip6pt\noindent{\it #2}\nobreak\par\nobreak}
+\nobreak\vskip6pt\nobreak
+\noindent\ninepoint\rm\parindent=1em}
+
+
+%for Introduction only
+
+\def\Introduction#1\par{\removelastskip
+\goodbreak\vskip24pt plus 1pt minus 6pt
+{\interlinepenalty=10000\pretolerance=10000
+\noindent\ninepoint\bf #1\nobreak\par\nobreak}
+\nobreak\vskip2pt\nobreak
+\noindent\ninepoint\rm}
+
+%for first level head alone
+
+\def\Section#1\par{\removelastskip
+\goodbreak\vskip6pt plus .5pt minus 1pt
+{\interlinepenalty=10000\pretolerance=10000
+\noindent\ninepoint\bf #1\nobreak\par\nobreak}
+\nobreak\vskip2pt\nobreak
+\noindent\ninepoint\rm}
+
+%for second level head alone
+
+\def\Subsection#1#2\par{\removelastskip
+\goodbreak\vskip6pt plus 1pt minus 4pt
+\interlinepenalty=10000\pretolerance=10000
+\noindent\ninepoint\rm #1~\it #2\nobreak\par\nobreak
+\nobreak\vskip2pt\nobreak
+\noindent\ninepoint\rm}
+
+%for first level head followed by second level head
+
+\def\subsection#1#2#3\par{\removelastskip
+\goodbreak\vskip6pt plus 1pt minus 4pt
+\interlinepenalty=10000\pretolerance=10000
+\noindent\ninepoint\bf #1\nobreak\par\nobreak\vskip2pt
+\noindent\ninepoint\rm #2~\it #3\nobreak\par\nobreak
+\nobreak\vskip2pt\nobreak
+\noindent\ninepoint\rm}
+
+%for introduction followed by second level head
+
+\def\introduction#1#2#3\par{\removelastskip
+\goodbreak\vskip24pt plus 1pt minus 6pt
+\interlinepenalty=10000\pretolerance=10000
+\noindent\ninepoint\bf #1\nobreak\par\nobreak\vskip2pt
+\noindent\ninepoint\rm #2~\it #3\nobreak\par\nobreak
+\nobreak\vskip2pt\nobreak
+\noindent\ninepoint\rm}
+
+\def\References #1\par{\vskip12pt plus 1pt
+\centerline{\smc References}\nobreak\par\nobreak
+\interlinepenalty=10000\parskip=0pt plus 1pt
+\parindent=\wd0
+\ninepoint
+\nobreak\vskip6pt\nobreak}
+
+
+\def\keywords#1{\insert\footins
+\bgroup\ninepoint
+\vskip6pt\noindent\hangindent=20pt\hangafter=1 {{\it Key words:}\hskip1em
+{#1\hfill}\vskip6pt\par{\centerline{\tenrm\folio}}}
+\dimen\footins=30pc
+\egroup}
+
+
+\long\def\received#1\par{\removelastskip
+\goodbreak\vskip12pt plus .5pt minus 1pt
+{\parindent=0pt
+\raggedcenter\pretolerance=10000
+\ninepoint\it #1\par}}
+
+
+\def\Proof{\removelastskip
+\skiphalfaline
+\it Proof.\enspace\rm}
+
+\def\figcaption#1#2\par{
+\noindent\ninepoint\bf Figure #1\hskip1em\rm#2\hfill\par}
+
+
+\def\tabcaption#1\par{%
+{\parindent=0pt
+\raggedcenter\pretolerance=10000
+\ninepoint {\it#1}\par}
+\vskip4pt\ninepoint\noindent\rm}
+
+
+\def\narrower{\leftskip=1em\rightskip=1em}
+\def\unnarrower{\leftskip=0pt\rightskip=0pt}
+
+%%%%FOOTNOTES%%%%%
+
+\newbox\footbox
+\setbox\footbox=\hbox{\ninerm 22)~}
+
+\def\footnoterule{\kern-3pt\hrule width 38truepc\kern2.6pt}
+
+
+\def\footnotespacing{\frenchspacing}
+\newdimen\footnotespace
+\footnotespace=0pt
+
+
+
+\def\footnote#1{\let\@sf\empty %#2 (the text) is read later
+  \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
+$^{#1}$\@sf\vfootnote{#1}}
+
+\def\vfootnote#1{\insert\footins\bgroup
+\interlinepenalty\interfootnotelinepenalty
+\splittopskip\ht\strutbox % top baseline for broken footnotes
+\splitmaxdepth\dp\strutbox \floatingpenalty\@MM
+\leftskip\z@skip \rightskip\z@skip \spaceskip\z@skip \xspaceskip\z@skip
+\parindent=\wd\footbox
+\litem{\eightrm #1}\ninepoint\footstrut\futurelet\next\fo@t}
+\def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
+\else\let\next\f@t\fi \next}
+\def\f@@t{\bgroup\aftergroup\@foot\let\next}
+\def\f@t#1{#1\@foot}
+\def\@foot{\strut\egroup}
+\def\footstrut{\vbox to\splittopskip{}}
+\skip\footins=12pt % space added when footnote is present
+\count\footins=1000 % footnote magnification factor (1 to 1)
+\dimen\footins=8in % maximum footnotes per page
+
+
+
+%%%%%OUTPUT ROUTINE%%%%%%
+
+\newif\iftitlepage
+
+\def\makeheadline{\iftitlepage \global\titlepagefalse
+\vbox{\titleheadline}%
+\vskip5pt
+\else \vbox{\ifodd\pageno\rightheadline\else\leftheadline\fi}%
+\vskip6pt\fi}
+
+\output{\plainoutput}
+
+%\def\vc{\vrule height 15pt depth 0pt width .4pt }
+%\def\hc{\vrule height .2pt depth .2pt width 15pt }
+\def\vc{}   % changed for draft article
+\def\hc{}   % changed for draft article
+
+\def\vcrip{\hbox to 0pt{\hss\vc\hss}}
+\def\vcrop{\hbox to 0pt{\hss\vc\hss}}
+\def\hcrip{\hbox to 0pt{\hss\hc\hskip 3pt}}
+\def\hcrop{\hbox to 0pt{\hskip 3pt\hc\hss}}
+\def\ltoprules{\nointerlineskip\vbox to 0pt{\offinterlineskip\vss
+  \moveleft3.5pc\hbox to 45.5pc{\vcrip\gll\hfil\vcrop}
+  \vskip1pt
+  \moveleft3.5pc\hbox to 45.5pc{\hcrip\hfil\hcrop}
+  \vskip2pc}\nointerlineskip}
+\def\lbottomrules{\nointerlineskip\vskip2pc\vbox to 0pt{\offinterlineskip
+  \moveleft3.5pc\hbox to 45.5pc{\hcrip\hfil\hcrop}
+  \vskip 3pt
+  \moveleft3.5pc\hbox to 45.5pc{\vcrip\hfil\vcrop}
+  \vss}\nointerlineskip}
+
+\def\rtoprules{\nointerlineskip\vbox to 0pt{\offinterlineskip\vss
+  \moveleft4pc\hbox to 45.5pc{\vcrip\hfil\glr\vcrop}
+  \vskip1pt
+  \moveleft4pc\hbox to 45.5pc{\hcrip\hfil\hcrop}
+  \vskip2pc}\nointerlineskip}
+\def\rbottomrules{\nointerlineskip\vskip2pc\vbox to 0pt{\offinterlineskip
+  \moveleft4pc\hbox to 45.5pc{\hcrip\hfil\hcrop}
+  \vskip 3pt
+  \moveleft4pc\hbox to 45.5pc{\vcrip\hfil\vcrop}
+  \vss}\nointerlineskip}
+
+\newinsert\topins
+\newif\ifp@ge
+\newif\if@mid
+\def\topinsert{\@midfalse\p@gefalse\@ins}
+\def\midinsert{\@midtrue\@ins}
+\def\pageinsert{\@midfalse\p@getrue\@ins}
+\skip\topins=0pt% no space added when a topinsert is present
+\count\topins=1000
+\dimen\topins=\maxdimen
+\def\@ins{\par\begingroup\setbox0=\vbox\bgroup}
+\def\endinsert{\egroup
+     \if@mid \dimen@=\ht0 \advance\dimen@ by\dp0
+        \advance\dimen@ by 12\p@ \advance\dimen@ by \pagetotal
+        \ifdim\dimen@>\pagegoal \@midfalse\p@gefalse\fi\fi
+     \if@mid \bigskip \box0 \bigbreak
+     \else\insert\topins{\penalty100 % floating insertion
+        \splittopskip=0pt \splitmaxdepth=\maxdimen \floatingpenalty=0
+        \ifp@ge \dimen@=dp0
+           \vbox to \vsize{\unbox0 \kern-dimen@} %depth is zero
+        \else \box0 \nobreak\bigskip\fi}\fi\endgroup}
+
+\newif\ifr@ggedbottom
+\def\raggedbottom{\topskip10pt plus60pt \r@ggedbottomtrue}
+\def\normalbottom{\topskip10pt \r@ggedbottomfalse} %undoes \raggedbottom
+
+\def\pagebody{\vbox to\vsize{\ifvoid\topins\else\unvbox\topins\fi
+     \dimen@=\dp255 \unvbox255
+     \ifvoid\footins\else %footnote info is present
+         \vskip\skip\footins\footnoterule \unvbox\footins\fi
+     \ifr@ggedbottom \kern-\dimen@\vfill\fi}}
+
+
+
+\def\plainoutput{\shipout
+      \vbox{\ifodd\pageno\rtoprules\makeheadline\pagebody\rbottomrules\else
+      \ltoprules\makeheadline\pagebody\lbottomrules\fi}
+      \advancepageno
+      \ifnum\outputpenalty>-20000\else\dosupereject\fi}
+
+
+\def\runninghead#1{\global\outer\def\righthead{\it#1}}
+%\def\lefthead{\it Biometrics, {\ifnum\issueno=1 March\else\ifnum\issueno=2 June
+%\else\ifnum\issueno=3 September\else\ifnum\issueno=4 December\fi\fi\fi\fi}
+%{\ifnum\volno=52
+%\rm1996\else\ifnum\volno=53 \rm1997 \else\ifnum\volno=54 \rm1998\fi\fi\fi}}
+\def\lefthead{\righthead}   % lefthead set to blank for submission of articles
+
+
+
+\def\galleyline#1#2#3#4{\global\outer\def\mssno{mss \# #1}\def\apno{
+AP art.\ \# #2}\def\volno{#3}\def\issueno{#4}}
+
+%\def\gll{\line{\indent\ninebf\mssno; \apno; BIOM vol.~\volno(\issueno)\hfill\hfill}}
+%\def\glr{\line{\hfill\hfill\ninebf\mssno; \apno; BIOM vol.~\volno(\issueno)\hskip1em}}
+\def\gll{}     % dummy galley line left for submission purposes
+\def\glr{}     % dummy galley line right for submission purposes
+
+
+\def\rightheadline{\line{\vbox to 8.5pt{}%
+      \tenpoint\hfill\righthead\hfill{\tenrm\folio}}}
+\def\leftheadline{\line{\vbox to 8.5pt{}%
+      \tenpoint{\tenrm\folio}\hfill\lefthead\hfill}}
+
+%\def\titleheadline{\baselineskip=9pt\noindent{\smcnine Biometrics \volno,
+%\folio--000}
+%      \hfill\break{\ninerm {\ifnum\issueno=1 March\else\ifnum\issueno=2 June
+%\else\ifnum\issueno=3 September\else\ifnum\issueno=4 December\fi\fi\fi\fi}
+%{\ifnum\volno=52
+%1996\else\ifnum\volno=53 1997 \else\ifnum\volno=54 1998
+%\else\ifnum\volno=55 \rm1999\fi\fi\fi\fi}}\hfill\hfill}
+\def\titleheadline{}   % no title on first page
+
+
+%%%%%%MACROS%%%%%%%
+
+
+\def\litem{\noindent\hangindent=20pt\hangafter=1 }
+
+\def\ref #1{\noindent\hangindent=20pt\hangafter=1 #1}
+
+\def\dis{\displaystyle}
+
+\def\skipalineandahalf{\removelastskip\vskip28pt plus 2pt minus 2pt}
+\def\skipaline{\removelastskip\vskip22pt plus 1pt minus 1pt}
+\def\skiphalfaline{\removelastskip\vskip11pt plus 1pt minus 1pt}
+
+
+\def\raggedcenter{\leftskip=0pt plus 4em \rightskip
+=\leftskip \parfillskip=0pt \spaceskip=.3333em
+\xspaceskip=.5em \pretolerance=9999 \tolerance=9999
+\hyphenpenalty=9999 \exhyphenpenalty=9999}
+
+\def\dotfill{\leaders\hbox to 1em{\hss.\hss}\hfill}
+
+\def\qed{$\rlap{$\sqcap$}\sqcup$} %end of proof
+
+\def\0{\phantom{0}} 
+%for compensation in tables: stands for one digit
+\def\1{\phantom{.0}} 
+%for compensation in tables: stands for decimal point followed by one digit
+\def\m{\phantom{$-$}} %for compensation in tables: stands for a minus sign
+
+\def\mapright#1{\smash{\mathop{\longrightarrow}\limits^{#1}}}
+%rightarrow with something on top
+
+
+\def\punc{\hskip1.5pt\cdot\hskip1.5pt} 
+%a centered dot with a little bit ofspace around it for f(.)
+\def\frac#1#2{{#1\over#2}}
+

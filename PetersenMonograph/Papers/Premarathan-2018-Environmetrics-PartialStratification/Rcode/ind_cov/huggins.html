@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>huggins.R</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<!-- Automatically generated by RStudio [12861c30b10411e1afa60800200c9a66] -->
+
+<h3>huggins.R</h3>
+
+<p>wpremara &mdash; <em>Nov 5, 2014, 12:59 PM</em></p>
+
+<pre><code class="r">###############################################################################
+############ Capture Closed models  and Huggins models using RMark ############
+###############################################################################
+
+setwd(&quot;U:\\Lasantha/Research/Rcode&quot;)
+library(RMark)
+</code></pre>
+
+<pre><code>Warning: package &#39;RMark&#39; was built under R version 3.0.3
+</code></pre>
+
+<pre><code>This is RMark 2.1.9
+</code></pre>
+
+<pre><code class="r">options(width=350)
+
+## &quot;convert.inp&quot; - Convert MARK input file to RMark dataframe
+##    covariates - names to be assigned to the covariates defined in the inp file
+##    first two colums in the .inp file are names as &quot;ch&quot; and &quot;freq&quot;
+data &lt;- convert.inp(&quot;test&quot;, covariates=c(&quot;sex&quot;, &quot;length&quot;))
+head(data)
+</code></pre>
+
+<pre><code>  ch freq sex length
+1 10    1   1     21
+2 10    1   1     15
+3 10    1   1     16
+4 10    1   1     16
+5 10    1   1     18
+6 10    1   1     23
+</code></pre>
+
+<pre><code class="r">data$length.sq= (data$length)^2 # add a column of (length)^2 to the data frame
+data$sex  &lt;- as.factor(ifelse(data$sex==1, &quot;Male&quot;, &quot;Female&quot;))
+data
+</code></pre>
+
+<pre><code>   ch freq    sex length length.sq
+1  10    1   Male     21       441
+2  10    1   Male     15       225
+3  10    1   Male     16       256
+4  10    1   Male     16       256
+5  10    1   Male     18       324
+6  10    1   Male     23       529
+7  10    1 Female     22       484
+8  10    1 Female     17       289
+9  10    1 Female     25       625
+10 10    1 Female     20       400
+11 01    1   Male     23       529
+12 01    1   Male     19       361
+13 01    1   Male     19       361
+14 01    1   Male     23       529
+15 01    1   Male     24       576
+16 01    1   Male     21       441
+17 01    1   Male     15       225
+18 01    1   Male     20       400
+19 01    1 Female     20       400
+20 01    1 Female     17       289
+21 01    1 Female     25       625
+22 01    1 Female     17       289
+23 01    1 Female     23       529
+24 11    1   Male     15       225
+25 11    1   Male     24       576
+26 11    1 Female     25       625
+27 11    1 Female     23       529
+</code></pre>
+
+<pre><code class="r">summary(data)
+</code></pre>
+
+<pre><code>      ch                 freq       sex         length       length.sq  
+ Length:27          Min.   :1   Female:11   Min.   :15.0   Min.   :225  
+ Class :character   1st Qu.:1   Male  :16   1st Qu.:17.0   1st Qu.:289  
+ Mode  :character   Median :1               Median :20.0   Median :400  
+                    Mean   :1               Mean   :20.2   Mean   :420  
+                    3rd Qu.:1               3rd Qu.:23.0   3rd Qu.:529  
+                    Max.   :1               Max.   :25.0   Max.   :625  
+</code></pre>
+
+<pre><code class="r"># Process encounter history dataframe for MARK analysis
+#Prior to analyzing the data, this function initializes several variables 
+# (e.g., number of capture occasions, time intervals) that are often specific
+# to the capture-recapture model being fitted to the data. It also is used to
+# 1) define groups in the data that represent different levels of one or more factor
+#    covariates (e.g., sex), 
+# 2) define time intervals between capture occasions (if not 1), and 
+# 3) create an age structure for the data, if any.
+
+# Process data
+data.processed=process.data(data,model=&quot;Huggins&quot;,groups=c(&quot;sex&quot;))
+#
+# Create default design data
+#data.ddl=make.design.data(data.processed)
+
+#  Define parameter models
+p.dot = list(formula=~1,share=TRUE)
+p.time = list(formula=~time,share=TRUE)
+p.sex = list(formula=~sex,share=TRUE)
+p.time.sex =  list(formula=~time+sex,share=TRUE)
+
+p.length.sq =list(formula=~length+length.sq,share=TRUE)
+p.length.time =list(formula=~length+length.sq + time,share=TRUE)
+p.length.sex =list(formula=~length+length.sq + sex,share=TRUE)
+p.length.time.sex =list(formula=~length+length.sq + sex+time,share=TRUE)
+
+
+
+############  Capture Closed models ###########################################
+# Not vary by sex or time , p=c 
+closed.tdot=mark(data.processed,model=&quot;Closed&quot;,model.parameters=list(p=p.dot))
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~1)c() 
+
+Npar :  1
+-2lnL:  54.54
+AICc :  56.61
+
+Beta
+              estimate     se    lcl      ucl
+p:(Intercept)   -1.056 0.5417 -2.118 0.005751
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.2581 0.2581
+Group:sexMale   0.2581 0.2581
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.2581
+Group:sexMale   0.2581
+</code></pre>
+
+<pre><code class="r">#  constant p and constant c but different, Not vary by sex or time 
+closed.tdot.2=mark(data.processed,model=&quot;Closed&quot;)
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~1)c(~1) 
+
+Npar :  2
+-2lnL:  54.14
+AICc :  58.38
+
+Beta
+              estimate     se     lcl    ucl
+p:(Intercept)  -2.5649 5.3923 -13.134 8.0039
+c:(Intercept)  -0.9163 0.5916  -2.076 0.2433
+
+
+Real Parameter p
+                      1       2
+Group:sexFemale 0.07143 0.07143
+Group:sexMale   0.07143 0.07143
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.2857
+Group:sexMale   0.2857
+</code></pre>
+
+<pre><code class="r"># Not vary by sex but time varying,   p=c ,
+closed.time=mark(data.processed,model=&quot;Closed&quot;,model.parameters=list(p=p.time))
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~time)c() 
+
+Npar :  2
+-2lnL:  54.14
+AICc :  58.38
+
+Beta
+              estimate     se     lcl      ucl
+p:(Intercept)  -1.1787 0.5718 -2.2993 -0.05798
+p:time2         0.2624 0.4206 -0.5621  1.08678
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.2353 0.2857
+Group:sexMale   0.2353 0.2857
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.2857
+Group:sexMale   0.2857
+</code></pre>
+
+<pre><code class="r"># Closed heterogeneity : (vary by sex but Not time), p=c
+closed.sex=mark(data.processed,model=&quot;Closed&quot;,
+                model.parameters=list(p=p.sex),adjust=TRUE)
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~sex)c() 
+
+Npar :  2
+-2lnL:  54.37
+AICc :  58.61
+
+Beta
+              estimate     se    lcl    ucl
+p:(Intercept)  -0.8109 0.7817 -2.343 0.7213
+p:sexMale      -0.4418 1.0874 -2.573 1.6896
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.3077 0.3077
+Group:sexMale   0.2222 0.2222
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.3077
+Group:sexMale   0.2222
+</code></pre>
+
+<pre><code class="r"># Closed heterogeneity : (vary by time and sex), p=c
+closed.sex=mark(data.processed,model=&quot;Closed&quot;,
+                model.parameters=list(p=p.time.sex),adjust=TRUE)
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~time + sex)c() 
+
+Npar :  3
+-2lnL:  53.98
+AICc :  60.46
+
+Beta
+              estimate     se     lcl   ucl
+p:(Intercept)  -0.9335 0.8028 -2.5071 0.640
+p:time2         0.2624 0.4206 -0.5621 1.087
+p:sexMale      -0.4418 1.0874 -2.5732 1.690
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.2822 0.3382
+Group:sexMale   0.2018 0.2473
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.3382
+Group:sexMale   0.2473
+</code></pre>
+
+<pre><code class="r">######################### Huggins models #####################################
+
+# Not vary by sex or time , p=c 
+huggins.tdot.sdot=mark(data.processed,model=&quot;Huggins&quot;, 
+                       model.parameters=list(p=p.length.sq))
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~length + length.sq)c() 
+
+Npar :  3
+-2lnL:  50.22
+AICc :  56.7
+
+Beta
+              estimate       se      lcl     ucl
+p:(Intercept)  42.3137 27.13574 -10.8723 95.4998
+p:length       -4.6513  2.81970 -10.1779  0.8753
+p:length.sq     0.1196  0.07043  -0.0184  0.2577
+
+
+Real Parameter p
+                    1     2
+Group:sexFemale 0.182 0.182
+Group:sexMale   0.182 0.182
+
+
+Real Parameter c
+                    2
+Group:sexFemale 0.182
+Group:sexMale   0.182
+</code></pre>
+
+<pre><code class="r"># Not vary by sex but time varying,   p=c ,
+huggins.time=mark(data.processed,model=&quot;Huggins&quot;,
+                  model.parameters=list(p=p.length.time))
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~length + length.sq + time)c() 
+
+Npar :  4
+-2lnL:  49.82
+AICc :  58.64
+
+Beta
+              estimate       se      lcl     ucl
+p:(Intercept)  42.1912 27.13633 -10.9960 95.3784
+p:length       -4.6513  2.81970 -10.1779  0.8753
+p:length.sq     0.1196  0.07043  -0.0184  0.2577
+p:time2         0.2624  0.42062  -0.5621  1.0868
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.1645 0.2038
+Group:sexMale   0.1645 0.2038
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.2038
+Group:sexMale   0.2038
+</code></pre>
+
+<pre><code class="r"># Huggins heterogeneity (vary by sex but not time), p=c
+huggins.sex=mark(data.processed,model=&quot;Huggins&quot;,
+                 model.parameters=list(p=p.length.sex),adjust=TRUE)
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~length + length.sq + sex)c() 
+
+Npar :  4
+-2lnL:  50.2
+AICc :  59.02
+
+Beta
+              estimate       se       lcl     ucl
+p:(Intercept)  42.6273 27.24878 -10.78028 96.0350
+p:length       -4.7076  2.86159 -10.31633  0.9011
+p:length.sq     0.1213  0.07194  -0.01968  0.2623
+p:sexMale       0.1756  1.43039  -2.62799  2.9791
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.1648 0.1648
+Group:sexMale   0.1904 0.1904
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.1648
+Group:sexMale   0.1904
+</code></pre>
+
+<pre><code class="r"># Huggins heterogeneity (vary by time and sex), p=c
+huggins.time.sex=mark(data.processed,model=&quot;Huggins&quot;,
+                      model.parameters=list(p=p.length.time.sex),adjust=TRUE)
+</code></pre>
+
+<pre><code>
+Output summary for Huggins model
+Name : p(~length + length.sq + sex + time)c() 
+
+Npar :  5
+-2lnL:  49.81
+AICc :  61.06
+
+Beta
+              estimate       se       lcl     ucl
+p:(Intercept)  42.5052 27.24943 -10.90371 95.9141
+p:length       -4.7077  2.86159 -10.31639  0.9011
+p:length.sq     0.1213  0.07194  -0.01968  0.2623
+p:sexMale       0.1756  1.43040  -2.62797  2.9792
+p:time2         0.2624  0.42062  -0.56206  1.0868
+
+
+Real Parameter p
+                     1      2
+Group:sexFemale 0.1486 0.1849
+Group:sexMale   0.1722 0.2129
+
+
+Real Parameter c
+                     2
+Group:sexFemale 0.1849
+Group:sexMale   0.2129
+</code></pre>
+
+<pre><code class="r">##################################################################################
+
+huggins.sex$results$beta
+</code></pre>
+
+<pre><code>              estimate       se       lcl     ucl
+p:(Intercept)  42.6273 27.24878 -10.78028 96.0350
+p:length       -4.7076  2.86159 -10.31633  0.9011
+p:length.sq     0.1213  0.07194  -0.01968  0.2623
+p:sexMale       0.1756  1.43039  -2.62799  2.9791
+</code></pre>
+
+<pre><code class="r"># create values of length to use for predictions
+min.length=min(data$length)
+max.length=max(data$length)
+length.values=seq(from=min.length,to=max.length,length=25)
+
+# Create design dataframes for MARK model specification
+data.ddl=make.design.data(data.processed)
+
+#Compute estimates of real parameters for multiple covariate values
+# Computes real estimates for a dataframe of covariate values and the var-cov matrix of the real estimates.
+
+# make predictions for rows of &#39;data.ddl&#39; associated with
+# females (par.index=1) and males (par.index=3)
+pred.model &lt;- covariate.predictions(huggins.time.sex, 
+                                  data=data.frame(length=length.values,length.sq=length.values^2),
+                                  indices=c(1,3))
+
+# store values of sex in pred.model
+female.rows=which(pred.model$estimates$par.index==1)
+male.rows=which(pred.model$estimates$par.index==3)
+pred.model$estimates$sex &lt;- NA
+pred.model$estimates$sex[female.rows] &lt;- &quot;female&quot;
+pred.model$estimates$sex[male.rows] &lt;- &quot;male&quot;
+head(pred.model$estimates)
+</code></pre>
+
+<pre><code>  vcv.index model.index par.index length length.sq estimate     se      lcl    ucl fixed    sex
+1         1           1         1  15.00     225.0   0.3077 0.3758 0.013803 0.9338       female
+2         2           3         3  15.00     225.0   0.3463 0.2825 0.043856 0.8594         male
+3         3           1         1  15.42     237.7   0.2253 0.2938 0.010624 0.8874       female
+4         4           3         3  15.42     237.7   0.2574 0.2108 0.038383 0.7507         male
+5         5           1         1  15.83     250.7   0.1657 0.2274 0.007837 0.8331       female
+6         6           3         3  15.83     250.7   0.1914 0.1579 0.031038 0.6362         male
+</code></pre>
+
+<pre><code class="r">pred=pred.model$estimates
+
+library(ggplot2)
+</code></pre>
+
+<pre><code>Warning: package &#39;ggplot2&#39; was built under R version 3.0.3
+</code></pre>
+
+<pre><code class="r">pred.ggplot &lt;- ggplot(pred, aes(x=length, y=estimate, group=sex)) +
+                  geom_line(size=1.5, aes(colour = sex)) +
+                  theme(legend.position=c(0.15,0.8), legend.justification=c(1,0)) +
+                  xlab(&quot;Length&quot;) + 
+                  ylab(&quot;Estimated cap prob&quot;)
+
+pred.ggplot
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">aa=1
+xval=20
+xsq = xval^2
+exp(42.6273520 -4.7076212*xval +  0.1213267*xsq + 0.1755777*aa ) / (1+ exp(42.6273880 -4.7076212*xval +  0.1213267*xsq + 0.1755777*aa ))
+</code></pre>
+
+<pre><code>[1] 0.05632
+</code></pre>
+
+</body>
+
+</html>
+

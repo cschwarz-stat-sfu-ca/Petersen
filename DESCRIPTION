@@ -1,0 +1,41 @@
+Package: Petersen
+Type: Package
+Title: Petersen estimator for capture-recapture experiments
+Version: 0.2.0
+Author: Carl James Schwarz
+Maintainer: Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>
+Description: A comprehensive implementation of the Petersen estimator
+    and its many variants. 
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
+Imports:
+    AICcmodavg,
+    bbmle,
+    BTSPAS,
+    formula.tools,
+    ggplot2,
+    MASS,
+    Matrix,
+    msm,
+    numDeriv,
+    plyr,
+    reshape2,
+    rlang,
+    RMark,
+    SPAS,
+    stats,
+    stringr,
+    tidyr,
+    utils
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: 
+    knitr,
+    Rmarkdown,
+    R.rsp

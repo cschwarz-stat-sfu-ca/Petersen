@@ -1,0 +1,1183 @@
+% The Stratified Petersen Estimator with a Known Number of Unread Tags
+% Biometrics 55, 1014-1021.
+%
+% Carl James Schwarz, Department of Statistics and Mathematics, Simon Fraser University
+% For further information please contact me at:
+%     Phone:  (604) 291-3376
+%     Fax:    (604) 291-4947
+%     Email:  cschwarz@cs.sfu.ca
+%
+% This paper contains tables that are printed in landscape orientations.
+% The TeX commands \vsize and \hsize are set just before the tables are generated.
+%
+
+
+\input template.tex    % this is the Biometrics template 
+\input rotate.tex      % this is for rotating tables
+
+\def\E{\mathop{\hbox{\rm E}}\nolimits}
+
+
+\runninghead{Stratified-Petersen with unread tags}
+
+\galleyline{A}{B}{54}{1}
+
+\Title{The Stratified Petersen Estimator with a Known Number of Unread Tags}
+
+
+
+\Author{Carl J. Schwarz}
+
+\Affiliation{Department of Statistics and Mathematics,
+Simon Fraser University, Burnaby, B.C., Canada  V5A 1S6; e-mail cschwarz@cs.sfu.ca}
+
+\Author{Myra Andrews}
+
+\Affiliation{Department of Statistics and Mathematics,
+Simon Fraser University, Burnaby, B.C., Canada  V5A 1S6}
+
+
+\Authorlast{Michael R.  Link}
+
+\Affiliation{LGL Limited, Sidney, B.C., Canada  V8L 3Y8}
+
+
+
+\Summary{}
+ 
+The Petersen estimator estimator of abundance.
+can be biased when the assumption of homogeneous capture
+probability or homogeneous recapture probability is violated.
+Often this heterogeneity is related to the time or place of
+capture or recapture and if these can be stratified,
+the stratified-Petersen estimator reduces the bias caused by this heterogeneity.
+In some experiments, not all the recovered tagged animals can be examined, and 
+only a subsample has its stratum of release and recovery determined. 
+We develop methods for this modified experiment and apply them
+to estimate the number of salmon returning to spawn in a river in
+British Columbia, Canada.
+
+
+\keywords{capture-recapture; mark-recapture; Petersen estimator; 
+salmon escapement; salmon spawning}
+
+
+
+
+\Introduction {1.~Introduction}
+
+The Petersen estimator of abundance 
+can be severely biased if the assumption of 
+equal capture or of equal recapture probabilities among all animals
+is violated.
+Often, heterogeneity in capture or recapture probabilities is related to the
+time when or the place where the animals are captured or recaptured.
+In these cases, the Stratified-Petersen method (Darroch, 1961;
+Seber, 1982;  Plante, 1990;
+Banneheka, Routledge, and Schwarz, 1997; Schwarz and Taylor, 1998;
+Plante, Rivest and Tremblay, 1998) can be used.
+
+In this method, in each of $s$ strata
+a known number of animals ($n_i^c$) are captured
+tagged with individually 
+identifiable tags,
+and released.
+Recaptures take place in each of $t$ strata.
+Tagged animals have their tags read which identifies the stratum of release and
+of recapture so that the number ($m_{ij}$) of individuals marked
+in stratum $i$ and recovered in strata $j$ may be determined.
+A count of untagged animals recovered in each of the recovery strata
+($u_j$) is also made.
+
+Normally, all tagged animals that are recaptured  have their tags read. However, in 
+some cases, the number of tagged animals recovered is too large or it is 
+logistically impossible to read all of the tags. 
+For example, our paper was motivated by a study where salmon are tagged
+as they return to spawn and `recoveries' are made by counting the number
+of tagged and untagged fish as they pass through a fish-way at a dam
+upstream. The tags are readily visible so that it is easy to count the number of tagged
+fish passing 
+but it is difficult to extract tagged fish using a dip net to read the tags so
+only a fraction of the tags can be read to determine the tag number and hence
+when the fish were initially tagged.
+In general, a count of the total number
+of tagged animals in the recovery samples is known, but only a random
+sub-sample of the recovered tagged animals have their tags read leaving
+$z_j$ animals whose stratum of release is unknown.
+
+In this paper, we extend the Darroch-Plante model for the stratified-Petersen to account
+for a known number of tags recovered but not read. We apply this model to estimate
+the number of salmon returning to spawn (the salmon escapement) in the Nass
+River, B.C., Canada. 
+
+\Section{2.~Notation}
+
+We consider the case of $s$ release strata and $t$ recovery strata.
+A dot in a subscript implies summation over that subscript, e.g.,
+$m_{i\bullet }=\sum\limits_{j=1}^t {m_{ij}}$.
+
+
+\Subsection{2.1~Parameters}
+
+{\parindent=2cm   % start the notation
+\def\litem#1{\item{\hbox to\parindent{\enspace#1\hfill}}} 
+ 
+\litem{$N$} total number of animals in the population over all release strata.
+
+\litem{$\psi _i$} proportion of population in release stratum $i$ ($i=1,\ldots ,s$).
+$\sum\limits_{i=1}^s {\psi _i}=1$.
+
+\litem{$N_i$} number of animals in release stratum $i$ ($i=1,\ldots ,s$). 
+$N_i=N\psi_i=( {\gamma _i+\sum\limits_{j=1}^t {\mu _{ij}\lambda _j}}
+)( {1+\beta _i} )$.
+$\sum\limits_{i=1}^s {N_i}=N$. 
+Note that the sets $\{N,\{\psi_i\}\}$ and $\{N_i\}$ are two different
+but equivalent parameterizations for the number of animals in the release strata.
+
+\litem{$c_i ,r_j$} probability of initial capture in release stratum $i$ ($i=1,\ldots ,s$),
+or capture in recovery stratum $j$ ($j=1,\ldots ,t$).
+
+\litem{$\beta _i$} odds of not capturing an animal in 
+release stratum $i$ ($i=1,\ldots ,s$).
+$\beta _i={{1-c_i} \over {c_i}}$ 
+
+\litem{$\theta _{ij}$} probability that an animal released in stratum $i$
+moves to recovery stratum $j$ ($i=1,\ldots ,s$; $j=1,\ldots ,t$). We allow 
+$\sum\limits_{j=1}^t {\theta _{ij}}\le 1$
+to account for movement to areas not sampled or mortality between release
+and recovery.
+
+\litem{$\mu _{ij}$} expected number of animals that 
+are released in stratum $i$, move to recovery stratum $j$, and are recaptured
+($i=1,\ldots ,s$; $j=1,\ldots ,t$). 
+$\mu _{ij}=N\psi _ic_i\theta _{ij}r_j$ 
+
+\litem{$\lambda _j$} probability that a tagged animal recovered in stratum $j$ 
+will have its tag read ($j=1,\ldots ,t$). 
+
+\litem{$\gamma _i$} expected number of animals released in 
+stratum $i$ which do not have their tags read
+($i=1,\ldots ,s$).
+$\gamma _i=N\psi _ic_i-\sum\limits_{j=1}^t {\mu _{ij}\lambda _j}$ 
+
+\par} % end of indent for section 2.1
+
+\Subsection{2.2~Statistics}
+
+{\parindent=2cm   % start the notation
+\def\litem#1{\item{\hbox to\parindent{\enspace#1\hfill}}} 
+
+\litem{$n_i^c$}  number of animals captured, tagged, and released in stratum $i$
+($i=1,\ldots ,s$). 
+
+\litem{$m_{ij}$} number of animals tagged and released in stratum $i$ that 
+are recovered in stratum $j$ and have have their tags read
+($i=1,\ldots ,s$; $j=1,\ldots ,t$). 
+
+\litem{$u_j$} number of animals recovered in stratum $j$ without tags
+($j=1,\ldots ,t$).
+
+\litem{$z_j$}  number of tagged animals recovered in stratum $j$ whose
+tags are not read
+($j=1,\ldots ,t$). 
+\par} % end of notation section
+
+  
+
+\Section{3.~Model Development and Fitting}
+
+The statistics for this experiment can be arranged into a rectangular
+array as shown in Table 1.
+The key difference between this experiment 
+and the usual stratified-Petersen experiment
+is that 
+the stratum of release for the 
+$\{z_j\}$
+tagged animals recovered is not known.
+
+We make the same assumptions as outlined in Darroch (1961),
+Seber (1982), Plante (1990),
+Banneheka, Routledge, and Schwarz (1997), Schwarz and Taylor (1998), and
+Plante, Rivest, and Tremblay (1998). 
+In addition, we assume that the animals selected to have their tags read
+are a random sample from all tagged animals recovered. 
+The expected values of the statistics are shown in Table 2.
+
+Plante (1990) and Plante, Rivest, and Tremblay (1998)
+ showed that in the ordinary stratified-Petersen (where all
+ags are read), not all parameters are identifiable.
+We can rewrite the expected values
+shown in Table 2 in terms of new identifiable parameters as shown in Table 3.
+[Note that our $\gamma _i$ is defined slightly differently than
+these previous works.]
+In the case where $s\le t$, 
+the population sizes in the release strata are identifiable
+even if the population is not closed, i.e., some animals may `leave
+the population' (e.g. die between release and recovery, or emigrate to
+recovery strata not sampled).
+This corresponds to many real situations as exemplified by
+Schwarz and Taylor (1998). 
+[In the case  $s\ge t$, only the population size in the recovery
+strata are estimable.]
+
+We chose to parameterize in terms of the $s$ parameters
+$\{\gamma _i\}$ 
+rather than the set 
+$\{ N,\{\psi _i\}_{i=1,\ldots s}\}$
+(recall that $\sum\limits_{i=1}^s {\psi _i}=1$) because, as will
+be shown later, the estimating equations are simpler.
+There is a 1--1 transformation between these two parameter sets.
+
+Up to this point, the development has paralleled that in Plante (1990)
+and Plante, Rivest, and Tremblay (1998). 
+The distribution of the statistics 
+$\{ m_{ij} \}$,
+$\{ {n_i^c - m_{i \bullet }} \}$,
+and
+$\{ {u_j} \}$ 
+can be modelled either as 
+multinomial counts conditional upon the $n_\bullet ^c$
+using the  expectations
+as shown in Table 3 (as was done by Plante, 1990, and Plante, Rivest, and Tremblay,  1998)
+or as independent Poisson counts - both lead to the same MLEs.
+
+However, at this point, difficulties arise in
+developing a likelihood function. 
+The distribution of 
+$\{ {z_j} \}$ 
+conditional upon the set 
+$\{ {{n_i^c - m_{i \bullet }}} \}$
+is a convolution of $s$ multinomial
+distributions with complex  cell probabilities and 
+involves a high-dimensional summation that is not amenable
+to inclusion in a likelihood, i.e this portion of the likelihood is:
+
+%$$\eqalign{%
+%L( {\left\{ {z_j} \right\}} |&{ \left\{ {n_i^c-m_{i\bullet }} \right\},
+%\left\{ {\lambda _j} \right\},\left\{ {\mu_{ij}} \right\},\left\{ {\gamma _i} \right\}    } )=\cr  % {} match so far
+%&\sum\limits_{z_{11}^*}{ } 
+%\cdots
+%\sum\limits_{z_{st}^*}{ }
+%\prod\limits_{i=1}^s {\left( {\matrix{{n_i^c-m_{i\bullet }}{z_{i1}^*,\cdots ,z_{it}^*,n_i^c-m_{i\bullet }-z_{i\bullet }^*} }} \right)}
+%\left[ {\prod\limits_{j=1}^t {\left( {{{\mu _{ij}\left( {1-\lambda _j} \right)} \over {\gamma _i}}} \right)^{z_{ij}^*}}} \right] 
+%\times \cr
+%&\left( {{
+%{\gamma _i- \sum\limits_{j=1}^t {\mu _{ij}\left( {1-\lambda _j} \right)}}
+% \over {\gamma _i}
+%}} \right)
+%^{n_i^c-m_{i\bullet }-z_{i\bullet }^*}\cr
+%}$$ % end of equation alignment
+
+$$\eqalign{%
+L( {\left\{ {z_j} \right\} |& \left\{ {n_i^c-m_{i\bullet }} \right\},
+\left\{ {\lambda _j} \right\},\left\{ {\mu_{ij}} \right\},\left\{ {\gamma _i} \right\}} )=\cr
+&\sum\limits_{z_{11}^*} {\cdots \sum\limits_{z_{st}^*}
+{\prod\limits_{i=1}^s {\left( {\matrix{{n_i^c-m_{i\bullet }}\cr
+{z_{i1}^*,\cdots ,z_{it}^*,n_i^c-m_{i\bullet }-z_{i\bullet }^*}\cr
+}} \right)}}}
+\left[ {\prod\limits_{j=1}^t
+{\left( {{{\mu _{ij}\left( {1-\lambda _j} \right)} \over {\gamma _i}}}
+\right)^{z_{ij}^*}}} \right] \times \cr
+&\left( {{{\gamma _i-\sum\limits_{j=1}^t
+{\mu _{ij}\left( {1-\lambda _j} \right)}} \over {\gamma _i}}} \right)
+^{n_i^c-m_{i\bullet }-z_{i\bullet }^*}\cr
+}$$ % end of equation alignment
+
+subject to:
+$z_{\bullet j}^*=z_j,\ and\ \ z_{i\bullet }^*\le n_i^c-m_{i\bullet }.$
+
+
+
+For these reasons, we use a generalized estimating equation (GEE) approach
+(Liang and Zeger, 1986).
+GEEs
+have been used in capture-recapture contexts (e.g. Becker, 1984; Yip 1991)
+through estimating functions based on martingales describing the 
+capture and release process. In this context we will derive 
+estimating equations based on the moments of the observed 
+statistics.
+
+Using the GEE approach, the estimates are derived as the solutions to:
+${\bf D^{T}V}^{-1} ( {{\bf Y}-\bpi} )={\bf 0}$
+where:
+{\bf Y} is a vector of observed statistics;
+{$\bpi$} is a 
+vector of the expected values of ${\bf Y}$;
+{\bf V} is a `working' covariance
+matrix of the observed statistics;
+and {\bf D} is matrix of partial derivatives
+${{\partial \bpi } \over {\partial \bomega ' }}$ where $\bomega$ is the 
+parameter set.
+The estimates are consistent even if ${\bf V}$ is not the true covariance
+matrix of the observed statistics and will be efficient if ${\bf V}$ is close to the 
+true covariance of ${\bf Y}$.
+
+In this case, the $(st+s+2t+1)$ components of ${\bf Y}$ are: 
+$st$ components referring to 
+$\{ m_{ij} \}$; 
+$s$ components referring to 
+$\{ {n_i^c - m_{i \bullet }} \}$;
+$t$ components referring to 
+$\{ u_j \}$;
+$t$ components referring to 
+$\{ z_j \}$;
+and 1 component referring to  $n_\bullet^c - m_{\bullet \bullet }-z_\bullet $.
+The components of $\bpi$ refer to the expectations of these statistics as shown
+in Table 3. 
+The components of $\bomega$ refer to the $st+2s+t$ parameters:
+$\{ {\mu _{ij}} \},\{ {\gamma _i} \}, \{ {\beta _i} \}$, and $\{ {\lambda _j} \}$.
+The working covariance matrix is a diagonal matrix
+with diagonal elements corresponding to the expected values -- this 
+makes the `assumption' that the observed statistics are approximately
+Poisson distributed.
+This formulation leads to 
+estimates that minimize
+the usual Pearson-$\chi^2$ measure of goodness-of-fit, i.e.
+minimum $\chi^2$ estimates. 
+Consequently, we expect our estimators to be nearly as efficient
+as the true MLEs.
+
+This gives rise to the following estimating equations:
+
+{\parindent=3cm  % score equation formatting equations
+\item{Parameter} Equation
+ 
+\item{${\left\{ {\mu _{ij}} \right\}_{j=1,\ldots ,t}^{i=1,\ldots ,s}}$} 
+$0=\left( {{{m_{ij}} \over {\mu _{ij}\lambda _j}}-1} \right)\lambda _j
++\left( {{{u_j} \over {\sum\limits_{a=1}^s {\beta _a\mu _{aj}}}}-1} \right)\beta _i
++\left( {{{z_j} \over {\left( {1-\lambda _j} \right)\mu _{\bullet j}}}-1} \right)\left( {1-\lambda _j} \right)$\hfill\break 
+\hfill${}-\left( {{{n_\bullet ^c-m_{\bullet \bullet }-z_\bullet } \over {\gamma _\bullet
+-\sum\limits_{a=1}^s {\sum\limits_{b=1}^t {\left( {1-\lambda _b} \right)\mu _{ab}}}}}-1} \right)\left( {1-\lambda _j} \right) $ 
+
+\item{${\left\{ {\gamma _i} \right\}_{}^{i=1,\ldots ,s} }$} 
+${0=\left( 
+{{{n_i^c-m_{i\bullet }} \over {\gamma _i}}-1} \right)+
+\left( {{{n_\bullet ^c-m_{\bullet \bullet }-z_\bullet } \over 
+{\gamma _\bullet-\sum\limits_{a=1}^s {\sum\limits_{b=1}^t {\left( {1-\lambda _b} 
+\right)\mu _{ab}}}}}-1} \right)} $ 
+
+\item{${\left\{ {\beta _i} \right\}_{}^{i=1,\ldots ,s}}$}
+${0=\sum\limits_{j=1}^t {\left[ {\left( {{{u_j} \over {\sum\limits_{a=1}^s {\beta _a\mu _{aj}}}}-1} \right)\mu _{ij}} \right] } } $ 
+
+
+\item{${\left\{ {\lambda _j} \right\}_{}^{j=1,\ldots ,t}} $}
+$0=\sum\limits_{i=1}^s {\left[ {\left( {{{m_{ij}} \over {\mu _{ij}\lambda _j}}-1} \right)\mu _{ij}} \right]}-\left( {{{z_j} \over {\left( {1-\lambda _j} \right)\mu _{\bullet j}}}-1} \right)\mu _{\bullet j}$\hfill\break
+\hfill ${}+\left( {{{n_\bullet ^c-m_{\bullet \bullet }-z_\bullet } \over {\gamma _\bullet -\sum\limits_{a=1}^s {\sum\limits_{b=1}^t {\left( {1-\lambda _b} \right)\mu _{ab}}}}}-1} \right)\mu _{\bullet j} $ 
+
+\par} % end of small table
+
+This system of equations  does not have an analytical solution and must
+be solved numerically. However, two approximate solutions are:
+$\hat \gamma _i\approx n_i^c-m_{i\bullet }$ and 
+$\hat \lambda _j\approx {{m_{\bullet j}} \over {m_{\bullet j}+z_{\bullet j}}}$.
+The former is analogous to the results in Plante, Rivest, and Tremblay (1998), and
+the latter is intuitively appealing because it represents the ratio of the number
+of tags read to the total number of tags recovered in each recovery
+stratum.
+
+Under this approximate solution, the remaining equations reduce to:
+$${0={{m_{ij}} \over {\mu _{ij}}}+{{u_j\beta _i} \over
+{\sum\limits_{a=1}^s {\beta _a\mu _{aj}}}}-\beta _i+{{z_j} 
+\over {\mu _{\bullet j}}}-1 }  $$
+$${0=\sum\limits_{j=1}^t {\left[ {\left( {{{u_j} \over {\sum\limits_{a=1}^s {\beta _a\mu _{aj}}}}-1} \right)\mu _{ij}} \right]}}$$
+which again are analogous to those in Plante (1990) with her $m_{ij}$ 
+`replaced' by 
+$m_{ij}+z_j{{\mu _{ij}} \over {\mu _{\bullet j}}}$ representing an `estimate'
+of the number of tags released in stratum $i$ and recovered in
+stratum $j$ had all tags been read. 
+The last equation has the same form as Plante (1990).
+As outlined in Schwarz and Taylor (1998), the
+$\{ {\beta _i} \}$
+are found to minimize the discrepancy between
+the $u_j$ row and the linear combination of the rows of the  $\mu_{ij}$ matrix.
+
+Initial values for the $\beta_i$ can be found using a least-squares approach
+(Banneheka, Routledge, and Schwarz, 1997)
+after adjusting the $m_{ij}$ to account for unread tags.
+
+The variances of the estimated parameters are found as:
+$V\left( {\hat \bomega} \right)={\bf \left[ {D^{T}V^{-1}D} \right]}^{-1} %***left/right left in
+\left[ { {\bf D^{T}V}^{-1}V({\bf Y}){\bf V}^{-1}{\bf D}} \right]         %***left/right left in
+\left[ { {\bf D^{T}V}^{-1}{\bf D}} \right]^{-1}$                         %***left/right left in
+where $V({\bf Y})$ is the true variance-covariance matrix of {\bf Y}.
+The $V({\bf Y})$ can be readily derived
+despite the difficulties in writing a likelihood for the $z_j$.
+The variance of the estimates can be estimated by replacing the parameters 
+by their estimates in the
+above equation.
+
+
+
+Estimates of the initial stratum sizes are then found as:
+$\hat N_i=( {\hat \gamma _i+\sum\limits_{j=1}^t {\hat \mu _{ij}\hat \lambda _j}} )( {1+\hat \beta _i} )$.
+The estimated total population size is found by summing the individual stratum
+estimates:
+$\hat N=\sum\limits_{i=1}^s {( {\hat \gamma _i+\sum\limits_{j=1}^t {\hat \mu _{ij}\hat 
+\lambda _j}} )( {1+\hat \beta _i} )}$.
+
+The estimated
+variance of these derived parameters is found using the delta-method 
+and the estimated variances of the original parameters.
+
+Note that
+$\hat \gamma_i \approx n_i^c-m_{i\bullet }$,
+$\widehat{\mu _{ij}\lambda _j}\approx m_{ij}$, and,
+$1+\hat \beta _i={1 \over \hat {c}_i}$ so that
+$\hat N \approx \sum\limits_{i=1}^s {{{n_i^c} \over {\widehat{c}_i}}}$,
+a Horvitz-Thompson type estimator.
+Huggins (1989) and Yip, Huggins, and Lin (1996) examined the
+performance of similar-types of estimators for closed
+populations and found that these performed
+poorly when sample sizes were small and the capture
+probabilities poorly estimated. 
+This is also expected to be true for our estimators as confirmed
+by our simulation study.
+
+
+
+A goodness-of-fit statistic can be found using a Pearson-type statistic as:
+$$\displaylines{   % break formula into smaller bits
+{\rm X}^2=\sum\limits_{i=1}^s {\sum\limits_{j=1}^t 
+{{{({m_{ij}-\hat \mu _{ij}\hat \lambda _j})^2} \over {\hat \mu _{ij}\hat \lambda _j}}}}
++\sum\limits_{i=1}^s {{{({n_i^c-m_{i\bullet }-\hat \gamma _i})^2} \over {\hat \gamma _i}}}
++\sum\limits_{j=1}^t {{{\left( {u_j-\sum\limits_{a=1}^s {\hat \beta _a\hat \mu _{aj}}} \right)^2} \over {\sum\limits_{a=1}^s {\hat \beta _a\hat \mu _{aj}}}}}\hfill\cr  % break and justify left
+\hfill {}
++\sum\limits_{j=1}^t {{{\left( {z_j-\hat \mu _{\bullet j}({1-\hat \lambda _j})} \right)^2} \over {\hat \mu _{\bullet j}({1-\hat \lambda _j})}}}
++{{\left( {n_\bullet ^c-m_{\bullet \bullet }-z_\bullet -\left( {\hat \gamma _\bullet -\sum\limits_{a=1}^s {\sum\limits_{b=1}^t {\hat \mu _{ab}({1-\hat \lambda _b})}}} \right)} \right)^2} \over {{\hat \gamma _\bullet-\sum\limits_{a=1}^s {\sum\limits_{b=1}^t {\hat \mu _{ab}({1-\hat \lambda _b}) }}}  }}\cr
+}$$                  % end of displaylines
+
+This will have an approximate $\chi _{t-s}^2$ distribution.
+Not all of the cells
+are independent of each other because there is some double counting of
+animals between the $z_j$ and the $n_i - m_{i \bullet}$. 
+However, the $z_j$ will be conditionally independent
+of the other cells and so in large samples the approximation should be valid.
+
+Models where constraints are imposed upon the parameters (e.g. equal tag reading
+rate in all recovery strata) can be fit by using variants of the chain
+rule.
+
+Because there is no formal likelihood, there is no simple procedure for model 
+selection and testing, except, perhaps, comparing the change in the
+goodness of fit statistic. 
+Williams (1970) outlined a bootstrap-type procedure for this that
+could be used to discriminate between models.
+Wald-type tests could also be constructed
+using the estimates and the estimated variance-covariance matrix.
+
+As noted by Schwarz and Taylor (1998), extensive pooling of the rows
+or column counts may be required, and there is no objective method
+of assessing which poolings are `optimal'.
+Schwarz and Taylor (1998) also noted that the estimates of $\beta_i$
+are very unstable 
+if the expected counts are small 
+leading to unstable estimates for $N$;
+they suggest that the expected
+values of $m_{ij}$ should not be less than 5-10. 
+
+Specialized software to fit the above model using the estimating equations
+has been written in S-Plus and
+is available from the first author. This software also will fit simpler models 
+where the tag-reading rate is assumed to be equal for all the recovery 
+strata, where the tag application rate is equal for all release
+strata,
+or where the parameters can be modelled using covariates.
+In the middle model above, the estimate of the total population size
+is algebraically equal to the simple Petersen estimator which is known to be
+consistent when all the initial capture probabilities are equal.
+
+In the absence of specialized software for this experiment, approximate
+solutions can be found using software for the stratified-Petersen with all
+tags read (e.g. SPAS from Arnason et al., 1996) by initially
+`distributing' the
+unread tags into their respective rows in the same proportion as the $m_{ij}$ 
+to their
+column sums. 
+Then use SPAS to obtain estimates of the $\mu _{ij}$; use these
+revised estimates to reapportion the $z_j$; and repeat until convergence.
+Of course, the final variance estimates reported by SPAS will be too small.
+
+
+
+
+
+\Section{4.~Example}
+
+The Nass River is located in northern British Columbia, Canada and
+supports several stocks of sockeye salmon. 
+From mid-June to early September 1995, 
+daily samples of up to 400
+returning sockeye salmon 
+were captured with two fish wheels, 
+tagged with individually numbered tags, and released
+back to the river (Link and Gurak, 1997).
+The fish migrate up river to spawn at several sites.
+The fish arrive at the entrance to one spawning area, Meziadin Lake,
+approximately 3 weeks later.
+Here fish travel through a fishway 
+and counting chute 
+where they can be observed, counted,
+and fish removed using a dipnet to read their tags. 
+Approximately 1,500-10,000 fish  pass through the fishway each day.
+Because the tags are quite visible, it is relatively easy
+to count the number of tagged fish, but it is more 
+difficult to recapture the fish, and not all tagged
+fish can be captured to be read.
+
+Here, the population is not `closed' as fish can be removed by
+a fishery after passing the fish wheels and spawn in 
+many other sites not sampled. However, we can
+still obtain estimates of the number of fish passing
+the fish wheels.
+Because the $m_{ij}$ matrix based on the daily counts is quite
+sparse, releases and recoveries were pooled into 8 release and
+10 recovery strata as shown in Table 4.
+
+The estimates of the parameters from the full model with separate
+initial capture probabilities for each release stratum and 
+separate tag reading rates for each recovery stratum are shown
+in Table 5.
+Although the goodness-of-fit statistic shows some lack of fit
+(${\rm X}^2$ = 16.4 with 2 df),
+the
+majority of the lack-of-fit comes from 2 cells, the
+deviations between the observed and expected counts are usually below 4\%, and
+large samples sizes make even minor deviations detectable.
+The estimates of the $\lambda _j$ indicate that a simpler
+model would not be tenable (the goodness-of-fit statistic increases
+to 1008.2 with 11 df). The estimates of
+the $\beta _i$ indicate that tagging rates varied from about 
+1/90 per day to 1/30 per day and again a simpler
+model is not tenable (the goodness-of-fit statistic increases
+to 433.6 with 9 df). 
+
+The estimate of the overall run is 356,104 fish with an 
+estimated se of 4,749 fish. Note that the
+estimated se of the overall run is comparable to the se
+of the estimated individual strata sizes - this is caused
+by the fact that the latter are very highly correlated.
+
+
+The pooled-Petersen (i.e. ignoring
+stratification) is approximately 3.7\% smaller. 
+The apparent bias is statistically significant, but not of
+biological significance.
+The negative bias is not unexpected. As noted by Seber (1982, Section 3.2.2, p. 86) and
+by Schwarz and Taylor (1998), a positive correlation
+between the capture and recapture probabilities among
+fish leads to a negative bias in the Petersen estimate.
+Ironically, the capture-probability of the fishwheel-caught fish is often
+the highest when large numbers of fish are migrating due to 
+optimal water conditions and what might
+be density dependent catchability may be positively
+correlated with abundance.
+Similarly, at the fishway, more effort is expended when
+a large number of fish are expected to arrive and the
+capture probability is also larger!
+
+
+Two simulation studies were performed to (1) asses the performance
+of the proposed estimator in the current example, and (2)
+to assess the performance of the estimators when recapture
+rates are much smaller and data is sparser.
+
+One hundred simulated datasets from a population based upon the
+estimates in Table 5(a) were generated and
+and estimates and estimated standard 
+errors were obtained for each data set.
+All point estimates appear to unbiased but
+there may be a slight underestimate of the actual standard
+error for the strata sizes and the overall population size.
+The good performance of the estimators is not unexpected given the
+relatively large number of tagged fish recovered.
+
+A second set of simulated datasets with approximately $1/10$ of the recovery
+effort observed in the example was generated using a similar procedure.
+The point estimators remained unbiased, but as expected, the variability 
+of the estimators increased by about a factor of $\sqrt{10}$. 
+The estimated standard errors are
+much more variable and there appears to be significant bias in the
+estimated standard errors for the stratum and overall population sizes.
+In sparse data, many of the $m_{ij}$ are
+zero, and Plante, Rivest, and Tremblay (1998) note that the
+corresponding $\hat{\mu}_{ij}=0$, and these sampling zeroes
+have the same effect as structural zeroes in the variance estimation, i.e.
+the observed `zeroes' are treated as
+known parameters and so the estimated variances are
+biased downwards. 
+
+
+\Section{5.~Discussion}
+
+In this experiment, the use of estimating equations provides a
+simple method to obtain estimates compared to using
+a formal likelihood which is not tractable.
+As noted in the paper, our estimates are a form of
+minimum $\chi^2$ estimators, and asymptotically
+will be close to fully efficient.
+The disadvantage of this approach is that model
+selection (through likelihood ratio tests and AIC) is
+not readily done, although some modification
+using changes in the goodness-of-fit statistic as a 
+surrogate for changes in the likelihood could be
+possible.
+Our approach is also related to that of 
+quasi-likelihood
+(Wedderburn, 1974). 
+
+The estimates could also have been obtained
+using the EM-algorithm where the missing data
+refers to the allocation of tags counted but not
+read to the cells in the $m_{ij}$ array.
+The evaluation and maximization of the complete-data
+likelihood then then exactly the same as that
+of Plante, Rivest, and Tremblay (1998). However,
+it is still difficult to evaluate the expectation 
+of the complete-data likelihood over the unobservable
+components subject to the complex observed 
+constraints. However, an approximate solution
+can be obtained as outlined at the end of Section 3.1.
+
+It is interesting to estimate the effect of not reading all
+the tags upon the estimates. 
+If we replace the observed $m_{ij}$ by 
+$m_{ij}^{*} = m_{ij}+z_j{{\hat \mu _{ij}} \over {\hat \mu _{\bullet j}}}$ 
+to simulate what would happen if all tags were read, then
+analyze this simulated date using SPAS, the final estimates
+of the population size are unchanged, but the se of the
+overall run size decreases by approximately 8\%.
+It is not likely cost effective to increase the sampling
+effort to get this increased precision in this experiment. 
+Using our software, simulated data could be analyzed
+to help select the optimal level of sampling at
+both the capture and recapture stages.
+
+The ability to partially count tagged recoveries has
+two other immediate applications.
+First, it is quite common in fisheries to tag fish
+by injecting them with a small wire about 2 mm in 
+size that is coded with information about the time
+and location of release and to simultaneously
+batch mark them with a fin clip.
+When fish are recovered, it is relatively easy to 
+identify the marked fish from the fin clip, but more tedious and
+time consuming to extract and read the coded-wire
+tag. For example, recoveries are often obtained 
+from recreational fishers who deposit the head into
+specially marked barrels at fish cleaning stations and
+these heads are dissected at the laboratory.
+Now only a portion of the fish need to be examined
+further but the total count of the recoveries
+can be incorporated.
+
+Second, field conditions may make it difficult
+to reliably identify tagged fish. Using methods similar
+to those outlined in Rajwani and Schwarz (1997),
+a second survey could be conducted to estimate the number
+of tags overlooked - i.e. an estimate of the $z_j$
+could be obtained.
+These could be used to improve the estimates
+based on the initial, faulty, survey - but of 
+course, the variance of the estimates needs to be
+adjusted in a similar fashion as in Rajwani and
+Schwarz (1997).
+
+Lastly, in this particular experiment, the
+pooled-Petersen estimator had a statistically
+significant but biologically meaningless negative
+bias. However, it is not difficult to 
+construct examples where the bias can be
+as great as 40\%.
+As well, the stratified-Petersen provides estimates
+of the capture-efficiency of the fish wheels
+which 
+are being used to evaluate the performance of an in season
+mark-recapture method (Link and Gurak, 1997).
+Similarly, Schwarz and Taylor (1998) compared
+estimates from a stratified mark-recapture experiment
+to those obtained by a hydro-acoustic methods to try
+and ascertain why the estimates of the total run
+varied by a factor of 2 between the two methods.
+
+
+
+\Acknowledgments{} 
+
+This work was supported by a Natural Science and Engineering
+Research Council of Canada (NSERC) Research Grant to CJS.
+The sockeye salmon data were provided by the Nisga'a
+Tribal Council and LGL Limited.
+
+
+\resume{}
+
+To be added by editor.
+
+
+
+\References{}
+
+\ref Arnason, A. N., Kirby, C. W., Schwarz, C. J., and Irvine, J. R. (1996). 
+Computer analysis of marking data from stratified populations for estimation of 
+salmonid escapements and the size of other populations. 
+{\it Canadian Technical Report of Fisheries and Aquatic Sciences} {\bf 2106}.
+
+\ref Banneheka, S. G., Routledge, R. D., and Schwarz, C. J.
+(1997).  
+Stratified two-sample tag-recovery census of closed populations.
+{\it Biometrics\/}
+{\bf 53}, 1212--1224.
+
+\ref Becker, N. G. (1984).
+Estimating population size from capture-recapture experiments in continuous
+time.
+{\it Australian Journal of Statistics\/} {\bf 26}, 1-7.
+
+\ref Darroch, J. N. (1961).  
+The two-sample capture-recapture census when tagging and sampling are stratified.
+{\it Biometrika\/} {\bf 48}, 241--260.
+
+\ref Huggins, R. M. (1989).
+On the statistical analysis of capture-experiments.
+{\it Biometrika\/} {\bf 76}, 133-140.
+
+\ref Liang, K. Y. and Zeger, S. L. (1986).
+Longitudinal data analysis using generalized linear models.
+{\it Biometrika\/} {\bf 73}, 13-22.
+
+\ref Link, M. R. and Gurak, A. C. (1997).
+The 1995 Fishwheel Project on the Nass River, B.C.
+{\it Canadian Manuscript Report of Fisheries and Aquatic Sciences\/}
+{\bf 2422}, xi+99 p.
+
+\ref Plante, N. (1990). 
+Estimation de la taille d'une population animale \`a l'aide d'un
+mod\`ele de capture-recapture avec stratification. M.Sc. Thesis, Universit\'e
+ Laval, Canada.
+
+\ref Plante, N., Rivest, L.-P., and Tremblay, G. (1998). 
+Stratified capture-recapture estimation of the size of a closed population.
+{\it Biometrics\/} {\bf 54}, 47--60.
+
+\ref Rajwani, K. and Schwarz, C. J. (1997). 
+Adjusting for missing tags in salmon escapement surveys. 
+{\it Canadian Journal of Fisheries and Aquatic Sciences\/} {\bf 54}, 800--808.
+
+\ref Schwarz, C. J. and Taylor, C. G. (1998). 
+The use of the stratified-Petersen estimator in fisheries management: estimating the number of pink salmon (Oncorhynchus gorbuscha) spawners in the Fraser River.
+{\it Canadian Journal of Fisheries and Aquatic Sciences\/} {\bf 55},
+281--297.
+
+\ref Seber, G. A. F. (1982).
+{\it The Estimation of Animal Abundance and Related Parameters}, 2nd edition.
+London:Griffen.
+
+\ref Wedderburn, R. W. M. (1974).
+Quasi-likelihood functions, generalized linear models, and the Gauss-Newton
+method. {\it Biometrika\/} {\bf 61}, 439-437.
+
+\ref Williams, D. A. (1970).
+Discussion on ``A method of discriminating between models'',
+{\it Journal of the Royal Statistical Society, Series B\/} {\bf 32}, 350.
+
+\ref Yip, P. (1991).
+A martingale estimating equation for a capture-recapture experiment in discrete
+time.
+{\it Biometrics\/} {\bf 47}, 1081-1088.
+
+\ref Yip, P. S., Huggins, R. M., and Lin, D. Y. (1996).
+Inference for capture-recapture experiments in continuous time with
+variable capture rates.
+{\it Biometrika\/} {\bf 83}, 477-483.
+
+
+
+\vfill\eject  % new page
+%-------------------------------------------------------------------------------------
+% This table will be printed in landscape orientation
+ 
+\newbox\obsstat
+\setbox\obsstat=\vbox\bgroup
+\hsize=54pc
+
+
+
+\centerline{\bf Table 1}
+
+\tabcaption{Observed statistics}
+
+{  % start of table
+\tabskip=0pt\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&            % center justified - stratum number
+   \hfil#\hfil \tabskip=40pt &   % right justified  - number released
+   \hfil#\hfil&                 % number recovered in recovery stratum 1
+   \hfil#\hfil&         %  ... 
+   \hfil#\hfil&         %  ...
+   \hfil#\hfil&         %  t
+   \hfil#\hfil%         % total recoveries - note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release & Number &    \multispan4 \hfill Recovery Stratum\hfill    & Tags not \cr
+Stratum & released & $1$   & $2$   &  $\ldots$  &  $t$  &  read     \cr
+\noalign{\vskip-2pt}
+\tablerule
+1      &  $n_1^c$ & $m_{11}$ & $m_{12}$ & $\ldots$ & $m_{1t}$ & $n_1^c - m_{1 \bullet}$ \cr
+2      &  $n_2^c$ & $m_{21}$ & $m_{22}$ & $\ldots$ & $m_{2t}$ & $n_2^c - m_{2 \bullet}$ \cr
+$\ldots$ & $\ldots$   & $\ldots$   & $\ldots$   & $\ldots$ & $\ldots$   & $\ldots$      \cr
+$s$    &  $n_s^c$ & $m_{s1}$ & $m_{s2}$ & $\ldots$ & $m_{st}$ & $n_s^c - m_{s \bullet}$ \cr
+\noalign{\vskip 6pt}
+\multispan2 Number recovered \hfill \cr
+\multispan2 without tags \hfill & $u_1$ & $u_2$ & $\ldots$ & $u_t$ \cr
+\noalign{\vskip 6pt}
+\multispan2 Number tags recovered \hfill  \cr
+\multispan2 but not read \hfill& $z_1$ & $z_2$ & $\ldots$ & $z_t$  \cr
+\noalign{\vskip-2pt}
+\tablerule
+\multispan5 Number of tags not recovered =
+$n_{\bullet}^c - m_{\bullet \bullet} - z_{\bullet}$ \hfill \cr
+}   % end of halign
+}   % end of table
+\egroup   % end of hbox definition for Table 1
+
+\rotl{\obsstat}
+
+\vfill\eject  % new page
+%-------------------------------------------------------------------------------------
+
+
+% This table will be printed in landscape orientation
+ 
+\newbox\eval
+\setbox\eval=\vbox\bgroup
+\hsize=54pc
+
+\centerline{\bf Table 2}
+
+\tabcaption{Expected values of statistics shown in Table 1}
+
+{  % start of table
+\tabskip=0pt\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&    % centre justified - stratum number
+   \hfil#\hfil     &   % right justified  - number released
+   \hfil#\hfil&         % number recovered in recovery stratum 1
+   \hfil#\hfil&         %  ...
+   \hfil#\hfil&         %  t
+   \hfil#\hfil%         % total recoveries - note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release & Number &
+\multispan3 \hfill Recovery Stratum\hfill    
+& Tags not \cr
+Stratum & released & $1$   
+&  $\ldots$  &  $t$  &  read     \cr
+\noalign{\vskip-2pt}
+\tablerule
+1      &  $N\psi _1c_1$
+& $N\psi _1c_1\theta _{11}r_1\lambda _1$ 
+& $\ldots$ 
+& $N\psi _1c_1\theta _{1t}r_t\lambda _t$ 
+& $N\psi _1c_1-\sum\limits_{j=1}^t {N\psi _1c_1\theta _{1j}r_j\lambda _j}$
+ \cr
+2      &  $N\psi _2c_2$ 
+& $N\psi _2c_2\theta _{21}r_1\lambda _1$ 
+& $\ldots$ 
+& $N\psi _2c_2\theta _{2t}r_t\lambda _t$ 
+& $N\psi _2c_2-\sum\limits_{j=1}^t {N\psi _2c_2\theta _{2j}r_j\lambda _j}$
+\cr
+$\ldots$ & $\ldots$   
+& $\ldots$   & $\ldots$ & $\ldots$   &$ \ldots$    \cr
+$s$    &  $N\psi _sc_s$ 
+& $N\psi _sc_s\theta _{s1}r_1\lambda _1$ 
+& $\ldots$ 
+& $N\psi _sc_s\theta _{st}r_t\lambda _t$ 
+& $N\psi _sc_s-\sum\limits_{j=1}^t {N\psi _sc_s\theta _{sj}r_j\lambda _j}$
+ \cr
+\multispan2 Number recovered \hfill \cr
+\noalign{\vskip-6pt}
+\multispan2 without tags \hfill  & 
+$\sum\limits_{i=1}^s {N\psi _i ({1-c_i})\theta _{i1}r_1}$ 
+&$\ldots$ 
+&$\sum\limits_{i=1}^s {N\psi _i({1-c_i})\theta _{it}r_t}$  \cr
+\noalign{\vskip 6pt}
+\multispan2 Number tags recovered \hfill 
+&$\sum\limits_{i=1}^s {N\psi _i c_i \theta _{i1}r_1} ({1-\lambda _1})$ 
+&$\ldots$ 
+&$\sum\limits_{i=1}^s {N\psi _i c_i \theta _{it}r_t} ({1-\lambda _t})$  \cr
+\noalign{\vskip-9pt}
+\multispan2 but not read \hfill \cr
+\noalign{\vskip-2pt}\tablerule
+\multispan5 Expected number of tags not recovered = 
+$\sum\limits_{i=1}^s { {N\psi _ic_i} } [{1-\sum\limits_{j=1}^t {\theta _{ij}r_j}}]$ \hfill \cr
+}   % end of halign
+}   % end of table
+
+\egroup   % end of hbox definition for Table 2
+
+\rotl{\eval}
+
+
+\vfill\eject  % new page
+%-------------------------------------------------------------------------------------
+
+
+% This table will be printed in landscape orientation
+ 
+\newbox\evalnew
+\setbox\evalnew=\vbox\bgroup
+\hsize=54pc
+\centerline{\bf Table 3}
+
+\tabcaption{Expected value of observed statistics in terms of the identifiable
+parameters}
+
+{  % start of table
+\tabskip=0pt\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&    % center justified - stratum number
+   \hfil#\hfil \tabskip=40pt &   % right justified  - number released
+   \hfil#\hfil&         % number recovered in recovery stratum 1
+   \hfil#\hfil&         %  ...
+   \hfil#\hfil&         %  t
+   \hfil#\hfil%         % total recoveries - note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release & Number &    
+\multispan3 \hfill Recovery Stratum\hfill    
+& Tags not \cr
+Stratum & released & $1$   
+&  $\ldots$  &  $t$  &  read     \cr
+\noalign{\vskip-2pt}
+\tablerule
+1      &  
+$\gamma _1+\sum\limits_{j=1}^t {\mu _{1j} \lambda_j}$
+&$\mu_{11}\lambda _1$
+&$\ldots$ 
+&$\mu_{1t}\lambda _t$ & $\gamma _1$ \cr
+2      &  $\gamma _2+\sum\limits_{j=1}^t {\mu _{2j} \lambda_j}$ 
+&$\mu_{21}\lambda _1 $ 
+&$\ldots$ 
+&$\mu_{2t}\lambda _t$ & $\gamma _2$ \cr
+$\ldots$ & $\ldots$   
+& $\ldots$   & $\ldots$ & $\ldots$   & $\ldots$          \cr
+$s$    &  $\gamma _s+\sum\limits_{j=1}^t {\mu _{sj} \lambda_j}$ 
+&$\mu_{s1}\lambda _1$ 
+&$\ldots$ 
+&$\mu_{st}\lambda _t$ & $\gamma _s$ \cr
+\noalign{\vskip 6pt}
+\multispan2 Number recovered \hfill \cr
+\noalign{\vskip-6pt}
+\multispan2 without tags \hfill  
+&$\sum\limits_{i=1}^s {\beta _i\mu _{i1}}$ 
+&$\ldots$ 
+&$\sum\limits_{i=1}^s {\beta _i\mu _{it}}$ \cr
+\noalign{\vskip 6pt}
+\multispan2 Number tags recovered \hfill  \cr
+%\noalign{\vskip-1pt}
+\multispan2 but not read \hfill 
+&$({1-\lambda _1})\mu _{\bullet 1}$ 
+&$\ldots$ 
+&$({1-\lambda _t})\mu _{\bullet t}$  \cr
+\noalign{\vskip-2pt}
+\tablerule
+\multispan5 Expected number of tags not recovered =
+$\gamma _\bullet -\sum\limits_{j=1}^t {({1-\lambda _j})\mu _{\bullet j}}$ \hfill \cr
+}   % end of halign
+}   % end of table
+
+\egroup   % end of hbox definition for Table 3
+
+\rotl{\evalnew}
+
+
+\vfill\eject  % new page
+%-------------------------------------------------------------------------------------
+
+% This table will be printed in landscape orientation
+ 
+\newbox\exdata
+\setbox\exdata=\vbox\bgroup
+\hsize=54pc
+\centerline{\bf Table 4}
+
+\tabcaption{Summary statistics for sockeye salmon returning to spawn in the Nass River, B.C., Canada}
+
+{  % start of table
+\tabskip=0pt\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&    % center justified - stratum number
+   \hfil#\quad&    % right justified  - number released
+   \hfil#\quad&         % number recovered in recovery stratum 1
+   \hfil#\quad&         %  2
+   \hfil#\quad&         %  3
+   \hfil#\quad&         %  4 
+   \hfil#\quad&         %  5 
+   \hfil#\quad&         %  6 
+   \hfil#\quad&         %  7
+   \hfil#\quad&         %  8 
+   \hfil#\quad&         %  9
+   \hfil#\quad&         %  10
+   \hfil#\quad%    % total recoveries - note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release & Number &    \multispan{10} \hfill Recovery Stratum\hfill    & Tags not \cr
+Stratum & released & $1$   & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ &  $10$  &  read     \cr
+\noalign{\vskip-2pt}
+\tablerule
+     1 &1,070 & 118 &  68 &   8 &   7 &   1 &   0 &  0 &   0 &   0 &  0  &  868 \cr
+     2 &1,919 &  32 & 245 &  88 &  45 &  14 &   3 &  2 &   2 &   0 &  0  & 1,488 \cr
+     3 &2,487 &   0 & 114 & 251 & 216 &  89 &  11 &  3 &   4 &   1 &  1  & 1,797 \cr
+     4 &1,103 &   0 &   0 &   6 &  93 & 221 &  65 & 19 &   9 &   1 &  0  &  689 \cr
+     5 & 763 &   0 &   0 &   0 &   0 &  52 &  98 & 47 &  20 &   4 &  0  &  542 \cr
+     6 & 638 &   0 &   0 &   0 &   0 &   0 &   1 & 30 & 119 &  56 &  8  &  424 \cr
+     7 & 628 &   0 &   0 &   0 &   0 &   0 &   0 &  0 &  61 & 171 & 18  &  378 \cr
+     8 & 209 &   0 &   0 &   0 &   0 &   0 &   0 &  0 &   0 &   8 & 38  &  163 \cr
+\noalign{\vskip 6pt}
+\multispan2 Number recovered \hfill \cr
+\multispan2 without tags \hfill  & 
+             13,047 &54,291& 33,389 &11,740 &13,411 &10,037& 8,448& 16,156& 21,178 &5,772 \cr
+\noalign{\vskip 6pt}
+\multispan2 Number tags recovered \hfill  \cr
+\multispan2 but not read \hfill & 
+           198  & 914 &  877  &  85 &   87 &  105  & 13 &   59 &  108 &  32 \cr
+\noalign{\vskip-2pt}
+\tablerule
+\multispan4 Number of tags not recovered = 3,871.\hfill  \cr
+}   % end of halign
+}   % end of table
+
+
+\egroup   % end of hbox definition for Table 1
+
+\rotl{\exdata}
+
+\vfill\eject  % new page
+%-------------------------------------------------------------------------------------
+% This table will be printed in landscape orientation
+ 
+\newbox\exest
+\setbox\exest=\vbox\bgroup
+\hsize=54pc
+\centerline{\bf Table 5 (a)}
+
+\tabcaption{Estimates of parameters from fitting the full model}
+
+{  % start of table
+%\tabskip=0pt
+\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&    % center justified - stratum number
+   \hfil#\quad&    % right justified  - number released
+   \hfil#\quad&         % number recovered in recovery stratum 1
+   \hfil#\quad&         %  2
+   \hfil#\quad&         %  3
+   \hfil#\quad&         %  4 
+   \hfil#\quad&         %  5 
+   \hfil#\quad&         %  6 
+   \hfil#\quad&         %  7
+   \hfil#\quad&         %  8 
+   \hfil#\quad&         %  9
+   \hfil#\quad&         %  10
+   \hfil#\quad&    % gamma i hat
+   \hfil#\quad%    % beta hat % note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release &   &    \multispan{10} \hfill Estimates of $\hat \mu _{ij}$
+ \hfill    & \cr
+Stratum & $\hat N_i$
+ & $1$   & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ &  $10$  &  $\hat \gamma _i$ & $\hat \beta _i$   \cr
+\noalign{\vskip-2pt}
+\tablerule
+1&36,883.4&273.6&213.8&27.5&8.9&1.2&0.0&0.0&0.0&0.0&0.0&867.4&33.5  \cr
+2&102,511.6&74.1&772.0&297.7&58.9&17.1&4.4&2.9&2.3&0.0&0.0&1,487.0&52.4  \cr
+3&48,792.9&0.0&357.8&875.7&271.2&109.3&17.3&3.6&5.0&1.4&1.5&1,795.8&18.6  \cr
+4&31,941.5&0.0&0.0&20.8&118.1&271.0&100.2&23.8&11.1&1.5&0.0&688.5&27.9  \cr
+5&35,316.7&0.0&0.0&0.0&0.0&63.6&145.6&64.4&23.6&5.9&0.0&541.6&45.2  \cr
+6&56,086.6&0.0&0.0&0.0&0.0&0.0&1.4&53.3&127.6&86.1&11.8&423.7&86.7  \cr
+7&31,760.4&0.0&0.0&0.0&0.0&0.0&0.0&0.0&71.2&254.5&26.7&377.7&49.6  \cr
+8&12,811.1&0.0&0.0&0.0&0.0&0.0&0.0&0.0&0.0&12.0&56.3&162.9&60.3  \cr
+&&  \cr
+$\hat \lambda _j$
+&&.431&.318&.287&.809&.812&.629&.886&.785&.690&.670&&  \cr
+&&&&&&&&&&&&&   \cr
+$\hat N=$ &356,104.1&&&&&&&&&&&&  \cr
+&&&&&&&&&&&&&  \cr
+\noalign{\vskip-2pt}
+\tablerule
+}   % end of halign
+}   % end of table
+
+\vskip 1cm
+\centerline{\bf Table 5 (b)}
+
+\tabcaption{Estimated se of parameter estimates from fitting the full model}
+
+{  % start of table
+%\tabskip=0pt
+\baselineskip=10pt
+\def\tablerule{\noalign{\vskip3pt\hrule\vskip3pt}}
+\def\tabrule{\noalign{\hrule\vskip1.5pt\hrule\vskip3pt}}
+
+\halign{  % first define the types of columns in the table
+   \hfil#\hfil&    % center justified - stratum number
+   \hfil#\quad&    % right justified  - number released
+   \hfil#\quad&         % number recovered in recovery stratum 1
+   \hfil#\quad&         %  2
+   \hfil#\quad&         %  3
+   \hfil#\quad&         %  4 
+   \hfil#\quad&         %  5 
+   \hfil#\quad&         %  6 
+   \hfil#\quad&         %  7
+   \hfil#\quad&         %  8 
+   \hfil#\quad&         %  9
+   \hfil#\quad&         %  10
+   \hfil#\quad&    % gamma i hat
+   \hfil#\quad%    % beta hat % note the terminating %
+   \cr             % end of preamble
+\tabrule  % double line after table caption
+Release &   &    \multispan{10} \hfill  se ($\hat \mu _{ij}$)
+ \hfill    & \cr
+Stratum & $se(\hat N_i)$
+ & $1$   & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ &  $10$  &  se($\hat \gamma _i)$ & $se(\hat \beta _i)$   \cr
+\noalign{\vskip-2pt}\tablerule
+1&3,095.2&18.7&24.5&9.7&3.3&1.2&.0&.0&.0&.0&.0&29.4&3.1   \cr
+2&5,676.8&12.3&38.3&27.0&7.2&4.5&2.6&1.8&1.7&.0&.0&38.5&3.2 \cr
+3&4,735.8&.0&30.3&38.6&16.3&11.3&5.2&2.0&2.5&1.4&1.5&42.2&1.9\cr
+4&3,346.3&.0&.0&8.5&11.0&16.6&11.7&5.1&3.7&1.5&.0&26.2&3.1\cr
+5&3,919.9&.0&.0&.0&.0&8.5&13.2&7.8&5.4&2.9&.0&23.3&5.4\cr
+6&5,535.8&.0&.0&.0&.0&.0&1.5&5.9&10.4&10.7&4.1&20.6&9.3\cr
+7&3,694.9&.0&.0&.0&.0&.0&.0&.0&9.1&16.9&6.0&19.4&6.2\cr
+8&2,188.8&.0&.0&.0&.0&.0&.0&.0&.0&4.1&8.2&12.8&11.3\cr
+&& \cr
+$se(\hat \lambda _j)$&&.027&.013&.013&.018&.018&.030&.026&.027&.024&.048&& \cr
+&& \cr
+$se(\hat N)=$&4,749.4& \cr
+\noalign{\vskip-2pt}
+\tablerule
+}   % end of halign
+}   % end of table
+
+\egroup   % end of hbox definition for Table 1
+
+\rotl{\exest}
+
+
+
+
+\end  % of document

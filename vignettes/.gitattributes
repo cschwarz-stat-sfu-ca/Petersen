@@ -1,0 +1,2 @@
+# https://stackoverflow.com/questions/31100061/make-git-to-track-auto-generated-files-but-ignore-from-diff
+*.html -diff
