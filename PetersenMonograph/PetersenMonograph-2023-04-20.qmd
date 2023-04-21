@@ -1,8 +1,8 @@
 ---
 title: "Petersen Estimator in Fisheries Management"
 author: "Carl James Schwarz"
-date: today
-date-format: "YYYY-MM-DD"
+date: now
+date-format: "YYYY-MM-DD  HH:mm:ss"
 execute: 
   error: true
 format: 
@@ -12,7 +12,7 @@ format:
     self-contained: true
     df-print: default
     toc-location: body
-    toc-expand: all
+    toc-depth: 2
   pdf:
     toc: true
     number-sections: true
@@ -58,9 +58,24 @@ ft_aictab <- function(aictab, widths=NULL){
 
 ```
 
-# Change log 
+# Installation & Change log 
 
-2023-05-01 First Release
+The *Petersen* package can be installed from CRAN in the usual way. (**NOT YET ON CRAN**)
+
+The development version can be installed from within *R* using:
+
+```{R}
+#| echo: true
+#| eval: false
+
+devtools::install_github("cschwarz-stat-sfu-ca/Petersen", 
+                        dependencies = TRUE,
+                        build_vignettes = TRUE)
+```
+
+Change log
+
+- 2023-05-01 First Release
 
 # Introduction
 
