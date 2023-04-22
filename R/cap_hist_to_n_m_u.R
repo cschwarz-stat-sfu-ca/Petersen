@@ -78,8 +78,9 @@ cap_hist_to_n_m_u <- function(data, sep=".."){
   }
   n1[is.na(n1)]<- 0
 
-  u2 <- plyr::ddply(data.aug, "..ts2", plyr::summarize, u2=sum(freq))
-  u2 <- u2[ u2$..ts2>0, ]
+  #browser()
+  u2 <- plyr::ddply(data.aug, "..ts2", plyr::summarize, u2=sum(freq[ ..ts1==0]))
+  u2 <- u2[ u2$..ts2>0 , ]
   time <- data.frame(..ts2=min(n1$..ts1):max(u2$..ts2))
   u2 <- merge(u2, time, all=TRUE)
   # notice that we leave is.na(u2) as missing to distinguish from 0

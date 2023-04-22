@@ -25,14 +25,14 @@ LP_IS_fit(
 }
 plus any other covariates (e.g. discrete strata and/or continuous covariates) to be used
 in the model fitting. At the moment, you are not allowed to use these covariates
-to used in the modelling process, but see the published code for more details.}
+to used in the modeling process, but see the published code for more details.}
 
 \item{p_model}{Model for the captured probabilities. This can reference
 other variables in the data frame, plus a special reserved term \code{..time} to indicate
 a time dependence in the capture probabilities. For example, \code{p_model=~1} would indicate
 that the capture probabilities are equal across the sampling events;
 \code{p_model=~..time} would indicate that the capture probabilities vary by sampling events;
-\code{p_model=~sex*..time} would indicate that the capture probabilites vary across
+\code{p_model=~sex*..time} would indicate that the capture probabilities vary across
 all combination of sampling events (\code{..time}) and a stratification variable (\code{sex}). The \code{sex} variable
 also needs to be in the data frame.
 
@@ -43,7 +43,7 @@ the models only have one capture probability (e.g., only for event 1).}
 for the two sampling occasions, but you can constrain this to have equal sampling fractions at both occasions.}
 
 \item{lambda_model}{Model for lambda category proportions. Usually this is set to different for the categories
-but you can contrain this with a null matrix and the \code{logit_lamba_offset} parameter}
+but you can constrain this with a null matrix and the \code{logit_lamba_offset} parameter}
 
 \item{logit_p_offset}{Used to fix capture probabilities at known values (seldom useful). Logit(p)=p_design \%*\% beta_p + logit_p_offset.}
 
@@ -51,7 +51,7 @@ but you can contrain this with a null matrix and the \code{logit_lamba_offset} p
 logit(theta) = theta_design \%*\% beta_theta + logit_theta_offset}
 
 \item{logit_lambda_offset}{Used to fix the sex ratio as a known value (e.g. .50) using
-logit(lambda) = lambd_design \%*\% beta_lambda + logit_lambda_offset.
+logit(lambda) = lambda_design \%*\% beta_lambda + logit_lambda_offset.
 Set the design matrix to a matrix with all zeros. Notice that because the lambda proportions must sum to 1,
 only specify an offset matrix that is number of categories -1.}
 

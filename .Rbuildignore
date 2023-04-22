@@ -3,3 +3,6 @@
 ^data-raw$
 ^man-roxygen
 ^PetersenMonograph
+cran-comments*
+^CRAN-RELEASE$
+CRAN-SUBMISSION

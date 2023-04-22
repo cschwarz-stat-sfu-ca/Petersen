@@ -3,7 +3,7 @@
 #' This will take a previous fit and return estimates of abundance.
 #' The population abundance is estimated using
 #' a Horvitz-Thompson type estimator and the user can request abundance
-#' estimates for sub-sets of the populaitonl
+#' estimates for sub-sets of the population
 #'
 
 #' @param LP_IS_fit A result of an LP_IS_fit() call.

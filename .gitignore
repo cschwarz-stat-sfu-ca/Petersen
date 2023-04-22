@@ -8,3 +8,8 @@ PetersenMonograph/*.html
 .Rdata
 .httr-oauth
 .DS_Store
+CODA*
+coda*
+inits*.txt
+data.txt
+model.txt

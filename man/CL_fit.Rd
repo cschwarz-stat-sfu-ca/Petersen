@@ -22,13 +22,13 @@ CL_fit(
 plus any other covariates (e.g. discrete strata and/or continuous covariates) to be used
 in the model fitting.}
 
-\item{covariate}{Name of continous covariate that influences capture probabilities at each event}
+\item{covariate}{Name of continuous covariate that influences capture probabilities at each event}
 
-\item{centers}{Centers of bins to group the covariates. We suggest no more than 30 bins in totalw
+\item{centers}{Centers of bins to group the covariates. We suggest no more than 30 bins in total
 with fewer bins with smaller sample sizes. Of course with smaller sample sizes, a simple stratified
 estimator may be easier to use.}
 
-\item{h1, h2}{Standard devition of normal kernal for first sampling event. This should be between 1/2 and the 1.5x the
+\item{h1, h2}{Standard deviation of normal kernel for first sampling event. This should be between 1/2 and the 1.5x the
 bin width. Larger values imply more smoothing. Smaller values imply less smoothing.}
 
 \item{conf_level}{The expected coverage for confidence intervals on N.}

@@ -5,6 +5,6 @@
 #' }
 #' plus any other covariates (e.g. discrete strata and/or continuous covariates) to be used
 #' in the model fitting. At the moment, you are not allowed to use these covariates
-#' to used in the modelling process, but see the published code for more details.
+#' to used in the modeling process, but see the published code for more details.
 #'
 

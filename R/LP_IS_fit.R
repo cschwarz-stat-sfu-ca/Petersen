@@ -15,12 +15,12 @@
 #' @param theta_model Model for theta (sampling fraction). Usually, this is set to be different
 #' for the two sampling occasions, but you can constrain this to have equal sampling fractions at both occasions.
 #' @param lambda_model Model for lambda category proportions. Usually this is set to different for the categories
-#' but you can contrain this with a null matrix and the \code{logit_lamba_offset} parameter
+#' but you can constrain this with a null matrix and the \code{logit_lamba_offset} parameter
 #' @param logit_p_offset Used to fix capture probabilities at known values (seldom useful). Logit(p)=p_design %*% beta_p + logit_p_offset.
 #' @param logit_theta_offset Used to fix sampling fractions at known values (seldom useful).
 #' logit(theta) = theta_design %*% beta_theta + logit_theta_offset
 #' @param logit_lambda_offset  Used to fix the sex ratio as a known value (e.g. .50) using
-#'    logit(lambda) = lambd_design %*% beta_lambda + logit_lambda_offset.
+#'    logit(lambda) = lambda_design %*% beta_lambda + logit_lambda_offset.
 #'    Set the design matrix to a matrix with all zeros. Notice that because the lambda proportions must sum to 1,
 #'    only specify an offset matrix that is number of categories -1.
 ##' @param p_beta.start Initial values for call to optimization routine for the beta parameters (on the logit scale).

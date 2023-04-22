@@ -3,8 +3,8 @@
 
 #' @param cap_hist A vector of capture histories.
 #' @param sep What separates the individual history values
-#' @param n  Nunber of sampling events in each history
-#' @param prefix Prefix for labelling columns of matrix
+#' @param n  Number of sampling events in each history
+#' @param prefix Prefix for labeling columns of matrix
 #' @param make.numeric Change the expanded columns to numeric from character?
 
 #' @details @template data.cap_hist

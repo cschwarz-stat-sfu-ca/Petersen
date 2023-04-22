@@ -30,7 +30,7 @@ other variables in the data frame, plus a special reserved term \code{..time} to
 a time dependence in the capture probabilities. For example, \code{p_model=~1} would indicate
 that the capture probabilities are equal across the sampling events;
 \code{p_model=~..time} would indicate that the capture probabilities vary by sampling events;
-\code{p_model=~sex*..time} would indicate that the capture probabilites vary across
+\code{p_model=~sex*..time} would indicate that the capture probabilities vary across
 all combination of sampling events (\code{..time}) and a stratification variable (\code{sex}). The \code{sex} variable
 also needs to be in the data frame.
 
@@ -58,7 +58,7 @@ fixed values are given in \code{logitP.fixed.values}}
 values for logit(P) at strata given by logitP.fixed. Typically this is used
 when certain strata have a 0 capture rate and the fixed value is set to -10
 which on the logit scale gives $p_i$ essentially 0. Don't specify values such
-as -50 because numerical problems could occur in WinBugs/OpenBugs.}
+as -50 because numerical problems could occur when this is converted to the 0-1 scale.}
 
 \item{InitialSeed}{Numeric value used to initialize the random numbers used
 in the MCMC iterations.}

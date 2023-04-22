@@ -7,7 +7,6 @@
 #' @template param.data
 #' @template param.strat_var
 #' @param do.fisher.test Should a fisher exact test be done?
-#' @param seed Seed to set the random number generator
 #' @importFrom stats na.pass xtabs
 
 #' @return List containing the contingency table and the chi-square test and fisher-exact test

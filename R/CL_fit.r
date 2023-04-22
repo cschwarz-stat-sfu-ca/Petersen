@@ -7,11 +7,11 @@
 #'
 
 #' @template param.data
-#' @param covariate Name of continous covariate that influences capture probabilities at each event
-#' @param centers   Centers of bins to group the covariates. We suggest no more than 30 bins in totalw
+#' @param covariate Name of continuous covariate that influences capture probabilities at each event
+#' @param centers   Centers of bins to group the covariates. We suggest no more than 30 bins in total
 #' with fewer bins with smaller sample sizes. Of course with smaller sample sizes, a simple stratified
 #' estimator may be easier to use.
-#' @param h1,h2 Standard devition of normal kernal for first sampling event. This should be between 1/2 and the 1.5x the
+#' @param h1,h2 Standard deviation of normal kernel for first sampling event. This should be between 1/2 and the 1.5x the
 #' bin width. Larger values imply more smoothing. Smaller values imply less smoothing.
 #' @template param.conf_level
 
@@ -87,7 +87,7 @@ ChenLloydestimate <- function(data, h1, h2, w = FALSE, covariate="Covariate")
 #           h2 = std dev of the smoothing kernel for the second probability of captur
   #browser()
   S <- function(x, h, xx = x, wgt = 0. * x + 1.){
-#       Create the kernal density weights using a Normal distribution with std dev=h
+#       Create the kernel density weights using a Normal distribution with std dev=h
 	      k <- length(x)
 	      M <- matrix(rep(xx, k), ncol = k) - matrix(rep(x, length(xx)), ncol = k, byrow = T)
 	      M <- matrix(dnorm(M, sd = h), ncol = k) %*% diag(wgt)
@@ -99,7 +99,7 @@ ChenLloydestimate <- function(data, h1, h2, w = FALSE, covariate="Covariate")
 	uu <- as.vector(data$u)
 	x <- data$center
 
-#       Get the smoothing matrix based on a normal kernal with bandwidth = std dev = h1
+#       Get the smoothing matrix based on a normal kernel with bandwidth = std dev = h1
 	S1 <- S(x, h1)
 #       Smooth the marks put out and the marks recaptured to estimate the recapture rates (smoothed)
 	Mtl <- as.vector(S1 %*% MM)

@@ -11,9 +11,9 @@ split_cap_hist(cap_hist, sep = "", n = 2, prefix = "t", make.numeric = FALSE)
 
 \item{sep}{What separates the individual history values}
 
-\item{n}{Nunber of sampling events in each history}
+\item{n}{Number of sampling events in each history}
 
-\item{prefix}{Prefix for labelling columns of matrix}
+\item{prefix}{Prefix for labeling columns of matrix}
 
 \item{make.numeric}{Change the expanded columns to numeric from character?}
 }

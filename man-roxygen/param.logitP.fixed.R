@@ -6,4 +6,4 @@
 #' values for logit(P) at strata given by logitP.fixed. Typically this is used
 #' when certain strata have a 0 capture rate and the fixed value is set to -10
 #' which on the logit scale gives $p_i$ essentially 0. Don't specify values such
-#' as -50 because numerical problems could occur in WinBugs/OpenBugs.
+#' as -50 because numerical problems could occur when this is converted to the 0-1 scale.

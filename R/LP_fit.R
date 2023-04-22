@@ -5,7 +5,7 @@
 #' for the capture probabilities and will use conditional likelihood
 #' to fit the model. The population abundance is estimated using
 #' a Horvitz-Thompson type estimator and the user can request abundance
-#' estimates for sub-sets of the populaitonl
+#' estimates for sub-sets of the population.
 #'
 
 #' @template param.data

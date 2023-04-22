@@ -3,7 +3,7 @@
 #' a time dependence in the capture probabilities. For example, \code{p_model=~1} would indicate
 #' that the capture probabilities are equal across the sampling events;
 #' \code{p_model=~..time} would indicate that the capture probabilities vary by sampling events;
-#' \code{p_model=~sex*..time} would indicate that the capture probabilites vary across
+#' \code{p_model=~sex*..time} would indicate that the capture probabilities vary across
 #' all combination of sampling events (\code{..time}) and a stratification variable (\code{sex}). The \code{sex} variable
 #' also needs to be in the data frame.
 #'

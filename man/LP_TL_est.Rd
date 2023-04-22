@@ -17,7 +17,7 @@ matrix is used to form an estimate.
 
 Some familiarity on how \code{model.matrix()} generates the model matrix of coefficients used in the expansion
 is needed.
-For example \code{N_hat=~1} creates a model matrix with 1 column (represening the intercept) and
+For example \code{N_hat=~1} creates a model matrix with 1 column (representing the intercept) and
 so requests abundance over the entire population;
 Specifying \code{N_hat=~-1+Sex} creates a model matrix with 2 columns (one for each sex) consisting of 0/1 depending
 if that row of the data frame is M/F. Hence, two abundance estimates (one for each sex) is computed.
@@ -34,13 +34,13 @@ to only use those animals with expansion factors less than 1000 in forming the e
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with abundance estimess
+An list object with abundance estimates
 }
 \description{
 This will take a previous fit and return estimates of abundance.
 The population abundance is estimated using
 a Horvitz-Thompson type estimator based only on p1 and the user can request abundance
-estimates for sub-sets of the populaitonl
+estimates for sub-sets of the population.
 }
 \examples{
 

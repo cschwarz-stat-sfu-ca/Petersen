@@ -2,7 +2,7 @@
 % Please edit documentation in R/LP_SPAS_fit.R
 \name{LP_SPAS_fit}
 \alias{LP_SPAS_fit}
-\title{Fit a Stratified-Petersen SPAS modelB.}
+\title{Fit a Stratified-Petersen SPAS model.}
 \usage{
 LP_SPAS_fit(
   data,
@@ -41,7 +41,7 @@ row.pool.in=c(123,123,123,4), then the same pooling is done, but the matrix rows
 
 \item{min.released}{Minimum number of releases in a pooled row}
 
-\item{min.inspected}{Miniumum number of inspections in a pooled column}
+\item{min.inspected}{Minimum number of inspections in a pooled column}
 
 \item{min.recaps}{Minimum number of recaptures before any rows can be pooled}
 

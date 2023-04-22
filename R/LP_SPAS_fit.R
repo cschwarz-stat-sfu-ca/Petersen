@@ -1,4 +1,4 @@
-#' Fit a Stratified-Petersen SPAS modelB.
+#' Fit a Stratified-Petersen SPAS model.
 #'
 #' This function is a wrapper to fits a SPAS model. Consult the SPAS package for more details.
 #'

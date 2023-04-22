@@ -3,7 +3,7 @@
 #' This will take a previous fit and return estimates of abundance.
 #' The population abundance is estimated using
 #' a Horvitz-Thompson type estimator based only on p1 and the user can request abundance
-#' estimates for sub-sets of the populaitonl
+#' estimates for sub-sets of the population.
 #'
 
 #' @param LP_TL_fit A result of an LP_TL_fit() call.
@@ -11,7 +11,7 @@
 #' @template param.conf_level
 #' @param trace If trace flag is set in call when estimating functions
 #'
-#' @return An list object with abundance estimess
+#' @return An list object with abundance estimates
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided

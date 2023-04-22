@@ -6,13 +6,13 @@
 #' and will use conditional likelihood (conditional on capture at time 2)
 #' to fit the model. The population abundance is estimated using
 #' a Horvitz-Thompson type estimator and the user can request abundance
-#' estimates for sub-sets of the populaitonl
+#' estimates for sub-sets of the population.
 #'
 
 #' @template param.data
 #' @template param.dt_type
 #' @template param.p_model
-#' @param rho_model Model for retention probabilties
+#' @param rho_model Model for retention probabilities
 #' @param all_beta.start Initial values for call to optimization routine for the beta parameters (on the logit scale).
 #' The values will be replicated to match
 #' the number of initial beta parameters needed. Some care is needed here since the parameter order are for the p1 probabilities
@@ -25,7 +25,7 @@
 #'
 #' Capture histories (\code{cap_hist} in the \code{data} argument) are character values of length 4.
 #'
-#' If the tag loss model is two indistinguisable tags (\code{dt_type="notD"}), then valid capture histories are:
+#' If the tag loss model is two indistinguishable tags (\code{dt_type="notD"}), then valid capture histories are:
 #' \itemize{
 #'   \item \strong{1100}  Animals double tagged but never seen again.
 #'   \item \strong{111X}  Animals double tagged, but only 1 tag was present when animal recaptured at second event.
@@ -38,7 +38,7 @@
 #'   newly captured, plus fish that were tagged and lost all their tags, and were captured again
 #' }
 #'
-#' If the tag loss model is two distinguisable tags (\code{dt_type="twoD"}), then valid capture histories are the same
+#' If the tag loss model is two distinguishable tags (\code{dt_type="twoD"}), then valid capture histories are the same
 #' as above except the history \code{111X} is replaced by:
 #' \itemize{
 #'   \item \strong{1110} Animals double tagged, but only the first of the double tags applied  was present when animal recaptured at event 2,

@@ -115,8 +115,6 @@ Following Stigler's law of eponymy (https://en.wikipedia.org/wiki/Stigler%27s_la
 investigated the origin of the Petersen estimator and identified additional scientists whose early work
 on marking and estimating fish populations deserves more credit than it has received.
 
--   add sections on equal catchability over time, across groups, model
-    averaging etc.
 
 # Basic Sampling protocols and estimation
 
@@ -126,7 +124,7 @@ The fundamental goal of a Petersen study is to estimate $N$, the
 number of animals (the abundance) in the population of interest.
 
 The idealized protocol consists of an initial capture of $n_1$ animals
-from the population. These animals are given an individually numbered
+from the population. These animals are given a
 mark or tag (@fig-tagtypes).
 
 ![Common tag types and tagging locations. Diagram taken from XXXX.](Images/tagtypes.png){#fig-tagtypes }
@@ -561,7 +559,9 @@ The data frame can have a separate row for each fish (each with *freq=1*), or a 
 ### Petersen estimate {#sec-petersen-rodli-mt}
 
 We find the Petersen estimator of abundance using the conditional
-likelihood approach used in the *Petersen* package:
+likelihood approach used in the *Petersen* package in two steps (the reason for the two steps will be explained later):
+
+In the first step, the conditional-likelihood model is fit to the data:
 
 ```{r}
 #| echo: true
@@ -582,7 +582,7 @@ in deciding how to specify *p_model* in more complex situations involving strati
 In the standard Petersen estimator, we allow the capture probabilities to vary across
 the two sampling events. Consequently, the  *p_model* was specified as *p_model=~..time*.
 
-A summary of the fit is:
+A summary of the fit is given in a data frame
 
 ```{r}
 #| echo: true
@@ -595,23 +595,33 @@ rodli.fit.mt$summary
 
 The value of the conditional likelihood, number of parameters in the conditional likelihood (just the two 
 capture probabilities) and the number of observed fish (sum of the *freq* column) are also presented.
+Notice that in the conditional likelihood approach, the abundance is NOT a parameter in the likelihood and
+so is not counted in the model summary table.
 
-From the fit, we obtain estimates of overall abundance using the *LP_est()* function 
+In the second step, we obtain estimates of overall abundance using the *LP_est()* function 
 and the *N_hat* argument. Here there is no stratification
-or other groupings of the data, so the formula for *N_hat* is *~1* indicating that we should sum over the entire population.
+or other groupings of the data, so the formula for *N_hat* is *~1* indicating that we should find the estimated abundance for 
+the entire population. (In later sections, we will obtain abundance estimates for individual strata as well).
 
 ```{r}
 #| echo: true
 #| warning: false
 #| message: false
-#| #| collapse: true
+#| collapse: true
 
 
 rodli.est.mt <- Petersen::LP_est(rodli.fit.mt, N_hat=~1)
+```
 
+
+This again gives a data frame with the estimated abundance.
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+#| collapse: true
 rodli.est.mt$summary
-
-
 ```
 
 The estimated abundance is `r round(rodli.est.mt$summary$N_hat)` (SE
@@ -651,7 +661,7 @@ rodli.chapman <- plyr::rbind.fill(data_rodli,
 rodli.chapman
 ```
 
-Then this adjusted data is passed to the *Petersen* package:
+Then this adjusted data is passed to the *Petersen* package and the two step procedure is again followed:
 
 ```{r}
 #| echo: true
@@ -660,9 +670,15 @@ Then this adjusted data is passed to the *Petersen* package:
 #| collapse: true
 
 rodli.fit.mt.chap <- Petersen::LP_fit(rodli.chapman, p_model=~..time)
-rodli.fit.mt.chap$summary
-
 rodli.est.mt.chap <- Petersen::LP_est(rodli.fit.mt.chap, N=~1)
+```
+
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+#| collapse: true
 rodli.est.mt.chap$summary
 ```
 
@@ -684,9 +700,16 @@ specification for the model for $p$ from $p=\sim ..time$ to $p=\sim 1$:
 #| collapse: true
 
 rodli.fit.m0 <- Petersen::LP_fit(data_rodli, p_model=~1)
-rodli.fit.m0$summary
-
 rodli.est.m0 <- Petersen::LP_est(rodli.fit.m0, N_hat=~1)
+```
+
+This gives the estimates:
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+#| collapse: true
 rodli.est.m0$summary
 ```
 
@@ -1346,7 +1369,7 @@ Baseline conditions for assessing impact of assumption violations
 Now it is straight forward to investigate differences in catchability
 catchability and mortality between marked and unmarked fish. Suppose that
 marked fish are slightly less catchable at the second sampling event
-($p_2^{marked}=.016$; $p_2^{unmarked}=.017) and that marked fish have a 
+($p_2^{marked}=.016$; $p_2^{unmarked}=.017$) and that marked fish have a 
 survival probability of 0.95. The resulting bias is around 17%
 (@fig-assumvio-case1):
 
@@ -1414,12 +1437,16 @@ analogous to what happens in a Bayesian analysis.
 #### Adjusting Rodli estimates for tag loss
 
 Suppose we wish to adjust the Rodli estimates for tag loss. Recall the
-estimated abundance was:
+estimated abundance was
+`r round(rodli.est.mt$summary$N_hat)` (SE
+`r round(rodli.est.mt$summary$N_hat_SE)`) fish.
+
 
 ```{r}
-#| echo: true
+#| echo: false
 #| message: false
 #| warning: false
+#| eval: false
 
 rodli.est.mt$summary
 ```
@@ -1437,6 +1464,14 @@ rodli.est.mt.adjust <- LP_est_adjust(
               rodli.est.mt$summary$N_hat, rodli.est.mt$summary$N_hat_SE,
               tag.retention.est=0.90, tag.retention.se=0.05,
               )
+```
+
+A comparison of the original and adjusted estimates of the abundance are:
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
 rodli.est.mt.adjust$summary
 
 ```
@@ -1461,10 +1496,18 @@ data(data_sim_tagloss_twoD)
 data_one_tag <- data_sim_tagloss_twoD
 data_one_tag$old_cap_hist <- data_one_tag$cap_hist
 data_one_tag$cap_hist <- paste0(substr(data_one_tag$cap_hist,1,1),substr(data_one_tag$cap_hist,3,3))
+```
+
+This gives the "single tag" data:
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 data_one_tag[,-(1:2)]
 ```
 
-We now fit the regular Petersen estimator and get the estimates that are
+We now fit the regular Petersen estimator and get the estimates that are now
 biased because of tag loss:
 
 ```{r}
@@ -1489,6 +1532,14 @@ data_one_tag.est.adj <- Petersen::LP_est_adjust(
                              data_one_tag.est$summary$N_hat, data_one_tag.est$summary$N_hat_SE,
                              tag.retention.est=.64, 
                              tag.retention.se =.06)
+```
+
+giving:
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
 data_one_tag.est.adj$summary
 ```
 
@@ -1522,7 +1573,7 @@ $m_3=6$ new tags are found.
 The data and capture histories are:
 
 ```{r}
-#| echo: true
+#| echo: false
 #| warning: false
 #| message: false
 
@@ -1537,7 +1588,13 @@ data_overlook <- data.frame(
       cap_hist = c("10",   "11",   "01"),
       freq     = c(n1-m2,  m2,    n2-m2)
 )
+```
 
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 data_overlook
 ```
 
@@ -2016,7 +2073,8 @@ nop.sex.ma.N_hat_all<- LP_modavg(
 #| tbl-cap: "Model averaged estimates of overall abundance for Northern Pike"
 #| label: tbl-nop-sex-all-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_all)
 temp <- nop.sex.ma.N_hat_all[,vars]
 ft <- flextable(temp)
@@ -2034,7 +2092,7 @@ latter two models are one of the cases where the pooled-Petersen is
 unbiased, i.e., the capture-probabilities are homogeneous at either of
 the sampling events.
 
-**Check the values in the paragraph below** If only the model where each
+If only the model where each
 sex is modeled independently was used, the estimated abundances would
 have been 49,382 ( $SE$ 3,616) fish. In the models where the effect of sex was ignored either completely
 or at either of the sampling occasions, the
@@ -2047,7 +2105,7 @@ It is now possible to obtain estimates of the abundance of the two sub-populatio
 In the traditional pooled-Petersen estimator, it is not easy
 to get estimates of the sub-population, but this can also be done using
 the conditional likelihood approach followed by the Horvitz-Thompson
-estimator (@tab-nop-sex-indiv-modavg).
+estimator (@tbl-nop-sex-indiv-modavg).
 
 ```{r}
 #| echo: true
@@ -2070,9 +2128,10 @@ nop.sex.ma.N_hat_sex<- LP_modavg(
 #| message: false
 #| collapse: true
 #| tbl-cap: "Model averaged estimates of abundance for each sex for Northern Pike"
-#| label: tab-nop-sex-indiv-modavg
+#| label: tbl-nop-sex-indiv-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_sex)
 temp <- nop.sex.ma.N_hat_sex[,vars]
 ft <- flextable(temp)
@@ -2143,12 +2202,12 @@ nop.sumstat.length.class <- plyr::ddply(data_NorthernPike, "length.class", funct
 })
 
 nop.sumstat.all <- LP_summary_stats(data_NorthernPike)
-nop.sumstat.all$length.class <- "xxALL"
+nop.sumstat.all$length.class <- "ALL"
 
 nop.sumstat.length.class <- plyr::rbind.fill(nop.sumstat.length.class,
                                              nop.sumstat.all)
 
-nop.sumstat.length.class
+#nop.sumstat.length.class
 
 ft <- flextable(nop.sumstat.length.class)
 ft <- colformat_double(ft, j=c("p.recap","mf"), digits=3)
@@ -2176,7 +2235,8 @@ occasion) is constructed as illustrated in @tbl-nop-equal-mf-lengthclass.
 #| message: false
 #| collapse: true
 
-nop.equal.mf.length.class <- LP_test_equal_mf(data_NorthernPike, "length.class") 
+nop.equal.mf.length.class <- LP_test_equal_mf(data_NorthernPike,
+                                              "length.class") 
 ```
 
 ```{r}
@@ -2233,7 +2293,8 @@ tagged at sampling occasion 1 is constructed as illustrated in
 #| message: false
 #| collapse: true
 
-nop.equal.recap.length.class <- LP_test_equal_recap(data_NorthernPike, "length.class") 
+nop.equal.recap.length.class <- LP_test_equal_recap(data_NorthernPike, 
+                                                    "length.class") 
 ```
 
 ```{r}
@@ -2391,7 +2452,8 @@ nop.length.class.ma.N_hat_all<- LP_modavg(
 #| tbl-cap: "Model averaged estimates of overall abundance for Northern Pike when stratifying by length class"
 #| label: tbl-nop-lengthclass-all-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_all)
 temp <- nop.length.class.ma.N_hat_all[,vars]
 ft <- flextable(temp)
@@ -2444,7 +2506,8 @@ nop.length.class.ma.N_hat_length.class<- LP_modavg(
 #| label: tbl-nop-lengthclass-indiv-modavg
 
 vars <- c(#"N_hat_f",
-          "N_hat_rn","Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+          "N_hat_rn","Modnames","AICcWt","Estimate","SE",# "N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
 ft <- flextable(temp)
@@ -2627,7 +2690,7 @@ The estimated abundance from the best fitting model is:
 #| message: false
 #| collapse: true
 #| tbl-cap: "Estimated abundance of Northern Pike from quadratic relationship with length "
-#| label: tab-nop-quad2-est
+#| label: tbl-nop-quad2-est
 
 nop.est.length.quad2$summary
 
@@ -2850,8 +2913,6 @@ averaged results (@tbl-nop-length-sp-modavg).
 #| warning: false
 #| message: false
 #| collapse: true
-#| tbl-cap: "Estimated abundance of Northern Pike from quadratic relationship with length "
-#| label: tbl-nop-sp2-est
 
 nop.est.length.sp2.df4$summary
 
@@ -2887,7 +2948,8 @@ nop.length.class.ma.N_hat_length.class<- LP_modavg(
 #| label: tbl-nop-length-sp-modavg
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
 ft <- flextable(temp)
@@ -3412,14 +3474,22 @@ which is a slight reduction from the unpooled estimates.
 
 #### Comparing the different poolings:
 
-We can compare the fit using AICc in the usual way:
+We can compare the fit using AICc in the usual way (@tbl-spas-pooling-aictab)
 
 ```{r}
 #| echo: true
 #| warning: true
 #| message: true
-
 spas.aictab <- Petersen::LP_AICc(mod..1, mod..2, mod..3, mod..4)
+```
+
+
+```{r}
+#| echo: false
+#| warning: true
+#| message: true
+#| tbl-cap: "Comparision of model different SPAS poolings"
+#| label: tbl-spas-pooling-aictab
 
 ft_aictab(spas.aictab, widths=c("1"=2.5))
 ```
@@ -3434,7 +3504,7 @@ no pooling, but the condition factor of the model with no pooling makes
 it less than ideal.
 
 We can also create a report of the estimates and model average them in
-the usual way.
+the usual way (@tbl-spas-pooling-ma).
 
 ```{r}
 #| echo: false
@@ -3459,10 +3529,30 @@ report <- plyr::ldply(model.list, function(x){
               )
   
 })
-report
+#report
 
-LP_modavg(mod..1, mod..2, mod..3, mod..4)
+spas.ma <- LP_modavg(mod..1, mod..2, mod..3, mod..4)
+```
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| collapse: true
+#| tbl-cap: "Model averaged estimates of abundance from different SPAS poolings"
+#| label: tbl-spas-pooling-ma
+
+vars <- c(#"N_hat_f","N_hat_rn",
+          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
+#vars %in% names(nop.length.class.ma.N_hat_length.class)
+temp <- spas.ma[,vars]
+ft <- flextable(temp)
+ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- colformat_double(ft, j="AICcWt", digits=2)
+ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+
+ft
 ```
 
 Different column pooling will give the same fit and so cannot be
@@ -3501,7 +3591,8 @@ In their example, fish pass through a fishway where it relatively easy to see if
 has a tag, but only every 1/4 of fish are subsequently removed to read the tag and 
 know the stratum of release.
 
-Specialized software to fit the above model using the estimating equations has been written in S-Plus and is available upon request. 
+Specialized software to fit the above model using the estimating equations has been written in *R*
+and is available upon request. 
 This software also will fit simpler models where the tag-reading rate is assumed to be equal for all the recovery strata, 
 where the tag application rate is equal for all release strata, 
 or where the parameters can be modeled using covariates. 
@@ -4314,7 +4405,7 @@ impute a value based on the hierarchical model for the p's.
 
 This is done by passing the temporal stratum where the $logit(p)$ should
 be fixed typically at $logit(p)=-10$ which corresponds to
-$p=$`r expit(-10)`.
+$p=$`r formatC(expit(-10), format="f", width=20, digits=7)`.
 
 For example, to fix the $logit(p)$ for temporal stratum 12, the
 following code would be used:
@@ -4336,10 +4427,11 @@ BTSPAS.diag.fit2 <- LP_BTSPAS_Diag_fit(
 
 
 ```{r}
-#| echo: true
+#| echo: false
 #| warning: false
 #| message: false
 #| eval: false
+#| include: false
 res <- file.path("Images",paste0("btspas.diag.fit2",".Rdata"))
 
 if( file.exists(res)){
@@ -4452,6 +4544,7 @@ BTSPAS.diag.fit4 <- LP_BTSPAS_Diag_fit(
 #| echo: false
 #| warning: false
 #| message: false
+#| include: false
 
 res <- file.path("Images",paste0("btspas.diag.fit4",".Rdata"))
 
@@ -4515,7 +4608,7 @@ were never seen again. An additional
 unmarked fish were captured at the second fishwheel.
 
 Recaptures of marked fish no longer take place along the "diagonal" that
-was seen in the previous example:
+was seen in the previous example (only the first 10 strata are shown below):
 
 ```{r}
 #| echo: false
@@ -4702,6 +4795,7 @@ BTSPAS.nondiag.fit1 <- LP_BTSPAS_NonDiag_fit(
 #| echo: false
 #| warning: false
 #| message: false
+#| include: false
 res <- file.path("Images",paste0("btspas.nondiag.fit1",".Rdata"))
 
 if( file.exists(res)){
@@ -5012,11 +5106,30 @@ fitted model, but again can be done in the usual fashion for the entire populati
 #| echo: true
 #| warning: false
 #| message: false
+
+ma.table <- LP_modavg(wae.res1, wae.res2)
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| collapse: true
 #| tbl-cap: "Model averaging in incomplete stratification fits"
 #| label: tbl-IS-modavg
 
-ma.table <- LP_modavg(wae.res1, wae.res2)
-ma.table
+vars <- c(#"N_hat_f","N_hat_rn",
+          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
+#vars %in% names(nop.length.class.ma.N_hat_length.class)
+temp <- ma.table[,vars]
+ft <- flextable(temp)
+ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- colformat_double(ft, j="AICcWt", digits=2)
+ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+
+ft
 ```
 
 and for the individual categories (@tbl-IS-modavg-sex).
@@ -5026,12 +5139,31 @@ and for the individual categories (@tbl-IS-modavg-sex).
 #| echo: true
 #| warning: false
 #| message: false
-#| tbl-cap: "Model averaging in incomplete stratification fits"
-#| label: tbl-IS-modavg-sex
 
 ma.table <- LP_modavg(wae.res1, wae.res2, N_hat=~-1+..cat)
-ma.table
 ```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| collapse: true
+#| tbl-cap: "Model averaging in incomplete stratification fits for individual sex srata"
+#| label: tbl-IS-modavg-sex
+
+vars <- c(#"N_hat_f","N_hat_rn",
+          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
+#vars %in% names(nop.length.class.ma.N_hat_length.class)
+temp <- ma.table[,vars]
+ft <- flextable(temp)
+ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- colformat_double(ft, j="AICcWt", digits=2)
+ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+
+ft
+```
+
 
 ## Optimal allocation
 
@@ -5514,21 +5646,10 @@ twoD.res1 <- LP_TL_fit(data_sim_tagloss_twoD,
                        dt_type="twoD", 
                        p_model=~1, 
                        rho_model=~1)
-twoD.res1$summary
-
-```
-
-Estimated abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 twoD.est1 <- LP_TL_est(twoD.res1, N_hat=~1, conf_level=0.95, trace=FALSE)
 twoD.est1$summary
-
 ```
+
 
 Estimates of the tag retention probability is
 
@@ -5554,24 +5675,13 @@ twoD.res2 <- LP_TL_fit(data_sim_tagloss_twoD,
                        dt_type="twoD", 
                        p_model=~1, 
                        rho_model=~-1+..tag)
-twoD.res2$summary
+twoD.est2 <- LP_TL_est(twoD.res2, N_hat=~1, conf_level=0.95, trace=FALSE)
+twoD.est2$summary
 
 ```
 
 Note the use of the *..tag* variable in the formula for *rho* indicating
 that tag location is a factor that influences the retention probability.
-
-Estimated abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
-twoD.est2 <- LP_TL_est(twoD.res2, N_hat=~1, conf_level=0.95, trace=FALSE)
-twoD.est2$summary
-
-```
 
 Estimates of the different tag retention probabilities are
 
@@ -5675,17 +5785,6 @@ t2perm.res1 <- LP_TL_fit(data_sim_tagloss_t2perm,
                          dt_type="t2perm", 
                          p_model=~1, 
                          rho_model=~1)
-t2perm.res1$summary
-
-```
-
-Estimated abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 t2perm.est1 <- LP_TL_est(t2perm.res1, N_hat=~1, conf_level=0.95)
 t2perm.est1$summary
 
@@ -5728,7 +5827,7 @@ and only models with equal retention probabilities for the two tags can
 be fit.
 
 We start with a basic model, where capture probabilities and
-tag-retention probabilities don't vary over the fish.
+tag-retention probabilities don't vary over the fish. The estimate of abundance is:
 
 ```{r}
 #| echo: true
@@ -5739,17 +5838,6 @@ nop.TL.res1 <- LP_TL_fit(data_NorthernPike_tagloss,
                          dt_type="notD", 
                          p_model=~1, 
                          rho_model=~1)
-nop.TL.res1$summary
-
-```
-
-Estimates of abundance are:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 nop.TL.est1 <- LP_TL_est(nop.TL.res1, N_hat=~1, conf_level=0.95)
 nop.TL.est1$summary
 
@@ -5766,9 +5854,9 @@ nop.TL.est1$detail$data.expand[1:2,c("..tag","rho","rho.se")]
 ```
 
 So estimated tag retention was over 98%, and that is why tag loss was
-previous ignored.
+previously ignored.
 
-We now fit a model stratified by sex:
+We now fit a model stratified by sex and the estimate of overall abundance is now:
 
 ```{r}
 #| echo: true
@@ -5779,23 +5867,12 @@ nop.TL.res2 <- LP_TL_fit(data_NorthernPike_tagloss,
                          dt_type="notD", 
                          p_model=~Sex, 
                          rho_model=~1)
-nop.TL.res2$summary
-
-```
-
-The estimate of overall abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 nop.TL.est2 <- LP_TL_est(nop.TL.res2, N_hat=~1, conf_level=0.95)
 nop.TL.est2$summary
 
 ```
 
-Finally, we allow the tag retention probabilities to also vary by sex.
+Finally, we allow the tag retention probabilities to also vary by sex and the estimated overall abundance is:
 
 ```{r}
 #| echo: true
@@ -5806,23 +5883,12 @@ nop.TL.res3 <- LP_TL_fit(data_NorthernPike_tagloss,
                          dt_type="notD", 
                          p_model=~Sex, 
                          rho_model=~Sex)
-nop.TL.res3$summary
-
-```
-
-The estimate of overall abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 nop.TL.est3 <- LP_TL_est(nop.TL.res3, N_hat=~1, conf_level=0.95)
 nop.TL.est3$summary
 
 ```
 
-Estimates of the tag retention probability for the two sex is
+Estimates of the tag retention probability for the two sexes are
 
 ```{r}
 #| echo: true
@@ -5865,7 +5931,7 @@ ft_aictab (nop.TL.aictab, widths=c("1"=2))
 ```
 
 Most of the model weight is on the simplest model. The model averaged
-overall abundance estimate are:
+overall abundance estimate are (@tbl-example-nop-tagloss-modavg)
 
 ```{r}
 #| echo: true
@@ -5884,11 +5950,20 @@ nop.TL.modavg <- Petersen::LP_modavg (
 #| echo: false
 #| warning: false
 #| message: false
+#| collapse: true
 #| label: tbl-example-nop-tagloss-modavg
 #| tbl-cap: 'Model average estimate of overall abundance from  models fit to Northern Pike double tagging data'
 
-nop.TL.modavg
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
+          "N_hat_LCL", "N_hat_UCL")
+#vars %in% names(nop.sex.ma.N_hat_all)
+temp <- nop.TL.modavg[,vars]
+ft <- flextable(temp)
+ft <- width(ft, j="Modnames", width=3, unit="in")
+ft <- colformat_double(ft, j="AICcWt", digits=2)
+ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
 
+ft
 ```
 
 ## Example - Simulated data - non-reporting of tags and reward tags {#sec-tagloss-reward}
@@ -5934,7 +6009,7 @@ rr.se <- sd( rbeta(10000, t1.returned, t1.applied-t1.returned)/ rbeta(10000, t2.
 
 and is estimated as `r round(rr,3)` (SE `r round(rr.se,3)`). 
 
-We can now fit the permanent tag models as seen previously:
+We can now fit the permanent tag models as seen previously and obtain estimates of abundance:
 
 ```{r}
 #| echo: true
@@ -5945,17 +6020,6 @@ reward.res1 <- LP_TL_fit(data_sim_reward,
                          dt_type="t2perm", 
                          p_model=~1, 
                          rho_model=~1)
-reward.res1$summary
-
-```
-
-Estimated abundance is:
-
-```{r}
-#| echo: true
-#| warning: false
-#| message: false
-#| 
 reward.est1 <- LP_TL_est(reward.res1, N_hat=~1, conf_level=0.95)
 reward.est1$summary
 

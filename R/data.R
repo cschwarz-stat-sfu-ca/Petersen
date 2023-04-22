@@ -93,7 +93,7 @@
 #'  Because fish were not handled, it is not possible to know which of the double tags were lost, and so only
 #'  models with equal retention probabilities and non-distinguishable double tags should be fit. Note
 #'  that the capture history for a lost of 1 indistinguishable tag is 111X rather than 1110 or 1101 (both of
-#'  which are not allowed in the model with indistinguisable double tags)
+#'  which are not allowed in the model with indistinguishable double tags)
 #'
 #' @format ## `data_kokanee_tagloss`
 #' A data frame with many rows and 2 columns

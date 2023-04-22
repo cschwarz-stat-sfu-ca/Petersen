@@ -21,7 +21,7 @@
 #' The \code{cov1} function takes the value \code{N} and returns N covariate values. For example these could be
 #' simulated length, or sex of each fish. The \code{cov2} function takes the \code{cov1} values and generates
 #' a second covariate. Two covariates should be sufficient for most capture-recapture simulations.
-#' If generating continous covariates, you should round the covariate to
+#' If generating continuous covariates, you should round the covariate to
 #' about 100 distinct values to speed up your simulation.
 #'
 #' The remaining functions take the two covariate values and generate capture probabilities, single tag probabilities,

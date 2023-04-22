@@ -24,7 +24,7 @@ in the model fitting.}
 
 \item{dt_type}{Double Tag type. Valid values are
 \code{notD}, \code{twoD}, and \code{t2perm}
-for two indistinguisable tags; two distinguishable tags, when the second tag is a permanent tag and cannot be lost,
+for two indistinguishable tags; two distinguishable tags, when the second tag is a permanent tag and cannot be lost,
 respectively.}
 
 \item{p_model}{Model for the captured probabilities. This can reference
@@ -32,14 +32,14 @@ other variables in the data frame, plus a special reserved term \code{..time} to
 a time dependence in the capture probabilities. For example, \code{p_model=~1} would indicate
 that the capture probabilities are equal across the sampling events;
 \code{p_model=~..time} would indicate that the capture probabilities vary by sampling events;
-\code{p_model=~sex*..time} would indicate that the capture probabilites vary across
+\code{p_model=~sex*..time} would indicate that the capture probabilities vary across
 all combination of sampling events (\code{..time}) and a stratification variable (\code{sex}). The \code{sex} variable
 also needs to be in the data frame.
 
 For some models (e.g., tag loss models), the \code{..time} variable cannot be used because
 the models only have one capture probability (e.g., only for event 1).}
 
-\item{rho_model}{Model for retention probabilties}
+\item{rho_model}{Model for retention probabilities}
 
 \item{all_beta.start}{Initial values for call to optimization routine for the beta parameters (on the logit scale).
 The values will be replicated to match
@@ -58,14 +58,14 @@ for p1 and the tag retention probabilities
 and will use conditional likelihood (conditional on capture at time 2)
 to fit the model. The population abundance is estimated using
 a Horvitz-Thompson type estimator and the user can request abundance
-estimates for sub-sets of the populaitonl
+estimates for sub-sets of the population.
 }
 \details{
 The frequency variable (\code{freq} in the \code{data} argument) is the number of animals with the corresponding capture history.
 
 Capture histories (\code{cap_hist} in the \code{data} argument) are character values of length 4.
 
-If the tag loss model is two indistinguisable tags (\code{dt_type="notD"}), then valid capture histories are:
+If the tag loss model is two indistinguishable tags (\code{dt_type="notD"}), then valid capture histories are:
 \itemize{
 \item \strong{1100}  Animals double tagged but never seen again.
 \item \strong{111X}  Animals double tagged, but only 1 tag was present when animal recaptured at second event.
@@ -78,7 +78,7 @@ If the tag loss model is two indistinguisable tags (\code{dt_type="notD"}), then
 newly captured, plus fish that were tagged and lost all their tags, and were captured again
 }
 
-If the tag loss model is two distinguisable tags (\code{dt_type="twoD"}), then valid capture histories are the same
+If the tag loss model is two distinguishable tags (\code{dt_type="twoD"}), then valid capture histories are the same
 as above except the history \code{111X} is replaced by:
 \itemize{
 \item \strong{1110} Animals double tagged, but only the first of the double tags applied  was present when animal recaptured at event 2,

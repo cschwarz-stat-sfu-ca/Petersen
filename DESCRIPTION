@@ -25,7 +25,6 @@ Imports:
     plyr,
     reshape2,
     rlang,
-    RMark,
     SPAS,
     stats,
     stringr,
@@ -35,7 +34,8 @@ Depends:
     R (>= 2.10)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    R.rsp
 VignetteBuilder: 
     knitr,
     rmarkdown,

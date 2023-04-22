@@ -20,7 +20,7 @@ other variables in the data frame, plus a special reserved term \code{..time} to
 a time dependence in the capture probabilities. For example, \code{p_model=~1} would indicate
 that the capture probabilities are equal across the sampling events;
 \code{p_model=~..time} would indicate that the capture probabilities vary by sampling events;
-\code{p_model=~sex*..time} would indicate that the capture probabilites vary across
+\code{p_model=~sex*..time} would indicate that the capture probabilities vary across
 all combination of sampling events (\code{..time}) and a stratification variable (\code{sex}). The \code{sex} variable
 also needs to be in the data frame.
 
@@ -42,7 +42,7 @@ additional covariates (e.g., strata and/or continuous covariates) and the model
 for the capture probabilities and will use conditional likelihood
 to fit the model. The population abundance is estimated using
 a Horvitz-Thompson type estimator and the user can request abundance
-estimates for sub-sets of the populaitonl
+estimates for sub-sets of the population.
 }
 \details{
 The frequency variable (\code{freq} in the \code{data} argument) is the number of animals with the corresponding capture history.
