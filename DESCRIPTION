@@ -11,6 +11,7 @@ Description: A comprehensive implementation of Petersen-type estimators
     for tag loss; non reporting of tags; reward tags; categorical, geographical and temporal stratification;
     and continuous covariates in modeling catcability.
     Many examples from fisheries management are presented.
+
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
