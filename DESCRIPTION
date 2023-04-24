@@ -9,7 +9,8 @@ Description: A comprehensive implementation of Petersen-type estimators
     and its many variants for two-sample capture-recapture studies.
     A conditional likelihood approach is used that allows
     for tag loss; non reporting of tags; reward tags; categorical, geographical and temporal stratification;
-    and continuous covariates in modeling catcability.
+    partial stratification; 
+    and continuous variables in modeling catchability.
     Many examples from fisheries management are presented.
 License: GPL-2
 Encoding: UTF-8
