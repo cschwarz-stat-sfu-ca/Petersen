@@ -40,6 +40,7 @@ library(RMark)
 library(splines)
 library(SPAS)
 library(tidyverse)
+library(VGAM)
 
 # special formatting functions etc
 ft_aictab <- function(aictab, widths=NULL){
@@ -50,7 +51,7 @@ ft_aictab <- function(aictab, widths=NULL){
   ft <- colformat_double(ft, j=c("AICc","Delta","AICcWt"), digits=2)
   ft <- set_header_labels(ft, "cond.ll"='Conditional log-likelihood',
                             'n.parms'='# parms',
-                            'nobs'   ='# observations',
+                            'nobs'   ='# obs',
                             'weight'='Model weight',
                             "name_model"="Model specification")
   ft
@@ -60,7 +61,7 @@ ft_aictab <- function(aictab, widths=NULL){
 
 # Installation & Change log 
 
-The *Petersen* package can be installed from CRAN in the usual way. (**NOT YET ON CRAN**)
+The *Petersen* package can be installed from CRAN in the usual way.
 
 The development version can be installed from within *R* using:
 
@@ -1495,7 +1496,8 @@ data(data_sim_tagloss_twoD)
 
 data_one_tag <- data_sim_tagloss_twoD
 data_one_tag$old_cap_hist <- data_one_tag$cap_hist
-data_one_tag$cap_hist <- paste0(substr(data_one_tag$cap_hist,1,1),substr(data_one_tag$cap_hist,3,3))
+data_one_tag$cap_hist <- paste0(substr(data_one_tag$cap_hist,1,1),
+                                substr(data_one_tag$cap_hist,3,3))
 ```
 
 This gives the "single tag" data:
@@ -1529,7 +1531,9 @@ loss study:
 #| message: false
 
 data_one_tag.est.adj <- Petersen::LP_est_adjust(
-                             data_one_tag.est$summary$N_hat, data_one_tag.est$summary$N_hat_SE,
+                             data_one_tag.est$summary$N_hat, 
+                             data_one_tag.est$summary$N_hat_SE,
+                             
                              tag.retention.est=.64, 
                              tag.retention.se =.06)
 ```
@@ -1641,7 +1645,9 @@ These values are used to adjust the previous estimate
 #| message: false
 
 data_overlook.est.adj <- Petersen::LP_est_adjust(
-                             data_overlook.est$summary$N_hat, data_overlook.est$summary$N_hat_SE,
+                             data_overlook.est$summary$N_hat, 
+                             data_overlook.est$summary$N_hat_SE
+                             ,
                              tag.reporting.est=rho, 
                              tag.reporting.se =rho.se)
 data_overlook.est.adj$summary
@@ -2033,7 +2039,7 @@ nop.sex.aictab <- LP_AICc(
 #| tbl-cap: "Comparison of models fit to the Northern Pike data"
 #| label: tbl-nop-sex-aictab
 
-ft_aictab(nop.sex.aictab, widths=c("1"=3))
+ft_aictab(nop.sex.aictab, widths=c("1"=2))
 
 ```
 
@@ -2073,14 +2079,14 @@ nop.sex.ma.N_hat_all<- LP_modavg(
 #| tbl-cap: "Model averaged estimates of overall abundance for Northern Pike"
 #| label: tbl-nop-sex-all-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_all)
 temp <- nop.sex.ma.N_hat_all[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -2130,14 +2136,14 @@ nop.sex.ma.N_hat_sex<- LP_modavg(
 #| tbl-cap: "Model averaged estimates of abundance for each sex for Northern Pike"
 #| label: tbl-nop-sex-indiv-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, #"N_hat_conf_level", "N_hat_LCL", "N_hat_UCL"
 #vars %in% names(nop.sex.ma.N_hat_sex)
 temp <- nop.sex.ma.N_hat_sex[,vars]
 ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -2254,7 +2260,7 @@ temp$status <- c("Not seen at t1","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
 ft <- flextable(temp)
-ft <- colformat_double(ft, j=c((nc+1):(2*nc+1)), digits=3)
+ft <- colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
 ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
 ft <- align(ft, i = 1, j = NULL, align = "center", part = "header")
 ft <- flextable::compose(ft, i=2,
@@ -2313,7 +2319,7 @@ temp$status <- c("Not recaptured","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
 ft <- flextable(temp)
-ft <- colformat_double(ft, j=c((nc+1):(2*nc+1)), digits=3)
+ft <- colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
 ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
 ft <- align(ft, i = 1, j = NULL, align = "center", part = "header")
 ft <- flextable::compose(ft, i=2,
@@ -2415,7 +2421,7 @@ nop.sex.aictab <- LP_AICc(
 #| tbl-cap: "Comparison of models fit to the Northern Pike data stratifying by length class"
 #| label: tbl-nop-lengthclass-aictab
 
-ft_aictab(nop.sex.aictab, widths=c("1"=3))
+ft_aictab(nop.sex.aictab, widths=c("1"=2.5))
 
 ```
 
@@ -2452,14 +2458,14 @@ nop.length.class.ma.N_hat_all<- LP_modavg(
 #| tbl-cap: "Model averaged estimates of overall abundance for Northern Pike when stratifying by length class"
 #| label: tbl-nop-lengthclass-all-modavg
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_all)
 temp <- nop.length.class.ma.N_hat_all[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -2506,14 +2512,14 @@ nop.length.class.ma.N_hat_length.class<- LP_modavg(
 #| label: tbl-nop-lengthclass-indiv-modavg
 
 vars <- c(#"N_hat_f",
-          "N_hat_rn","Modnames","AICcWt","Estimate","SE",# "N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+          "N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
 ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -2615,7 +2621,7 @@ nop.sex.aictab <- LP_AICc(
 #| tbl-cap: "Comparison of models fit to the Northern Pike data including quadratic functions of length"
 #| label: tbl-nop-quad-aictab
 
-ft_aictab(nop.sex.aictab, widths=c("1"=3))
+ft_aictab(nop.sex.aictab, widths=c("1"=2.5))
 
 ```
 
@@ -2767,13 +2773,14 @@ nop.length.class.ma.N_hat_length.class<- LP_modavg(
 #| label: tbl-nop-length-quad-modavg
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -2842,7 +2849,7 @@ nop.sex.aictab <- LP_AICc(
 #| tbl-cap: "Comparison of models fit to the Northern Pike data including spline functions of length"
 #| label: tbl-nop-sp-aictab
 
-ft_aictab(nop.sex.aictab, widths=c("1"=3))
+ft_aictab(nop.sex.aictab, widths=c("1"=2.5))
 
 ```
 
@@ -2948,14 +2955,14 @@ nop.length.class.ma.N_hat_length.class<- LP_modavg(
 #| label: tbl-nop-length-sp-modavg
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -3543,14 +3550,14 @@ spas.ma <- LP_modavg(mod..1, mod..2, mod..3, mod..4)
 #| label: tbl-spas-pooling-ma
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- spas.ma[,vars]
 ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -4786,7 +4793,7 @@ BTSPAS.nondiag.fit1 <- LP_BTSPAS_NonDiag_fit(
          data=data_btspas_nondiag1,
          p_model=~1,
          InitialSeed=34343,
-         logitP.fixed=c(23:26), logitP.fixed.values=rep(-10,length(23:26)) #, trace=TRUE
+         logitP.fixed=c(23:26), logitP.fixed.values=rep(-10,length(23:26))
 )
 
 ```
@@ -4806,7 +4813,7 @@ if(!file.exists(res)){
          data=data_btspas_nondiag1,
          p_model=~1,
          InitialSeed=34343,
-         logitP.fixed=c(23:26), logitP.fixed.values=rep(-10,length(23:26)) #, trace=TRUE
+         logitP.fixed=c(23:26), logitP.fixed.values=rep(-10,length(23:26))
   )
   save(BTSPAS.nondiag.fit1, file=res)
 }
@@ -5120,14 +5127,14 @@ ma.table <- LP_modavg(wae.res1, wae.res2)
 #| label: tbl-IS-modavg
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")# ,"N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- ma.table[,vars]
 ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -5152,14 +5159,14 @@ ma.table <- LP_modavg(wae.res1, wae.res2, N_hat=~-1+..cat)
 #| label: tbl-IS-modavg-sex
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")# ,"N_hat_conf_level", "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- ma.table[,vars]
 ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
+ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -5547,7 +5554,7 @@ Estimates of abundance are:
 #| warning: false
 #| message: false
 #| 
-kok.est1 <- LP_TL_est(kok.res1, N_hat=~1, conf_level=0.95, trace=FALSE)
+kok.est1 <- LP_TL_est(kok.res1, N_hat=~1, conf_level=0.95)
 kok.est1$summary
 
 ```
@@ -5646,7 +5653,7 @@ twoD.res1 <- LP_TL_fit(data_sim_tagloss_twoD,
                        dt_type="twoD", 
                        p_model=~1, 
                        rho_model=~1)
-twoD.est1 <- LP_TL_est(twoD.res1, N_hat=~1, conf_level=0.95, trace=FALSE)
+twoD.est1 <- LP_TL_est(twoD.res1, N_hat=~1, conf_level=0.95)
 twoD.est1$summary
 ```
 
@@ -5675,7 +5682,7 @@ twoD.res2 <- LP_TL_fit(data_sim_tagloss_twoD,
                        dt_type="twoD", 
                        p_model=~1, 
                        rho_model=~-1+..tag)
-twoD.est2 <- LP_TL_est(twoD.res2, N_hat=~1, conf_level=0.95, trace=FALSE)
+twoD.est2 <- LP_TL_est(twoD.res2, N_hat=~1, conf_level=0.95)
 twoD.est2$summary
 
 ```
@@ -5745,13 +5752,14 @@ sim.twoD.ma.N_hat<- LP_modavg(
 #| label: tbl-sim-twoD-modavg
 
 vars <- c(#"N_hat_f","N_hat_rn",
-          "Modnames","AICcWt","Estimate","SE", "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
+          "Modnames","AICcWt","Estimate","SE")# , "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- sim.twoD.ma.N_hat[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=2, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -5954,14 +5962,14 @@ nop.TL.modavg <- Petersen::LP_modavg (
 #| label: tbl-example-nop-tagloss-modavg
 #| tbl-cap: 'Model average estimate of overall abundance from  models fit to Northern Pike double tagging data'
 
-vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE", #"N_hat_conf_level",
-          "N_hat_LCL", "N_hat_UCL")
+vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_all)
 temp <- nop.TL.modavg[,vars]
 ft <- flextable(temp)
 ft <- width(ft, j="Modnames", width=3, unit="in")
 ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE","N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- colformat_double(ft, j=c(""N_hat_LCL","N_hat_UCL"), digits=0)
 
 ft
 ```
@@ -6118,7 +6126,7 @@ res <- plyr::adply(scenarios[],1, function(x){
        rho2=function(cov1, cov2){rep(x$rho2,   length(cov1))},
        p2  =function(cov1, cov2){rep(x$n2/x$N, length(cov1))}
      )
-     fit <- Petersen::LP_TL_fit(sim_data, dt_type="notD", p_model=~1, rho_model=~1, trace=FALSE)
+     fit <- Petersen::LP_TL_fit(sim_data, dt_type="notD", p_model=~1, rho_model=~1)
      est <- Petersen::LP_TL_est(fit, N_hat=~1, conf_level=0.95)
      est$summary 
    }, x=x)
@@ -6418,9 +6426,11 @@ the help file on this function.
 est.list <- function(modset){
     # Extract the estimate, AICc, and SE from the model sets
     # we need list with three vectors
-    estimate <- plyr::laply(modset[ names(modset) != "model.table"], function(x){get.real(x, "N", se=TRUE)$estimate})
+    estimate <- plyr::laply(modset[ names(modset) != "model.table"], 
+                            function(x){get.real(x, "N", se=TRUE)$estimate})
     weight   <- modset$model.table$weight
-    se       <- plyr::laply(modset[ names(modset) != "model.table"], function(x){get.real(x, "N", se=TRUE)$se})
+    se       <- plyr::laply(modset[ names(modset) != "model.table"], 
+                            function(x){get.real(x, "N", se=TRUE)$se})
     list(estimate=estimate, weight=weight, se=se)
 }
 est.to.average <- est.list(salmon.modset)
@@ -7201,7 +7211,9 @@ library(VGAM)
 data(data_rodli)
 
 # split the capture histories
-rodli.vgam <- cbind(data_rodli, Petersen::split_cap_hist(data_rodli$cap_hist, make.numeric=TRUE))
+rodli.vgam <- cbind(data_rodli, 
+                    Petersen::split_cap_hist(data_rodli$cap_hist, 
+                    make.numeric=TRUE))
 
 # need to expand capture history by frequency
 rodli.vgam.expand <- plyr::adply(rodli.vgam, 1, function(x){
@@ -7246,7 +7258,9 @@ rodli.chapman <- plyr::rbind.fill(data_rodli,
                     data.frame(cap_hist="11", freq=1, comment="Added for Chapman"))
 
 # split the capture history
-rodli.vgam.chapman <- cbind(rodli.chapman, Petersen::split_cap_hist(rodli.chapman$cap_hist, make.numeric=TRUE))
+rodli.vgam.chapman <- cbind(rodli.chapman, 
+                            Petersen::split_cap_hist(rodli.chapman$cap_hist, 
+                            make.numeric=TRUE))
 
 # need to expand capture history by frequency
 rodli.vgam.chapman.expand <- plyr::adply(rodli.vgam.chapman, 1, function(x){
@@ -7279,7 +7293,9 @@ library(VGAM)
 data(data_rodli)
 
 # split the capture history
-rodli.vgam <- cbind(data_rodli, Petersen::split_cap_hist(data_rodli$cap_hist, make.numeric=TRUE))
+rodli.vgam <- cbind(data_rodli, 
+                    Petersen::split_cap_hist(data_rodli$cap_hist, 
+                    make.numeric=TRUE))
 
 # need to expand capture history by frequency
 rodli.vgam.expand <- plyr::adply(rodli.vgam, 1, function(x){
@@ -7295,7 +7311,8 @@ cat("Confidence intervals for Nhat not readily available??\n")
 # aic table 
 library(AICcmodavg)
 
-AICcmodavg::aictab(list(rodli.vgam.m.0, rodli.vgam.m.t))
+AICcmodavg::aictab(list(rodli.vgam.m.0, 
+                        rodli.vgam.m.t))
 
 ```
 
@@ -7313,16 +7330,26 @@ library(VGAM)
 
 data(data_NorthernPike)
 # split the capture history
-NorthernPike.vgam <- cbind(data_NorthernPike, Petersen::split_cap_hist(data_NorthernPike$cap_hist, make.numeric=TRUE))
+NorthernPike.vgam <- cbind(data_NorthernPike, 
+                           Petersen::split_cap_hist(data_NorthernPike$cap_hist, 
+                           make.numeric=TRUE))
 
-nop.vgam.time       <- vglm(cbind(t1,t2) ~ 1,   posbernoulli.t, data = NorthernPike.vgam)
-nop.vgam.sex.time   <- vglm(cbind(t1,t2) ~ Sex, posbernoulli.t, data = NorthernPike.vgam)
-nop.vgam.sex.p.time <- vglm(cbind(t1,t2) ~ Sex, posbernoulli.t(parallel = TRUE ~ Sex), data = NorthernPike.vgam)
+nop.vgam.time       <- vglm(cbind(t1,t2) ~ 1,   
+                            posbernoulli.t,
+                            data = NorthernPike.vgam)
+nop.vgam.sex.time   <- vglm(cbind(t1,t2) ~ Sex, 
+                            posbernoulli.t, 
+                            data = NorthernPike.vgam)
+nop.vgam.sex.p.time <- vglm(cbind(t1,t2) ~ Sex, 
+                            posbernoulli.t(parallel = TRUE ~ Sex), 
+                            data = NorthernPike.vgam)
 
 # aic table 
 library(AICcmodavg)
 
-AICcmodavg::aictab(list(nop.vgam.time, nop.vgam.sex.time, nop.vgam.sex.p.time))
+AICcmodavg::aictab(list(nop.vgam.time, 
+                        nop.vgam.sex.time, 
+                        nop.vgam.sex.p.time))
                         
 
 ```
@@ -7342,7 +7369,9 @@ library(VGAM)
 
 data(data_NorthernPike)
 # split the capture history
-NorthernPike.vgam <- cbind(data_NorthernPike, Petersen::split_cap_hist(data_NorthernPike$cap_hist, make.numeric=TRUE))
+NorthernPike.vgam <- cbind(data_NorthernPike, 
+                           Petersen::split_cap_hist(data_NorthernPike$cap_hist, 
+                          make.numeric=TRUE))
 
 # create the length classes
 NorthernPike.vgam$length.class <- car::recode(NorthernPike.vgam$length,
@@ -7352,14 +7381,22 @@ NorthernPike.vgam$length.class <- car::recode(NorthernPike.vgam$length,
                                     30:35='30-35';
                                     35:hi='35+'  ")
 
-nop.vgam.time       <- vglm(cbind(t1,t2) ~ 1,   posbernoulli.t, data = NorthernPike.vgam)
-nop.vgam.length.class.time   <- vglm(cbind(t1,t2) ~ length.class, posbernoulli.t, data = NorthernPike.vgam)
-nop.vgam.length.class.p.time <- vglm(cbind(t1,t2) ~ length.class, posbernoulli.t(parallel = TRUE ~ length.class), data = NorthernPike.vgam)
+nop.vgam.time                <- vglm(cbind(t1,t2) ~ 1,   
+                                     posbernoulli.t, 
+                                     data = NorthernPike.vgam)
+nop.vgam.length.class.time   <- vglm(cbind(t1,t2) ~ length.class, 
+                                     posbernoulli.t, 
+                                     data = NorthernPike.vgam)
+nop.vgam.length.class.p.time <- vglm(cbind(t1,t2) ~ length.class, 
+                                     posbernoulli.t(parallel = TRUE ~ length.class), 
+                                     data = NorthernPike.vgam)
 
 # aic table 
 library(AICcmodavg)
 
-AICcmodavg::aictab(list(nop.vgam.time, nop.vgam.length.class.time, nop.vgam.length.class.p.time))
+AICcmodavg::aictab(list(nop.vgam.time, 
+                        nop.vgam.length.class.time, 
+                        nop.vgam.length.class.p.time))
 ```
 
 
@@ -7426,9 +7463,9 @@ setup.parameters("Huggins", check=TRUE) # returns a vector of parameter names (c
 # Notice that there is NO parameter for the population size in the Huggins model
 
 rodli.rmark.mt <- mark( data_rodli.mark, invisible=TRUE, 
-                model="Huggins",
-                model.name="model ~..time",
-                model.parameters=list(p=list(formula=~time, share=TRUE))
+                        model="Huggins",
+                        model.name="model ~..time",
+                        model.parameters=list(p=list(formula=~time, share=TRUE))
               )
 ```
 
@@ -7779,7 +7816,7 @@ where the capture/tag retention parameters vary by covariates that are
 unknown for fish never seen can be fit again similar to the conditional
 likelihood Petersen estimator.
 
-# Appendix D: Brief theory for *BTSPAS* models.
+# Appendix E: Brief theory for *BTSPAS* models.
 
 The complete theory for the *BTSPAS* models is presented in Bonner and
 Schwarz (2011). This is a synopsis.
@@ -7943,17 +7980,4 @@ changes over time.
 
 The hierarchical model for the recapture probabilities and the smoothing
 spline are similar in this non-diagonal non-parametric movement model.
-
-
-# Things to to
-
--   VGAM methods don't seem to provide ci for N-hat? Is this true?
-
--   Add S3 method such as coef, summary, AIC, etc so that all the AICmod
-    averaging functions work pretty much as expected.
-
--   Using information about sex ratio 
-
--   Is it better to pool first and then estimate or to estimate first and
-then pool? See Seber (1982, p. 100)
 
