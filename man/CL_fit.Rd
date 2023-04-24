@@ -60,5 +60,5 @@ CL_fit(data_NorthernPike, "length")
 \references{
 SX Chen, CJ Lloyd (2000).
 A nonparametric approach to the analysis of two-stage mark-recapture experiments.
-Biometrika, 87, 633–649. \url{https://doi.org/10.1093/biomet/87.3.633}
+Biometrika, 87, 633–649. \doi{10.1093/biomet/87.3.633}.
 }

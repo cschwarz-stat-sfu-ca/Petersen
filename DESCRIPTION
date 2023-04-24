@@ -1,6 +1,6 @@
 Package: Petersen
 Type: Package
-Title: Petersen estimator for capture-recapture experiments
+Title: The Petersen-Estimator for Fisheries Management
 Version: 2023.5.1
 Date: 2023-05-01
 Author: Carl James Schwarz

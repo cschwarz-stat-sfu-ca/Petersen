@@ -107,7 +107,7 @@ res$summary
 \references{
 Premarathna, W.A.L., Schwarz, C.J., Jones, T.S. (2018)
 Partial stratification in two-sample capture–recapture experiments.
-Environmetrics, 29:e2498. \url{https://doi.org/10.1002/env.2498}
+Environmetrics, 29:e2498. \doi{10.1002/env.2498}
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.
