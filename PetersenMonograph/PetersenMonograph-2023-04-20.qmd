@@ -1,5 +1,5 @@
 ---
-title: "Petersen Estimator in Fisheries Management"
+title: "The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture Studies with Applications to Fisheries Management"
 author: "Carl James Schwarz"
 date: now
 date-format: "YYYY-MM-DD  HH:mm:ss"

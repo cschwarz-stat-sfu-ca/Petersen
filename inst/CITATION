@@ -1,13 +1,15 @@
 citHeader("To cite the Petersen package in publications use:")
 
 bibentry(
-  bibtype      = "Article",
-  title        = "The Petersen-Estimator in Fisheries Management {R} {Petersen} Package",
+  bibtype      = "Manual",
+  title        = "The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture
+                  Studies with Applications to Fisheries Management {R} {Petersen} Package",
   author       = "Carl James Schwarz",
   year         = "2023",
 
   textVersion  =
   paste("Schwarz, C. J (2023).",
-        "The Petersen Estimator in Fisheries Management. R Package.")
+        "The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture
+                  Studies with Applications to Fisheries Management. R Package.")
 )
 
