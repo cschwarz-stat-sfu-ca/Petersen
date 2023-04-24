@@ -56,6 +56,7 @@ cap_hist_to_n_m_u <- function(data, sep=".."){
 
   # to avoid CRAN check errors
   freq <- NULL
+  ..ts1 <- NULL
 
   # some basic data checking
   check.cap_hist_temporal.df(data)

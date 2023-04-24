@@ -1,4 +1,4 @@
-## 2023.4.1 Release
+## 2023.5.1 Release
 * First release of this package
 
 ## Test environments
@@ -10,19 +10,15 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were up to 2 Notes depending on R version/OS used: 
+There were up to 1 Notes depending on R version/OS used: 
 
-* Found the following (possibly) invalid URLs:
-  URL: https://www.jstor.org/stable/2332748
-    From: DESCRIPTION
-    Status: 403
-    Message: Forbidden
-  URL: https://www.jstor.org/stable/2533994
-    From: DESCRIPTION
-    Status: 403
-    Message: Forbidden
+N  checking installed package size ...
+     installed size is 15.2Mb
+     sub-directories of 1Mb or more:
+       doc       8.5Mb
+       extdata   6.4Mb
     
-  These are valid URLs
+  This contains an EXTENSIVE user manual and documentation.
   
 ## Reverse dependencies
 
