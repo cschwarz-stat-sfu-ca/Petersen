@@ -10,7 +10,7 @@ Description: A comprehensive implementation of Petersen-type estimators
     A conditional likelihood approach is used that allows
     for tag loss; non reporting of tags; reward tags; categorical, geographical and temporal stratification;
     partial stratification; 
-    and continuous variables in modeling catchability.
+    and continuous variables in modeling the probability of capture.
     Many examples from fisheries management are presented.
 License: GPL-2
 Encoding: UTF-8
