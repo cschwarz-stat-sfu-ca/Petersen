@@ -10,7 +10,14 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were up to 1 Notes depending on R version/OS used: 
+There were up to 2 Notes depending on R version/OS used: 
+
+N Maintainer: ‘Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>’
+New submission
+Size of tarball: 7189954 bytes
+
+  Yes, this is a NEW package.
+
 
 N  checking installed package size ...
      installed size is 15.2Mb
