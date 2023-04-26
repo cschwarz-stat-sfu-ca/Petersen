@@ -1,5 +1,5 @@
 ---
-title: "The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture Studies with Applications to Fisheries Management"
+title: "The Petersen-Estimator (and much more) for Two-Sample Capture-Recapture Studies with Applications to Fisheries Management"
 author: "Carl James Schwarz"
 date: now
 date-format: "YYYY-MM-DD  HH:mm:ss"
@@ -6555,9 +6555,117 @@ Random sampling at the entry to the system could occur if, for example, fishwhee
 approximately proportional to the run and a constant fraction of the tagged fish 
 have biological samples taken, e.g., every nth tagged fish is sampled.
 
-## Example - TBA
+## Example - Run size of Yukon River Chinook
+
+This is the 2011 data from Hamazaki and DeCovich (2014) taken from Table 2 of their paper. 
+
+Briefly, Chinook Salmon returning to Yukon River are counted in the lower river (Pilot Station)
+using hydroacoustic and sonar methods. At the same time, biological samples are taken
+throughout the run and the stock of origin was determined using GSI methods. In particular, 
+in 2011, the proportion of stocks of Canadian origin was 0.35 (SE .030) based on a sample 
+size of 251 fish of which 87 were fish of Canadian origin.
+
+Fish continue their upward migration and the number of fish that enter Canadian waters
+was counted using sonar at the Eagle Border Station (51,271 (SE 135)). To this was added
+the estimated harvest of Cdn fish between Pilot Station and Eagle Border Station from harvest monitoring given
+a total of 66,225 (SE 1514) Cdn fish. These are considered to be the "tagged" fish.
+
+Now consider running the experiment in reverse. We have 66,225 are marked at Eagle Border and swim "backwards"
+to Pilot Station. Here a biological sample of 251 fish were extracted, of which 87 were fish from Canada. 
+This is the "recapture" sample. So, in reverse, we have $n_1=66,225$; $n_2=251$, $m_2=87$ giving a 
+reverse Petersen estimate of
+$$\widehat{N}_{reverse}=\frac{n_1 \times n_2}{m_2}=\frac{66,225 \times 251}{87}=191,062$$
+as reported in their paper. [Their estimate is slightly different because of rounding.]
+
+The data are available in the *Petersen* package:
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+data(data_yukon_reverse)
+data_yukon_reverse
+
+```
+
+The estimates are obtained in the usual way:
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+yukon.fit <- Petersen::LP_fit(data_yukon_reverse,
+                                p_model=~..time)
+yukon.est <- Petersen::LP_est(yukon.fit, N_hat=~1)
+yukon.est$summary
+```
+
+The reported SE is too small because it does not account for the uncertainty in the $n_1$ (uncertainty in harvest
+and from sonal) and $m_2$ (because
+genetic assignment has some error). The *LP_est_adjust()* function can again be used. 
+First, we get the ajustment factors for $n_1$ and $m_2$ based on the reported uncertainties:
+
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+n1.adjust.est <- 1
+n1.adjust.se  <- data_yukon_reverse$se[ data_yukon_reverse$cap_hist=="10"] / data_yukon_reverse$freq[ data_yukon_reverse$cap_hist=="10"]
+cat("Estimated adjustment factors for n1 ", n1.adjust.est, n1.adjust.se, "\n")
+
+m2.adjust.est <- 1
+m2.adjust.se  <- data_yukon_reverse$se[ data_yukon_reverse$cap_hist=="11"] / sum(data_yukon_reverse$freq[ data_yukon_reverse$cap_hist!="10"])
+cat("Estimated adjustment factors for m2 ", m2.adjust.est, m2.adjust.se, "\n")
+
+```
+
+And, now the adjustment factors are applied
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| 
+set.seed(34543534)
+yukon.adjust <- LP_est_adjust(
+              yukon.est$summary$N_hat, yukon.est$summary$N_hat_SE,
+              n1.adjust.est=n1.adjust.est, n1.adjust.se=n1.adjust.se,
+              m2.adjust.est=m2.adjust.est, m2.adjust.se=m2.adjust.se
+              )
+yukon.adjust$summary
+
+
+```
+
+
+The final answer matches those reported in the paper ($\widehat{N}_{paper}=191,155$ (SE $18,372$)) where the authors used a bootstrapping
+procedure (similar to that used in the *LP_est_adjust()* function).
+
+
+
 
 ## Example combining forward and reverse capture-recapture studies
+
+TBA
+
+## Summary
+
+The reverse capture-recapture method requires no mortality (either natural or harvest) between the location of the biological
+sample and the final spawning grounds. Otherwise, these sources of removal must be added to the "tagged" group when applied in reverse.
+
+This is different from the forward capture-recapture experiment where mortality between
+the tagging and recapture events is allowable if it applies equally to tagged and untagged fish.  When running the estimator in
+reverse, it would appear on first glance that any mortality should have similar effects to immigration where the abundance could still be 
+estimated at the second sampling event. However, the key difference is that immigration in the forward direction applies only to
+untagged fish, but in the reverse direction mortality (now appearing to be immigration) is being applied to "tagged" fish.
+
+
+
+
 
 
 ```{r}

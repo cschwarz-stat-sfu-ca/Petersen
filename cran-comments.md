@@ -1,5 +1,6 @@
-## 2023.5.1 Release
-* First release of this package
+## 2023.6.1 Release
+
+* Added example of Reverse Capture-Recapture (Yukon River)
 
 ## Test environments
 * local OS X install, R 4.3.2

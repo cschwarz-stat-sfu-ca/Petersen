@@ -429,3 +429,35 @@
 #' @name data_wae_is_short
 #' @usage data(data_wae_is_short)
 "data_wae_is_short"
+
+
+#'  Yukon River data used for Reverse Capture-Recapture example.
+#'
+#'  Data from
+#'     Hamazaki, T. and DeCovich, N. (2014).
+#'     Application of the Genetic Mark–Recapture Technique for Run Size Estimation of Yukon River Chinook Salmon.
+#'     North American Journal of Fisheries Management, 34, 276-286.
+#'     DOI: 10.1080/02755947.2013.869283
+
+#'  This is the data from the 2011 data in Table 2 of the above paper.
+
+#' Estimated that total escapement to Canada (plus  harvest)
+#' was 66,225 (SE 1574)
+#' Estimated that proportion of stock that was Canadian was .34644 (SE .030)
+#' We converted this into a "sample size" and number of fish with Cdn genetics
+#' that gave the same SE.
+
+#' @format `data_yukon_reverse`
+#' A data frame with many rows and 4 columns
+#'
+#' \describe{
+#' \item{\code{cap_hist}.}{Capture history with possible histories as noted below}
+#' \item{\code{freq}.}{Number of fish with this history.}
+#' \item{\code{SE}.}{SE of the number of fish with this history}
+#' }
+#'
+#' @docType data
+#' @keywords datasets
+#' @name data_yukon_reverse
+#' @usage data(data_yukon_reverse
+"data_yukon_reverse"

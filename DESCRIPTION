@@ -1,15 +1,15 @@
 Package: Petersen
 Type: Package
 Title: The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture Studies with Applications to Fisheries Management
-Version: 2023.5.1
-Date: 2023-05-01
+Version: 2023.6.1
+Date: 2023-06-01
 Author: Carl James Schwarz
 Maintainer: Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>
 Description: A comprehensive implementation of Petersen-type estimators
     and its many variants for two-sample capture-recapture studies.
     A conditional likelihood approach is used that allows
     for tag loss; non reporting of tags; reward tags; categorical, geographical and temporal stratification;
-    partial stratification; 
+    partial stratification; reverse capture-recapture;
     and continuous variables in modeling the probability of capture.
     Many examples from fisheries management are presented.
 License: GPL-2
