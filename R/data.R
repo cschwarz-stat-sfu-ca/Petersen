@@ -459,5 +459,5 @@
 #' @docType data
 #' @keywords datasets
 #' @name data_yukon_reverse
-#' @usage data(data_yukon_reverse
+#' @usage data(data_yukon_reverse)
 "data_yukon_reverse"
