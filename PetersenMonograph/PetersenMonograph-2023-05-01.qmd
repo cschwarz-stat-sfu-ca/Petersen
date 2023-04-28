@@ -62,6 +62,8 @@ ft_aictab <- function(aictab, widths=NULL){
 
 # Installation & Change log 
 
+## Installation
+
 The *Petersen* package can be installed from CRAN in the usual way.
 
 The development version can be installed from within *R* using:
@@ -75,6 +77,26 @@ devtools::install_github("cschwarz-stat-sfu-ca/Petersen",
                         build_vignettes = TRUE)
 ```
 
+## Access to accompanying workbook
+
+The accompaning workbook is available in the external data directory of the package and can copied to your working directory using:
+
+```{R}
+#| echo: true
+#| eval: true
+
+extdata.dir <- system.file("extdata", package="Petersen")
+extdata.dir
+extdata.list <- list.files(extdata.dir)
+extdata.list
+
+# Uncomment the following to copy the PetersenWorkbook to your working directory.
+#file.copy(from=file.path(extdata.dir, "PetersenWorkbook-2006-01-20.xls"), to=getwd())
+
+
+```
+
+## Change log
 Change log
 
 - 2023-05-01 First Release
