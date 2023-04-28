@@ -7344,7 +7344,6 @@ parlance of the closed-population capture-recapture models).
 rodli.vgam.m.t <- vglm(cbind(t1,t2) ~ 1,
             posbernoulli.t, data = rodli.vgam.expand)
 summary(rodli.vgam.m.t)
-cat("Confidence intervals for Nhat not readily available??\n")
 ```
 
 ## Example Rodli Tarn - Chapman correction {#sec-vgam-rodli-chapman}
@@ -7383,8 +7382,6 @@ rodli.vgam.M.t.chapman <- vglm(cbind(t1,t2) ~ 1,
             posbernoulli.t, data = rodli.vgam.chapman.expand)
 summary(rodli.vgam.M.t.chapman)
 
-cat("Confidence intervals for Nhat not readily available??\n")
-
 ```
 
 ## Example - Rodli Tarn - Equal capture probabilities {#sec-vgam-rodli-m0}
@@ -7415,7 +7412,6 @@ rodli.vgam.expand <- plyr::adply(rodli.vgam, 1, function(x){
 rodli.vgam.m.0 <- vglm(cbind(t1,t2) ~ 1,
             posbernoulli.t(parallel = TRUE ~ 1), data = rodli.vgam.expand)
 summary(rodli.vgam.m.0)
-cat("Confidence intervals for Nhat not readily available??\n")
 
 # aic table 
 library(AICcmodavg)
@@ -7508,11 +7504,12 @@ AICcmodavg::aictab(list(nop.vgam.time,
                         nop.vgam.length.class.p.time))
 ```
 
-
-
-
 It is not possible to fit a model where the capture probabilities are
 equal at the first or second sampling event using the VGAM package.
+
+
+
+
 
 # Appendix C. Using RMark/MARK {#sec-mark-package}
 
