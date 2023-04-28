@@ -1,4 +1,4 @@
-PetersenMonograph-2023-04-20.html
+PetersenMonograph*.html
 CODA*
 coda*
 data.txt
@@ -6,3 +6,4 @@ inits*
 model.txt
 .DS_Store
 mark*
+PetersenMonograph*.pdf
