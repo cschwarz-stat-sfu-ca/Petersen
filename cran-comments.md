@@ -1,6 +1,8 @@
-## 2023.6.1 Release
+## 2023.5.1 Release
 
-* Added example of Reverse Capture-Recapture (Yukon River)
+Initial release - resubmission
+Large documentation object has been moved to GitHub repository with link from Vignettes
+
 
 ## Test environments
 * local OS X install, R 4.3.2
@@ -11,7 +13,7 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were up to 2 Notes depending on R version/OS used: 
+There were up to 1 Notes depending on R version/OS used: 
 
 N Maintainer: ‘Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>’
 New submission
@@ -20,14 +22,6 @@ Size of tarball: 7189954 bytes
   Yes, this is a NEW package.
 
 
-N  checking installed package size ...
-     installed size is 15.2Mb
-     sub-directories of 1Mb or more:
-       doc       8.5Mb
-       extdata   6.4Mb
-    
-  This contains an EXTENSIVE user manual and documentation.
-  
 ## Reverse dependencies
 
 None.
