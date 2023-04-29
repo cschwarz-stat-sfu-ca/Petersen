@@ -17,7 +17,6 @@ There were up to 1 Notes depending on R version/OS used:
 
 N Maintainer: ‘Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>’
 New submission
-Size of tarball: 7189954 bytes
 
   Yes, this is a NEW package.
 
