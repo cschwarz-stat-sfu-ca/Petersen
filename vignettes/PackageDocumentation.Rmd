@@ -1,0 +1,25 @@
+---
+title: "PackageDocumentation"
+author: "Carl James Schwarz"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PackageDocumentation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The user manual for this package is too large to be stored with the package, so you will need to access the user manual
+via the following link to the GitHub repository:
+
+
+https://github.com/cschwarz-stat-sfu-ca/Petersen/tree/master/PetersenMonograph
+
+You can download a *.pdf, or *.html, or a Quarto (*.qmd) document.
