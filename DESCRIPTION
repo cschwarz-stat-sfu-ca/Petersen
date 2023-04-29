@@ -1,8 +1,8 @@
 Package: Petersen
 Type: Package
 Title: The Petersen-Estimator (and many more) for Two-Sample Capture-Recapture Studies with Applications to Fisheries Management
-Version: 2023.6.1
-Date: 2023-06-01
+Version: 2023.5.1
+Date: 2023-05-01
 Author: Carl James Schwarz
 Maintainer: Carl James Schwarz <cschwarz.stat.sfu.ca@gmail.com>
 Description: A comprehensive implementation of Petersen-type estimators
