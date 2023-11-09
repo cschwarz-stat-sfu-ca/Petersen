@@ -99,6 +99,8 @@ extdata.list
 ## Change log
 Change log
 
+- 2023-12-01 Updates for CRAN submission. No new functionality or examples.
+
 - 2023-05-01 First Release
 
 # Introduction
