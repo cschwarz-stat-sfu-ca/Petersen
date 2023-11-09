@@ -34,7 +34,7 @@
 #'
 #
 #'
-#' @return A list with entries for the stratum index, n (number released), m matrix
+#' @returns A list with entries for the stratum index, n (number released), m matrix
 #' of recoveries in the current, next, etc stratum, and u (number of unmarked fish)
 #' captured in this recovery stratum.
 #'

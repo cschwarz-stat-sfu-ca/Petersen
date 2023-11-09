@@ -16,16 +16,39 @@ LP_BTSPAS_est(LP_BTSPAS_fit, parm = "Ntot", conf_level = 0.95, trace = FALSE)
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with abundance estimates
+An list object of class \emph{LP_BTSPAS_est} with the following elements
+\itemize{
+\item \strong{summary} A data frame  with the estimates of abundance, SE, and CI
+\item \strong{datetime} Date and time the fit was done
+}
 }
 \description{
 This will take a previous fit and return estimates of abundance.
 }
 \examples{
+\dontrun{
+# THis example takes too long to run.
+data(data_btspas_diag1)
+# extract the strata of interest
+temp<- cbind(data_btspas_diag1,
+             split_cap_hist( data_btspas_diag1$cap_hist,
+                             sep="..", make.numeric=TRUE))
+# only use data up to week 10 to keep example small
+temp <- temp[ temp$t1 \%in\% 0:10 & temp$t2 \%in\% 0:10,]
 
-#data(data_rodli)
-#rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#Petersen::LP_est(rodli.fit, N_hat=~1)
+fit <- Petersen::LP_BTSPAS_fit_Diag(
+  temp,
+  p_model=~1,
+  InitialSeed=23943242
+)
+fit$summary
+
+# now get the estimates of abundance
+est <-  Petersen::LP_BTSPAS_est (fit)
+est$summary
+}
+
+
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.

@@ -18,6 +18,7 @@
 #' @importFrom stats model.matrix coef qnorm
 #' @importFrom plyr ddply llply
 
+
 #' @noRd
 
 

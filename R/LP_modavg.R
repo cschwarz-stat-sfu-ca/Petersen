@@ -7,7 +7,7 @@
 #' @template param.N_hat
 #' @template param.conf_level
 
-#' @return An data frame with model averaged values
+#' @return An data frame with model averaged values for abundance
 #'
 #' @importFrom plyr ldply l_ply
 #' @importFrom AICcmodavg modavgCustom

@@ -14,7 +14,8 @@ LP_IS_fit(
   logit_lambda_offset = 0,
   cat.unknown = "U",
   p_beta.start = NULL,
-  trace = FALSE
+  trace = FALSE,
+  control.optim = list(trace = 0, maxit = 1000)
 )
 }
 \arguments{
@@ -63,9 +64,19 @@ The values will be replicated to match
 the number of initial beta parameters needed. Some care is needed here!}
 
 \item{trace}{If trace flag is set in call when estimating functions}
+
+\item{control.optim}{Control values passed to optim() optimizer.}
 }
 \value{
-An list object with the fit information
+An list object of class \emph{LP_IS_fit} with abundance estimates and other information with the following elements
+\itemize{
+\item \strong{summary} A data frame with the model for the capture probabilities, the sampling fractions at each capture occasion, and the category proportions;
+the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+\item \strong{data} A data frame with the raw data used in the fit
+\item \strong{fit} Results of the fit including the estimates, SE, vcov, etc.
+\item \strong{fit.call} Arguments used in the fit
+\item \strong{datetime} Date and time the fit was done
+}
 }
 \description{
 In some LP studies, stratification is only done on a random sample of unmarked
@@ -100,8 +111,10 @@ are examined and sexed. Similarly, capture histories such as \strong{FM} or \str
 \examples{
 
 data(data_wae_is_short)
-res <- Petersen::LP_IS_fit(data=data_wae_is_short, p_model=~-1 + ..cat:..time)
-res$summary
+fit <- Petersen::LP_IS_fit(data=data_wae_is_short, p_model=~..time)
+fit$summary
+est <- LP_IS_est(fit, N_hat=~1)
+est$summary
 
 }
 \references{

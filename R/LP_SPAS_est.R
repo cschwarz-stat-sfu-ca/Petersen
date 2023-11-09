@@ -7,7 +7,10 @@
 #' @template param.conf_level
 #' @param trace If trace flag is set in call when estimating functions
 #'
-#' @return An list object with abundance estimates
+#' @returns An list object with abundance estimates and other information with the following elements
+#' * **summary** Data frame with abundance estimates, their SE, and CIs as requested
+#' * **datetime** Date and time the estimation was done from the fit.
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
@@ -17,9 +20,16 @@
 
 #' @examples
 #'
-#' #data(data_rodli)
-#' #rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#' #Petersen::LP_est(rodli.fit, N_hat=~1)
+#' data(data_spas_harrison)
+
+#' fit <- Petersen::LP_SPAS_fit(data=data_spas_harrison,
+#'                               model.id="Pooling rows 5/6",
+#'                               row.pool.in=c(1,2,3,4,56,56),
+#'                               col.pool.in=c(1,2,3,4,5,6))
+#' fit$summary
+#' est <- Petersen::LP_SPAS_est(fit)
+#' est$summary
+
 
 #' @export LP_SPAS_est
 #'

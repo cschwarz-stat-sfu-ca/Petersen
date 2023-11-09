@@ -5,7 +5,8 @@
 
 #' @template param.data
 #'
-#' @return Summary statistics
+#' @return Summary statistics of *n1* (number observed at first occasion), *n2* (number observed at second occasion),
+#' and *m2* number recaptured in second occasion.
 #'
 
 #' @examples

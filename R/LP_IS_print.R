@@ -1,6 +1,17 @@
 #' Print the results from a fit a Lincoln-Petersen Model with incomplete stratification
 #'
 #' @param IS.results Results from fitting an incomplete stratification model
+#' @returns
+#' A nicely formatted report showing the results of the fit.
+#' * Model information (summary of arguments, model name, negative log-likelihood, number of parambers, AICc)
+#' * Raw data used in the fit (history, frequencey,categories)
+#' * Initial values used in the optimization of the likelihood for the parameters
+#' * Design matrix and offset values for the parameters
+#' * Maximum likelihood estimates for the parameters and estimated abundance by category
+#' * SE for the above
+#' * Observed and expected counts for each capture history
+#' * Residual plot constructed rom the previous observed and expected counts
+#'
 
 
 #' @examples

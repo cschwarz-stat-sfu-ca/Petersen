@@ -14,16 +14,25 @@ LP_SPAS_est(LP_SPAS_fit, conf_level = 0.95, trace = FALSE)
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with abundance estimates
+An list object with abundance estimates and other information with the following elements
+\itemize{
+\item \strong{summary} Data frame with abundance estimates, their SE, and CIs as requested
+\item \strong{datetime} Date and time the estimation was done from the fit.
+}
 }
 \description{
 This will take a previous fit and return estimates of abundance.
 }
 \examples{
 
-#data(data_rodli)
-#rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#Petersen::LP_est(rodli.fit, N_hat=~1)
+data(data_spas_harrison)
+fit <- Petersen::LP_SPAS_fit(data=data_spas_harrison,
+                              model.id="Pooling rows 5/6",
+                              row.pool.in=c(1,2,3,4,56,56),
+                              col.pool.in=c(1,2,3,4,5,6))
+fit$summary
+est <- Petersen::LP_SPAS_est(fit)
+est$summary
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.

@@ -34,7 +34,16 @@ the number of initial beta parameters needed. Some care is needed here!}
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with the fit information
+An list object of class \emph{LP_fit} with abundance estimates and other information with the following elements
+\itemize{
+\item \strong{summary} A data frame with the model for the capture probabilities;
+the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+\item \strong{data} A data frame with the raw data used in the fit
+\item \strong{fit} Results of the fit from the optimizer
+\item \strong{datetime} Date and time the fit was done
+}
+
+After the fit is done, use the \emph{LP_est()} function to get estimates of abundance.
 }
 \description{
 This will take a data frame of capture histories, frequencies, and
@@ -57,7 +66,10 @@ Capture histories (\code{cap_hist} in the \code{data} argument) are character va
 \examples{
 
 data(data_rodli)
-Petersen::LP_fit(data=data_rodli, p_model=~..time)
+fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
+fit$summary
+res <- Petersen::LP_est(fit, N_hat=~1)
+res$summary
 
 }
 \author{

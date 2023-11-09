@@ -26,7 +26,11 @@
 #'   \item \strong{01}  Animals captured at event 2 that appear to be untagged.
 #' }
 #'
-#' @return An list object with the fit information and various plots
+#' @returns An list object of class *LP_CL_fit* with abundance estimates and other information with the following elements
+#' * **summary** A data frame  with the estimates of abundance, SE, and CI
+#' * **fit** Details on the Chen and Lloyd fit including the smoothed estimates of catchability, estimates abundance by category classes,
+#' estimates of total abundance, plots of the estimated abundance curve and catchability curves, etc.
+#' * **datetime** Date and time the fit was done
 #'
 #' @import ggplot2
 #' @importFrom graphics hist
@@ -37,9 +41,10 @@
 #'
 #' library(Petersen)
 #' data(data_NorthernPike)
-#' CL_fit(data_NorthernPike, "length")
+#' res <- LP_CL_fit(data_NorthernPike, "length")
+#' res$summary
 
-#' @export CL_fit
+#' @export LP_CL_fit
 #' @references SX Chen, CJ Lloyd (2000).
 #' A nonparametric approach to the analysis of two-stage mark-recapture experiments.
 #' Biometrika, 87, 633–649. \doi{10.1093/biomet/87.3.633}.
@@ -51,7 +56,7 @@
 #
 # Documentation and integration into CL_fit added by C.Schwarz, 2023-02-22
 
-CL_fit <- function(data, covariate,
+LP_CL_fit <- function(data, covariate,
                    centers=hist(data[,covariate,drop=TRUE], breaks="Sturges", plot=FALSE)$mids,
                    h1=(centers[2]-centers[1])*.75,
                    h2=(centers[2]-centers[1])*.75,
@@ -284,20 +289,21 @@ ChenLloydestimate <- function(data, h1, h2, w = FALSE, covariate="Covariate")
 #  This shows for this problem that optimal bandwidth is about 1 inch which happens to match our increments
 
 #  Now to estimate the population size and get plots etc.
-   res <- ChenLloydestimate(covar.data,
+   res <- NULL
+   res$fit <- ChenLloydestimate(covar.data,
                             h1= h1, #1, #optimal.binwidth$t1[1],
                             h2= h2, #1,  #optimal.binwidth$t2[2],
                             covariate=covariate)
    #browser()
-   res$optimal.binwidth <- optimal.binwidth
-   res$covar.data       <- covar.data
+   res$fit$optimal.binwidth <- optimal.binwidth
+   res$fit$covar.data       <- covar.data
 
    # now to create the summary output
    summary <- data.frame(
                 N_hat_f     = "~1",
                 N_hat_rn    = "(Intercept)",
-                N_hat       = res$total.est[2],   # smoothed area under the curve
-                N_hat_SE    = res$total.sd [2],   # smoothed area under the curve
+                N_hat       = res$fit$total.est[2],   # smoothed area under the curve
+                N_hat_SE    = res$fit$total.sd [2],   # smoothed area under the curve
                 N_hat_conf_level=conf_level,
                 N_hat_conf_method="logN")
    summary$ N_hat_LCL   = exp(log(summary$N_hat)-qnorm(1-(1-conf_level)/2)*summary$N_hat_SE/summary$N_hat)
@@ -311,16 +317,8 @@ ChenLloydestimate <- function(data, h1, h2, w = FALSE, covariate="Covariate")
    res$summary <- summary
    res$datetime <- Sys.time()
 
-   class(res) <- "CL_fit"  # chen lloyd fit
+   class(res) <- "LP_CL_fit"  # chen lloyd fit
    res
 }
 
-#library(Petersen)
-#data(NorthernPike)
-
-#res<-CL_fit(NorthernPike, "length")
-#res$plot1
-#res$plot2
-#res
-#res$summary
 

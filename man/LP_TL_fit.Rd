@@ -49,7 +49,17 @@ and then for the rho probabilities}
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with the fit information
+An list object of class \emph{LP_TL_fit-notD} or \emph{LP_TL_fit-twoD}, or \emph{LP_TL_fit-t2per}
+(depending on the type of double tag) with abundance estimates and other information with the following elements
+\itemize{
+\item \strong{summary} A data frame with the model for the capture probabilities, and tag retention probabilities;
+the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+\item \strong{data} A data frame with the raw data used in the fit
+\item \strong{fit} Results of the fit including the estimates, SE, vcov, etc.
+\item \strong{datetime} Date and time the fit was done
+}
+
+After the fit is complete, use the \emph{LP_TL_est()} function to obtain estimates.
 }
 \description{
 This will take a data frame of capture histories, frequencies, and
@@ -101,7 +111,10 @@ newly captured, plus fish that were tagged and lost all their tags, and were cap
 \examples{
 
 data(data_kokanee_tagloss)
-Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
+fit <- Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
+fit$summary
+est <- Petersen::LP_TL_est(fit, N_hat=~1)
+est$summary
 
 }
 \author{

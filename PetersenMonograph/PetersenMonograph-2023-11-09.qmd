@@ -6477,9 +6477,14 @@ salmonavg.N
 #| echo: false
 #| warning: false
 #| message: false
+
+# clean up files
 rm(salmon.mt)
 rm(salmon.m0)
 RMark::cleanup(ask=FALSE)
+
+files <- dir(pattern="^mark")
+file.remove(files)
 
 ```
 
@@ -6504,6 +6509,9 @@ shown in @tbl-mresight-lne-compare.
 | Pooled   | 10,420     | 1340 |
 
 : Mean of the Petersen estimator and Petersen estimator form by pooling all samples {#tbl-mresight-lne-compare}
+
+
+
 
 ## Example of PNE method - TBA
 

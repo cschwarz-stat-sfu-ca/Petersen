@@ -8,19 +8,42 @@
 #' @param trace If trace flag is set in call when estimating functions
 #' @param parm Which parameter from the BTSPAS fix is to be extracted?
 #'
-#' @return An list object with abundance estimates
+#' @examples
+#' \dontrun{
+#' # THis example takes too long to run.
+#' data(data_btspas_diag1)
+
+#' # extract the strata of interest
+#' temp<- cbind(data_btspas_diag1,
+#'              split_cap_hist( data_btspas_diag1$cap_hist,
+#'                              sep="..", make.numeric=TRUE))
+
+#' # only use data up to week 10 to keep example small
+#' temp <- temp[ temp$t1 %in% 0:10 & temp$t2 %in% 0:10,]
+#'
+#' fit <- Petersen::LP_BTSPAS_fit_Diag(
+#'   temp,
+#'   p_model=~1,
+#'   InitialSeed=23943242
+#' )
+#' fit$summary
+#'
+#' # now get the estimates of abundance
+#' est <-  Petersen::LP_BTSPAS_est (fit)
+#' est$summary
+#' }
+#'
+#'
+#' @returns An list object of class *LP_BTSPAS_est* with the following elements
+#' * **summary** A data frame  with the estimates of abundance, SE, and CI
+#' * **datetime** Date and time the fit was done
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
 #' @importFrom plyr is.formula
 #' @importFrom stats as.formula model.matrix coef
 #' @importFrom bbmle mle2
-
-#' @examples
-#'
-#' #data(data_rodli)
-#' #rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#' #Petersen::LP_est(rodli.fit, N_hat=~1)
 
 #' @export LP_BTSPAS_est
 #'
@@ -29,7 +52,7 @@ LP_BTSPAS_est <- function(LP_BTSPAS_fit, parm="Ntot", conf_level=0.95, trace=FAL
   # After the Fit of model for the capture probability using BTSPAS
 
   # check the fitted objects
-  if(!inherits(LP_BTSPAS_fit, c("BTSPAS-Diag-fit","BTSPAS-NonDiag-fit")))
+  if(!inherits(LP_BTSPAS_fit, c("LP_BTSPAS_fit_Diag","LP_BTSPAS_fit_NonDiag")))
     stop("LP_BTSPAS argument must be the results of a call to fitting BTSPAS objectl")
 
   # check the confidence level

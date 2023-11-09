@@ -112,6 +112,39 @@ check.cap_hist_temporal.df <- function(data, sep=".."){
   invisible()
 }
 
+# check the data frame for geographic stratification
+check.cap_hist_geographic.df <- function(data, sep=".."){
+  if(!is.data.frame(data))stop("Capture history data must be a data frame")
+  if(!all(c("cap_hist","freq")%in% names(data)))stop("Capture history data frame must contain a 'cap_hist' and 'freq' variable")
+  if("..time" %in% names(data))warning("*** Capture-history data frame contains a variable '..time'  that may be overwritten ")
+  if("..tag"  %in% names(data))warning("*** Capture-history data frame contains a variable '..tag'   that may be overwritten ")
+  if("..EF"   %in% names(data))warning("*** Capture-history data frame contains a variable '..EF'    that may be overwritten ")
+
+  if(any(is.na(data$freq)))stop("All frequencies must be present and non-negative")
+  check.numeric(data$freq, min.value=0, req.length=nrow(data), check.whole=FALSE)
+
+  if(any(is.na(data$cap_hist)))stop("All capture-histories 'cap_hist' must be non-missing")
+  if(!is.character(data$cap_hist))stop("data$cap_hist must be character vector")
+
+  # now to try and split the capture histories into the temporal strata and see if ok
+  strata <- tryCatch({split_cap_hist(data$cap_hist, sep=sep, make.numeric=FALSE, prefix="gs")
+  },
+  error=function(cond) {
+    stop("Unable to separate the capture histories. Likely invalid format??")
+  },
+  warning=function(cond) {
+    stop(cond)
+  }
+  )
+  # check if any missing values in geographic strata
+  if(any(is.na(strata[,"gs1"])))stop("Some of the geographic strata were invalid ", paste(strata[,"gs1"],collapse=", "))
+  if(any(is.na(strata[,"gs2"])))stop("Some of the geographic strata were invalid ", paste(strata[,"gs2"],collapse=", "))
+  if(any(strata==""))stop("All geographic strata must be non-blank")
+
+  invisible()
+}
+
+
 # check the capture history data frame for validity for incomplete stratification
 check.cap_hist_IS.df <- function(data){
 
@@ -181,3 +214,13 @@ extract_posterior <- function(fit, effect.name, source="Bayesian"){
   post.long$variable <- as.character(post.long$variable)
   post.long
 }
+
+#######################################################################3
+# suppress cat() messages from function call
+# see https://stackoverflow.com/questions/34208564/how-to-hide-or-disable-in-function-printed-message
+quiet.eval <- function(x) {
+  sink(tempfile())
+  on.exit(sink())
+  invisible(force(x))
+}
+

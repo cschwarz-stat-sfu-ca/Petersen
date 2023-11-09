@@ -11,7 +11,12 @@
 #' @template param.conf_level
 #' @param trace If trace flag is set in call when estimating functions
 #'
-#' @return An list object with abundance estimates
+#'
+#' @returns An list object with abundance estimates and other information with the following elements
+#' * **summary** Data frame with abundance estimates, their SE, and CIs as requested
+#' * **detail** List with many components, including the rawdata, model fitting information, observed and expected values, residual plot, etc
+#' * **datetime** Date and time the estimation was done from the fit.
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
@@ -22,8 +27,10 @@
 #' @examples
 #'
 #' data(data_rodli)
-#' rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#' Petersen::LP_est(rodli.fit, N_hat=~1)
+#' fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
+#' fit$summary
+#' est <- Petersen::LP_est(fit, N_hat=~1)
+#' est$summary
 
 #' @export LP_est
 #'

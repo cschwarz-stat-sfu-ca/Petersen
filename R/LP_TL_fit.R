@@ -58,7 +58,16 @@
 #'   newly captured, plus fish that were tagged and lost all their tags, and were captured again
 #' }
 #'
-#' @return An list object with the fit information
+#' @returns An list object of class *LP_TL_fit-notD* or *LP_TL_fit-twoD*, or *LP_TL_fit-t2per*
+#' (depending on the type of double tag) with abundance estimates and other information with the following elements
+#' * **summary** A data frame with the model for the capture probabilities, and tag retention probabilities;
+#' the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+#' * **data** A data frame with the raw data used in the fit
+#' * **fit** Results of the fit including the estimates, SE, vcov, etc.
+#' * **datetime** Date and time the fit was done
+#'
+#' After the fit is complete, use the *LP_TL_est()* function to obtain estimates.
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
@@ -69,7 +78,10 @@
 #' @examples
 #'
 #' data(data_kokanee_tagloss)
-#' Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
+#' fit <- Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
+#' fit$summary
+#' est <- Petersen::LP_TL_est(fit, N_hat=~1)
+#' est$summary
 #'
 #' @export LP_TL_fit
 #'

@@ -26,7 +26,8 @@
 
 IS.fit.model = function(model.id ,Data,
                         captureDM,     thetaDM,     lambdaDM,
-                        captureOFFSET, thetaOFFSET, lambdaOFFSET){
+                        captureOFFSET, thetaOFFSET, lambdaOFFSET,
+                        control.optim=list(trace=1,maxit=1000)){
 
   # deal with R package visible binding. See https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html
 
@@ -55,7 +56,7 @@ IS.fit.model = function(model.id ,Data,
 
   # optimize the negative log likelihood function(MLEs in logit/log form)
   res =stats::optim(par=initial.pack.parm.est, fn=IS.neg.log.likelihood, method="L-BFGS-B",
-              lower=l.b, upper=u.b , control=list(trace=1,maxit=1000),
+              lower=l.b, upper=u.b , control=control.optim,
               Data=Data,
               captureDM=captureDM, thetaDM=thetaDM,lambdaDM=lambdaDM,
               captureOFFSET=captureOFFSET, thetaOFFSET=thetaOFFSET,
@@ -1232,7 +1233,7 @@ IS.print.output = function(x){
   ###########  Residual plot ##############################################################
   cat("\n")
   cat(paste("Standardized residual plot for the model", x$model.id,sep=" " ,'\n'))
-  x$res.plot
+  plot(x$res.plot)
 
 
 } # end of "IS.print.output"

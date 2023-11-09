@@ -22,7 +22,7 @@ released in week 1 but never recaptured.}
 data(data_btspas_nondiag1)
 }
 \description{
-This is the first non-diagonal case dataset from BTSPAS>
+This is the first non-diagonal case dataset from BTSPAS.
 }
 \details{
 Incoming sockeye salmon are captured on a first wheel, tagged with color tags

@@ -32,7 +32,7 @@ to only use those animals with expansion factors less than 1000 in forming the e
 \item{conf_level}{The expected coverage for confidence intervals on N.}
 }
 \value{
-An data frame with model averaged values
+An data frame with model averaged values for abundance
 }
 \description{
 This will take a series of LP fits and computes the model averages for each set of N_hat

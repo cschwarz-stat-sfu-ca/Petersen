@@ -54,7 +54,10 @@ LP_est_adjust(
 \item{trace}{If trace flag is set in call when estimating functions}
 }
 \value{
-An list object with a summary data frame and a data frame with the adjustment factors.
+An list object with a summary data frame and a data frame with the adjustment factors with the following objects
+\strong{summary} A data frame with the adjusted abundance estimates, SE, and CI
+\strong{adjustment} a data frame showing the adjustment factors applied for tag retention, tag reporting, n1 n2 or m2.
+\strong{datetime} Date and time the adjustment was done
 }
 \description{
 This will take a previous fit and return estimates of abundance after making various empirical adjustments
@@ -72,8 +75,9 @@ the mean, sd, ci estimated directly.
 data(data_rodli)
 rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
 rodli.est <- Petersen::LP_est(rodli.fit)
-Petersen::LP_est_adjust(rodli.est$summary$N_hat, rodli.est$summary$N_hat_SE,
+res <- Petersen::LP_est_adjust(rodli.est$summary$N_hat, rodli.est$summary$N_hat_SE,
           tag.retention.est=.90, tag.retention.se=.05)
+res$summary
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.

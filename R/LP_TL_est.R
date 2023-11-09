@@ -11,7 +11,11 @@
 #' @template param.conf_level
 #' @param trace If trace flag is set in call when estimating functions
 #'
-#' @return An list object with abundance estimates
+#' @returns An list object with abundance estimates and other information with the following elements
+#' * **summary** Data frame with abundance estimates, their SE, and CIs as requested
+#' * **detail** List with many components, including the rawdata, model fitting information, etc
+#' * **datetime** Date and time the estimation was done from the fit.
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
@@ -22,8 +26,10 @@
 #' @examples
 #'
 #' data(data_kokanee_tagloss)
-#' kok.fit <- Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
-#' Petersen::LP_TL_est(kok.fit, N_hat=~1)
+#' fit <- Petersen::LP_TL_fit(data=data_kokanee_tagloss, p_model=~1, rho_model=~1, dt_type="notD")
+#' fit$summary
+#' est <- Petersen::LP_TL_est(fit, N_hat=~1)
+#' est$summary
 
 #' @export LP_TL_est
 #'

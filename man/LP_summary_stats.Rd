@@ -16,7 +16,8 @@ plus any other covariates (e.g. discrete strata and/or continuous covariates) to
 in the model fitting.}
 }
 \value{
-Summary statistics
+Summary statistics of \emph{n1} (number observed at first occasion), \emph{n2} (number observed at second occasion),
+and \emph{m2} number recaptured in second occasion.
 }
 \description{
 This function takes the capture histories and computes $n_1$, $n_2$ and $m_2$.

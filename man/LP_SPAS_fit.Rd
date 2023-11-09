@@ -14,7 +14,8 @@ LP_SPAS_fit(
   min.inspected = 50,
   min.recaps = 50,
   min.rows = 1,
-  min.cols = 1
+  min.cols = 1,
+  quietly = FALSE
 )
 }
 \arguments{
@@ -46,10 +47,24 @@ row.pool.in=c(123,123,123,4), then the same pooling is done, but the matrix rows
 \item{min.recaps}{Minimum number of recaptures before any rows can be pooled}
 
 \item{min.rows, min.cols}{Minimum number or rows and columns after pooling}
+
+\item{Suppress}{all console messages that occur during the fit. This includes the progress bar
+when a model that requires MCMC is fit (\emph{LP_BTSPAS_fit_Diag} and \emph{LP_BTSPAS_fit_NonDiag}), or
+a trace of the likelihood during the fit (\emph{LP_SPAS_fit}).}
 }
 \value{
-A list with many entries including the fit from SPAS and a summary line
-in standard format. Refer to the vignettes for more details.
+An list object of class \emph{LP_SPAS_fit} with abundance estimates and other information with the following elements
+\itemize{
+\item \strong{summary} A data frame with the model for the capture probabilities;
+the conditional log-likelihood; the number of parameters; the number of parameters, condition factor of the data matrix, and method used to fit the model
+\item \strong{data} A data frame with the raw data used in the fit
+\item \strong{fit} Results of the fit including the estimates, SE, vcov, etc.
+\item \strong{row.pool.in}, \strong{col.pool.in}, \strong{autopool} Arguments used in the fit to indicate row, column, or automatic pooling used in the fit.
+\item \strong{datetime} Date and time the fit was done
+}
+
+After the fit is complete, use the \emph{LP_SPAS_est()} function to extract the estimates, and the SPAS::SPAS.print.model() function to get a nicely
+formatted report on the fit.
 }
 \description{
 This function is a wrapper to fits a SPAS model. Consult the SPAS package for more details.
@@ -57,10 +72,14 @@ This function is a wrapper to fits a SPAS model. Consult the SPAS package for mo
 \examples{
 data(data_spas_harrison)
 
-mod1 <- Petersen::LP_SPAS_fit(data=data_spas_harrison,
-                      model.id="Pooling rows 5/6",
-                      row.pool.in=c(1,2,3,4,56,56),
-                      col.pool.in=c(1,2,3,4,5,6))
-SPAS::SPAS.print.model(mod1$fit)
-mod1$summary
+fit <- Petersen::LP_SPAS_fit(data=data_spas_harrison,
+                              model.id="Pooling rows 5/6",
+                              row.pool.in=c(1,2,3,4,56,56),
+                              col.pool.in=c(1,2,3,4,5,6),quietly=TRUE)
+fit$summary
+est <- Petersen::LP_SPAS_est(fit)
+est$summary
+
+# make a nice report using the SPAS package functions
+SPAS::SPAS.print.model(fit$fit)
 }

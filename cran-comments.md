@@ -1,4 +1,4 @@
-## 2023.5.1 Release
+## 2023.12.1 Release
 
 Initial release - resubmission
 Large documentation object has been moved to GitHub repository with link from Vignettes

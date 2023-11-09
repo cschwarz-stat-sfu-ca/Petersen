@@ -29,7 +29,7 @@ condensed version of data_wae_is_long.
 
 Fish were tagged on the spawning grounds and
 recovered in the summer gillnet assessment.
-#'
+
 Rather than sexing all of the fish, only a sub-sample of unmarked fish
 is sexed at each sampling occasion. Possible capture histories are then
 M0, F0, MM, FF, U0, UU, 0M, 0F

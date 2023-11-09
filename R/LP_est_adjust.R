@@ -20,7 +20,11 @@
 #' @param n.sim Number of simulation runs to make
 #' @param trace If trace flag is set in call when estimating functions
 #'
-#' @return An list object with a summary data frame and a data frame with the adjustment factors.
+#' @returns An list object with a summary data frame and a data frame with the adjustment factors with the following objects
+#' **summary** A data frame with the adjusted abundance estimates, SE, and CI
+#' **adjustment** a data frame showing the adjustment factors applied for tag retention, tag reporting, n1 n2 or m2.
+#' **datetime** Date and time the adjustment was done
+
 #'
 #' @details
 #' The estimate and SE are converted to a beta distribution for adjustment factors between 0 and 1 with equivalent
@@ -39,8 +43,9 @@
 #' data(data_rodli)
 #' rodli.fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
 #' rodli.est <- Petersen::LP_est(rodli.fit)
-#' Petersen::LP_est_adjust(rodli.est$summary$N_hat, rodli.est$summary$N_hat_SE,
+#' res <- Petersen::LP_est_adjust(rodli.est$summary$N_hat, rodli.est$summary$N_hat_SE,
 #'           tag.retention.est=.90, tag.retention.se=.05)
+#' res$summary
 
 #' @export LP_est_adjust
 #'

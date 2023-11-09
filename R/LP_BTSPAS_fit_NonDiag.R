@@ -7,7 +7,7 @@
 #' efficiency over time.  An MCMC object
 #' is also created with samples from the posterior.
 #'
-#' Use the \code{Petersen::LP_BTSPAS_Diag_fit} function for cases
+#' Use the \code{Petersen::LP_BTSPAS_fit_Diag} function for cases
 #' where recaptures take place in a single stratum (diagonal case).
 #'
 #' @template param.data
@@ -22,6 +22,8 @@
 #' @param InitialSeed Numeric value used to initialize the random numbers used
 #' in the MCMC iterations.
 #' @param trace  Internal tracing flag.
+#' @template param.remove_MCMC_files
+#' @template param.quietly
 
 
 #' @details
@@ -48,27 +50,56 @@
 #'  without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 
 #'
-#
+#' @returns An list object of class *LP_BTSPAS_fit_Diag* with the following elements
+#' * **summary** A data frame  with the information on the number of observtions in the fit
+#' * **data** Data used in the fit
+#' * **p_model**, **p_model_cov** Information on modelling the capture probabilities at the second occasion
+#' * **fit** n MCMC object with samples from the posterior distribution. A
+#' series of graphs and text file are also created with summary information. Refer to the BTSPAS package for more details.
+#' * **datetime** Date and time the fit was done
+
+#' @examples
+#' \dontrun{
+#' # THis example takes more than 30 seconds to execute, and so is not run here.
+#' data(data_btspas_nondiag1)
+#' temp<- cbind(data_btspas_nondiag1,
+#'              split_cap_hist( data_btspas_nondiag1$cap_hist,
+#'                              sep="..", make.numeric=TRUE))
+#' xtabs(~t1, data=temp)
 #'
-#' @return An MCMC object with samples from the posterior distribution. A
-#' series of graphs and text file are also created in the results along with
-#' a summary object
+#' # only use data up to week 10 to keep example small
+#' temp <- temp[ temp$t1 %in% c(0, 27:32) & temp$t2 %in% c(0, 27:32),]
+#'
+#' fit <- Petersen::LP_BTSPAS_fit_NonDiag(
+#'   temp,
+#'   p_model=~1,
+#'   InitialSeed=23943242,
+#'   quietly=TRUE
+#' )
+#' fit$summary
+#'
+#' # now get the estimates of abundance
+#' est <-  Petersen::LP_BTSPAS_est (fit)
+#' est$summary
+#' }
 
 #' @importFrom stats runif var sd
 #' @importFrom BTSPAS TimeStratPetersenNonDiagErrorNP_fit
 #'
-#' @export LP_BTSPAS_NonDiag_fit
+#' @export LP_BTSPAS_fit_NonDiag
 #'
 #'
 
-LP_BTSPAS_NonDiag_fit <- function(
+LP_BTSPAS_fit_NonDiag <- function(
      data,
      p_model=~1,
      p_model_cov=NULL,
      jump.after=NULL,
      logitP.fixed=NULL, logitP.fixed.values=NULL,
      InitialSeed=ceiling(stats::runif(1,min=0, max=1000000)),
-     trace=FALSE){
+     trace=FALSE,
+     remove_MCMC_files=TRUE,
+     quietly=FALSE){
 
   # some basic data checking
   check.cap_hist_temporal.df(data)
@@ -107,7 +138,34 @@ LP_BTSPAS_NonDiag_fit <- function(
   if(length(all.vars(p_model)) >0) logitP.cov <- model.matrix(p_model, data=p_model_cov)
 
   # now make the call
-  res <- BTSPAS::TimeStratPetersenNonDiagErrorNP_fit(
+  if(quietly){
+    res <- quiet.eval(BTSPAS::TimeStratPetersenNonDiagErrorNP_fit(
+      title="", prefix="TSPDE-",
+      time      = nmu$..ts,
+      n1        = as.vector(nmu$n1),
+      m2        = nmu$m2,
+      u2        = as.vector(nmu$u2),
+      jump.after= jump.after,
+      bad.n1=c(), bad.m2=c(), bad.u2=c(),
+      logitP.cov= logitP.cov,
+      logitP.fixed=logitP.fixed, logitP.fixed.values=logitP.fixed.values,
+      n.chains=3, n.iter=200000, n.burnin=100000, n.sims=2000,
+      tauU.alpha=1, tauU.beta=.05, taueU.alpha=1, taueU.beta=.05,
+      prior.beta.logitP.mean = c(logit(sum(nmu$m2,na.rm=TRUE)/sum(nmu$n1,na.rm=TRUE)),
+                                 rep(0,  ncol(as.matrix(logitP.cov))-1)),
+      prior.beta.logitP.sd   = c(stats::sd(logit((nmu$m2+.5)/(nmu$n1+1)),na.rm=TRUE),
+                                 rep(10, ncol(as.matrix(logitP.cov))-1)),
+      tauP.alpha=.001, tauP.beta=.001,
+      Delta.max = NULL,
+      prior.muTT = NULL,  tauTT.alpha = 0.1, tauTT.beta = 0.1,
+      run.prob=seq(0,1,.1),  # what percentiles of run timing are wanted
+      debug=FALSE, debug2=FALSE,
+      InitialSeed=InitialSeed,
+      save.output.to.files=FALSE,
+      trunc.logitP=15
+    ))}
+  if(!quietly){
+    res <- BTSPAS::TimeStratPetersenNonDiagErrorNP_fit(
            title="", prefix="TSPDE-",
            time      = nmu$..ts,
            n1        = as.vector(nmu$n1),
@@ -131,7 +189,8 @@ LP_BTSPAS_NonDiag_fit <- function(
            InitialSeed=InitialSeed,
            save.output.to.files=FALSE,
            trunc.logitP=15
-  )
+    )
+  }
 
   summary <- data.frame(
      p_model    = paste0(as.character(p_model), collapse=""),
@@ -139,7 +198,7 @@ LP_BTSPAS_NonDiag_fit <- function(
      cond.ll    = NA,
      n.parms    = NA,
      nobs       = sum(data$freq),
-     method     = "BTSPAS-NonDiag"
+     method     = "BTSPAS_NonDiag"
   )
 
   res <- list(summary    = summary,
@@ -151,7 +210,24 @@ LP_BTSPAS_NonDiag_fit <- function(
               name_model=paste("p: ", toString(p_model), collapse=""),
               fit=res,
               datetime=Sys.time())
-  class(res) <- "BTSPAS-NonDiag-fit"
+  class(res) <- "LP_BTSPAS_fit_NonDiag"
+
+  # remove any temporary MCMC files
+  if(remove_MCMC_files){
+    files <- dir(pattern="^CODAchain")
+    file.remove(files)
+    files <- dir(pattern="^codaIndex")
+    file.remove(files)
+    files <- dir(pattern="^data.txt")
+    file.remove(files)
+    files <- dir(pattern="^inits")
+    file.remove(files)
+    files <- dir(pattern="^model.txt")
+    file.remove(files)
+  }
+
+  # close the stdout connection (this should likely be done in BTSPAS)
+  #closeAllConnections()
 
   res
 }

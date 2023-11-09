@@ -29,6 +29,7 @@
 #' @param cat.unknown Value of character used to indicate the unknown stratum in the capture histories. Currently, this
 #' is fixed to "U" regardless of what is specified.
 #' @param trace If trace flag is set in call when estimating functions
+#' @param control.optim Control values passed to optim() optimizer.
 
 #' @details
 #'
@@ -54,7 +55,14 @@
 #' Capture histories such as \strong{UF} or \strong{UM} are not allowed since only UNTAGGED animals
 #' are examined and sexed. Similarly, capture histories such as \strong{FM} or \strong{MF} are not allowed.
 #'
-#' @return An list object with the fit information
+#' @returns An list object of class *LP_IS_fit* with abundance estimates and other information with the following elements
+#' * **summary** A data frame with the model for the capture probabilities, the sampling fractions at each capture occasion, and the category proportions;
+#' the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+#' * **data** A data frame with the raw data used in the fit
+#' * **fit** Results of the fit including the estimates, SE, vcov, etc.
+#' * **fit.call** Arguments used in the fit
+#' * **datetime** Date and time the fit was done
+
 #' @template author
 #'
 #' @importFrom formula.tools is.one.sided
@@ -68,8 +76,10 @@
 #' @examples
 #'
 #' data(data_wae_is_short)
-#' res <- Petersen::LP_IS_fit(data=data_wae_is_short, p_model=~-1 + ..cat:..time)
-#' res$summary
+#' fit <- Petersen::LP_IS_fit(data=data_wae_is_short, p_model=~..time)
+#' fit$summary
+#' est <- LP_IS_est(fit, N_hat=~1)
+#' est$summary
 #'
 #' @export LP_IS_fit
 #'
@@ -81,7 +91,8 @@ LP_IS_fit <- function(data, p_model,
                             logit_theta_offset=0,
                             logit_lambda_offset=0,
                             cat.unknown="U",
-                             p_beta.start=NULL, trace=FALSE){
+                            p_beta.start=NULL, trace=FALSE,
+                            control.optim=list(trace=0,maxit=1000)){
   # Fit a model for the capture probability with incomplete stratification
   # This is just a wrapper to the published code. At the moment, we do not allow
   # for other covariates in the p_model
@@ -103,7 +114,19 @@ LP_IS_fit <- function(data, p_model,
   if(!all(temp))stop("Sorry, current implementationd does not allow p_model to refers to other variables in data frame. :",
                      paste(p_model_vars[!temp],sep=", ", collapse=""))
 
-  cat("check model for theta; model for lambda; p offset; theta offset; lambda offset", "\n")
+  check.numeric(logit_p_offset,     min.value=0, max.value=0, req.length=1) # no real checking here
+  check.numeric(logit_theta_offset, min.value=0, max.value=0, req.length=1)
+  check.numeric(logit_lambda_offset,min.value=0, max.value=0, req.length=1)
+
+  theta_model_vars <- all.vars(theta_model)
+  temp <- theta_model_vars %in% c("..time")
+  if(!all(temp))stop("theta_model refers to variables other than ..time :",
+                     paste(theta_model_vars[!temp],sep=", ", collapse=""))
+
+  lambda_model_vars <- all.vars(lambda_model)
+  temp <- lambda_model_vars %in% c("..cat")
+  if(!all(temp))stop("lambda_model refers to variables other than ..cat:",
+                     paste(lambda_model_vars[!temp],sep=", ", collapse=""))
 
 #  if(!is.null(p_beta.start)){
 #     if(!is.numeric(p_beta.start))stop("p_beta.start must be a numeric vector")
@@ -160,7 +183,8 @@ LP_IS_fit <- function(data, p_model,
                      lambdaDM =lambdaDM,
                      captureOFFSET=logit_p_offset,
                      thetaOFFSET  =logit_theta_offset,
-                     lambdaOFFSET =logit_theta_offset)
+                     lambdaOFFSET =logit_theta_offset,
+                     control.optim=control.optim)
 
   #browser()
   summary <- data.frame(

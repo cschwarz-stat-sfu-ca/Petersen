@@ -17,55 +17,14 @@ released in the julian week but never recaptured.}
 \item{\code{logflow}}{log(flow) for this julian week}
 }
 }
-
-\subsection{\code{data_btspas_diag1}}{
-
-A data frame with many rows and 3 columns
-
-\describe{
-\item{\code{cap_hist}.}{Capture history of the form `jweek..jweek' for fish that are recaptured
-in the same julian week; '0..jweek' for unmarked fish newly captured in that julian week ; 'jweek..0' for fish
-released in the julian week but never recaptured.}
-\item{\code{freq}.}{Number of fish with this history.}
-\item{\code{logflow}}{log(flow) for this julian week}
-}
-}
 }
 \usage{
 data(data_btspas_diag1)
-
-data(data_btspas_diag1)
 }
 \description{
-This is the first diagonal case dataset from BTSPAS>
-
 This is the first diagonal case dataset from BTSPAS.
 }
 \details{
-Consider an experiment to estimate the number of outgoing smolts on a small river. The
-run of smolts extends over several weeks. As smolts migrate, they are captured and marked
-with individually numbered tags and released at the first capture location using, for example, a
-fishwheel. The migration continues, and a second fishwheel takes a second sample several
-kilometers down stream. At the second fishwheel, the captures consist of a mixture of marked
-(from the first fishwheel) and unmarked fish.
-
-The efficiency of the fishwheels varies over time in response to stream flow, run size passing
-the wheel and other uncontrollable events. So it is unlikely that the capture probabilities are
-equal over time at either location, i.e. are heterogeneous over time.
-
-We suppose that we can temporally stratify the data into, for example, weeks, where the
-capture-probabilities are (mostly) homogeneous at each wheel in each week. Furthermore, suppose that
-fish captured and marked in each week tend to migrate together so that they are
-captured in a single subsequent stratum. For example,
-suppose that in each julian week $j$, $n1_j$ fish are marked and released above the rotary screw trap.
-Of these, $m2_j$ are recaptured. All recaptures take place in the week of release,
-i.e. the matrix of releases and recoveries is diagonal.
-The $n1_j$ and $m2_j$ establish the capture efficiency of the second trap in julian week $j$.
-
-At the same time, $u2_j$ unmarked fish are captured at the screw trap.
-
-Capture-efficiency may be related to flow, so the log(flow) is also recorded.
-
 Consider an experiment to estimate the number of outgoing smolts on a small river. The
 run of smolts extends over several weeks. As smolts migrate, they are captured and marked
 with individually numbered tags and released at the first capture location using, for example, a
