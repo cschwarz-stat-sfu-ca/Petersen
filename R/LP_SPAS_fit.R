@@ -1,6 +1,6 @@
 #' Fit a Stratified-Petersen SPAS model.
 #'
-#' This function is a wrapper to fits a SPAS model. Consult the SPAS package for more details.
+#' This function is a wrapper to fits a SPAS model(Schwarz, 2023; Schwarz and Taylor, 1998). Consult the SPAS package for more details.
 #'
 #' @template param.data
 #' @param model.id Character string identifying the name of the model.
@@ -35,8 +35,19 @@
 #'
 #' # make a nice report using the SPAS package functions
 #' SPAS::SPAS.print.model(fit$fit)
+#'
+#' @references
+#' Schwarz CJ (2023). _SPAS: Stratified-Petersen Analysis System_.
+#' R package version 2023.3.31, <https://CRAN.R-project.org/package=SPAS>.
+#'
+#' Schwarz, C. J. and Taylor, C. G. (1998). The use of the
+#' stratified-Petersen estimator in fisheries management: estimating the
+#' number of pink salmon (Oncorhynchus gorbuscha) that spawn in the Fraser River.
+#' Canadian Journal of Fisheries and Aquatic Sciences 55, 281-297.
+#' https://doi.org/10.1139/f97-238
 
-# this is just a wrappr to the SPAS function
+
+# this is just a wrapper to the SPAS function
 
 LP_SPAS_fit <- function(data, model.id="Base model",
                               autopool=FALSE,

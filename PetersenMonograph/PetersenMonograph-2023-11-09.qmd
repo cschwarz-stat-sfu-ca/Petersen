@@ -6924,7 +6924,7 @@ Chapman, D. H. (1951). Some Properties of the Hypergeometric
 Distribution with Applications to Zoological Censuses. Univ Calif Public
 Stat 1, 131--60.
 
-Chen, S.and Lloyd, C. (2000). A non-parametric approach to the analysis
+Chen, S. and Lloyd, C. (2000). A non-parametric approach to the analysis
 of two stage mark-recapture experiments. Biometrika 88, 649--663.
 
 Cochran, W. G. (1977). Sampling Techniques, 3rd Edition. 3rd ed. New

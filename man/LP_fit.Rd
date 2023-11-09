@@ -48,7 +48,7 @@ After the fit is done, use the \emph{LP_est()} function to get estimates of abun
 \description{
 This will take a data frame of capture histories, frequencies, and
 additional covariates (e.g., strata and/or continuous covariates) and the model
-for the capture probabilities and will use conditional likelihood
+for the capture probabilities and will use conditional likelihood (Huggins, 1989)
 to fit the model. The population abundance is estimated using
 a Horvitz-Thompson type estimator and the user can request abundance
 estimates for sub-sets of the population.
@@ -71,6 +71,10 @@ fit$summary
 res <- Petersen::LP_est(fit, N_hat=~1)
 res$summary
 
+}
+\references{
+Huggins, R. M. 1989. On the Statistical Analysis of Capture Experiments.
+Biometrika 76: 133--40.
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.

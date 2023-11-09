@@ -84,6 +84,7 @@
 #' @export LP_IS_fit
 #'
 
+
 LP_IS_fit <- function(data, p_model,
                             theta_model=~-1+..time,
                             lambda_model=~-1+..cat,

@@ -67,7 +67,7 @@ After the fit is complete, use the \emph{LP_SPAS_est()} function to extract the 
 formatted report on the fit.
 }
 \description{
-This function is a wrapper to fits a SPAS model. Consult the SPAS package for more details.
+This function is a wrapper to fits a SPAS model(Schwarz, 2023; Schwarz and Taylor, 1998). Consult the SPAS package for more details.
 }
 \examples{
 data(data_spas_harrison)
@@ -82,4 +82,15 @@ est$summary
 
 # make a nice report using the SPAS package functions
 SPAS::SPAS.print.model(fit$fit)
+
+}
+\references{
+Schwarz CJ (2023). \emph{SPAS: Stratified-Petersen Analysis System}.
+R package version 2023.3.31, \url{https://CRAN.R-project.org/package=SPAS}.
+
+Schwarz, C. J. and Taylor, C. G. (1998). The use of the
+stratified-Petersen estimator in fisheries management: estimating the
+number of pink salmon (Oncorhynchus gorbuscha) that spawn in the Fraser River.
+Canadian Journal of Fisheries and Aquatic Sciences 55, 281-297.
+https://doi.org/10.1139/f97-238
 }

@@ -68,7 +68,8 @@ for p1 and the tag retention probabilities
 and will use conditional likelihood (conditional on capture at time 2)
 to fit the model. The population abundance is estimated using
 a Horvitz-Thompson type estimator and the user can request abundance
-estimates for sub-sets of the population.
+estimates for sub-sets of the population. Refer to references and appendices in vignettes
+for more details.
 }
 \details{
 The frequency variable (\code{freq} in the \code{data} argument) is the number of animals with the corresponding capture history.
@@ -116,6 +117,15 @@ fit$summary
 est <- Petersen::LP_TL_est(fit, N_hat=~1)
 est$summary
 
+}
+\references{
+Seber, G. A. F., and R. Felton. (1981). Tag Loss and the Petersen
+Mark-Recapture Experiment. Biometrika 68, 211--19.
+
+Hyun, S.-Y., Reynolds.J.H., and Galbreath, P.F. (2012). Accounting for
+Tag Loss and Its Uncertainty in a Mark--Recapture Study with a Mixture
+of Single and Double Tags. Transactions of the American Fisheries
+Society, 141, 11-25 http://dx.doi.org/10.1080/00028487.2011.639263
 }
 \author{
 Schwarz, C. J. \email{cschwarz.stat.sfu.ca@gmail.com}.

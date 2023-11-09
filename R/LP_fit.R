@@ -2,7 +2,7 @@
 #'
 #' This will take a data frame of capture histories, frequencies, and
 #' additional covariates (e.g., strata and/or continuous covariates) and the model
-#' for the capture probabilities and will use conditional likelihood
+#' for the capture probabilities and will use conditional likelihood (Huggins, 1989)
 #' to fit the model. The population abundance is estimated using
 #' a Horvitz-Thompson type estimator and the user can request abundance
 #' estimates for sub-sets of the population.
@@ -52,6 +52,12 @@
 #' res$summary
 #'
 #' @export LP_fit
+#'
+#' @references
+#' Huggins, R. M. 1989. On the Statistical Analysis of Capture Experiments.
+#' Biometrika 76: 133--40.
+
+
 #'
 
 LP_fit <- function(data, p_model, p_beta.start=NULL, trace=FALSE){

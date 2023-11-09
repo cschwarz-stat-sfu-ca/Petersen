@@ -140,3 +140,11 @@ est <-  Petersen::LP_BTSPAS_est (fit)
 est$summary
 }
 }
+\references{
+Bonner, S. J. and Schwarz, C. J. (2021). BTSPAS: Bayesian Time Stratified Petersen Analysis System.R package version 2021.11.2.
+
+Bonner, S. J., & Schwarz, C. J. (2011).
+Smoothing population size estimates for Time-Stratified Mark-Recapture experiments Using Bayesian P-Splines.
+Biometrics, 67, 1498-1507.
+\doi{10.1111/j.1541-0420.2011.01599.x}
+}
