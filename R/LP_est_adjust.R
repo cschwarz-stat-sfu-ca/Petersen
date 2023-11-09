@@ -29,7 +29,7 @@
 #' @details
 #' The estimate and SE are converted to a beta distribution for adjustment factors between 0 and 1 with equivalent
 #' mean and SD as the estimate and se. The estimate and se are used in normal distribution for adjustment factors for n1, n2, and m2.
-#' These adjustment factors are then simulated a large number of times and then multipled together
+#' These adjustment factors are then simulated a large number of times and then multiplied together
 #' to get the mean and sd of all adjustments applied together.
 #' Then the abundance is simulated (on the log scale), the product taken, and
 #' the mean, sd, ci estimated directly.

@@ -51,7 +51,7 @@
 
 #'
 #' @returns An list object of class *LP_BTSPAS_fit_Diag* with the following elements
-#' * **summary** A data frame  with the information on the number of observtions in the fit
+#' * **summary** A data frame  with the information on the number of observations in the fit
 #' * **data** Data used in the fit
 #' * **p_model**, **p_model_cov** Information on modelling the capture probabilities at the second occasion
 #' * **fit** n MCMC object with samples from the posterior distribution. A
