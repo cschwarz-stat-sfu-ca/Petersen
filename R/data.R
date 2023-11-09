@@ -18,12 +18,12 @@
 #' capture-probabilities are (mostly) homogeneous at each wheel in each week. Furthermore, suppose that
 #' fish captured and marked in each week tend to migrate together so that they are
 #' captured in a single subsequent stratum. For example,
-#' suppose that in each julian week $j$, $n1_j$ fish are marked and released above the rotary screw trap.
-#' Of these, $m2_j$ are recaptured. All recaptures take place in the week of release,
+#' suppose that in each julian week \eqn{j}{j}, \eqn{n1_j}{n1_j} fish are marked and released above the rotary screw trap.
+#' Of these, \eqn{m2_j}{m2_j} are recaptured. All recaptures take place in the week of release,
 #' i.e. the matrix of releases and recoveries is diagonal.
-#' The $n1_j$ and $m2_j$ establish the capture efficiency of the second trap in julian week $j$.
+#' The \eqn{n1_j}{n1_j} and \eqn{m2_j}{m2_j} establish the capture efficiency of the second trap in julian week \eqn{j}{j}.
 #'
-#' At the same time, $u2_j$ unmarked fish are captured at the screw trap.
+#' At the same time, \eqn{u2_j}{u2_j} unmarked fish are captured at the screw trap.
 #'
 #' Capture-efficiency may be related to flow, so the log(flow) is also recorded.
 
@@ -126,7 +126,7 @@
 #'
 #' \describe{
 #' \item{\code{cap_hist}.}{Capture history (10, 01, or 11). Note that
-#' $n_{10}=n_1-m_2$; $n_{01}=n_2-m_2$; and $n_{11}=m2$}
+#' \eqn{n_{10}=n_1-m_2}{n10=n1-m2}; \eqn{n_{01}=n_2-m_2}{n01=n2-m2}; and \eqn{n_{11}=m2}{n11=m2}}
 #' \item{\code{freq}.}{Number of fish with this history. Always 1}
 #' \item{\code{Sex}.}{Sex of the fish. M=Male; F=Female}
 #' \item{\code{Length}}{Length of the fish in inches.}
@@ -154,7 +154,7 @@
 #'
 #' \describe{
 #' \item{\code{cap_hist}.}{Capture history (10, 01, or 11). Note that
-#' $n_{10}=n_1-m_2$; $n_{01}=n_2-m_2$; and $n_{11}=m2$}
+#' \eqn{n_{10}=n_1-m_2}{n10=n1-m2}; \eqn{n_{01}=n_2-m_2}{n01=n2-m2}; and \eqn{n_{11}=m2}{n11=m2}}
 #' \item{\code{freq}.}{Number of fish with this history. Always 1}
 #' \item{\code{Sex}.}{Sex of the fish. M=Male; F=Female}
 #' \item{\code{Length}}{Length of the fish in inches.}
@@ -173,9 +173,9 @@
 #' (\emph{Salmo truitta}) in some small Norwegian tarns. Between 100 and 200 trout were caught by
 #' seining, marked by removing a fin (an example of a batch mark) and distributed
 #' in a systematic fashion around the tarn to encourage mixing.
-#' A total of $n_1=109$ fish were
+#' A total of \eqn{n_1}{n1}=109 fish were
 #' captured, clipped and released,
-#' $n_2=177$ fish were captured at the second occasion, and $m_2=57$
+#' \eqn{n_2}{n2}=177 fish were captured at the second occasion, and \eqn{m_2}{m2}=57
 #' marked fish were recovered.
 #'
 #' @format ## `data_rodli`
@@ -183,7 +183,7 @@
 #'
 #' \describe{
 #' \item{\code{cap_hist}.}{Capture history (10, 01, or 11). Note that
-#' $n_{10}=n_1-m_2$; $n_{01}=n_2-m_2$; and $n_{11}=m2$}
+#' \eqn{n_{10}=n_1-m_2}{n10=n1-m2}; \eqn{n_{01}=n_2-m_2}{n01=n2-m2}; and \eqn{n_{11}=m_2}{n11=m2}}
 #' \item{\code{freq}.}{Number of fish with this history}
 #' }
 #'

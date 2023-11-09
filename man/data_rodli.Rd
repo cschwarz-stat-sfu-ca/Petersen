@@ -11,7 +11,7 @@ A data frame with 3 rows and 2 columns:
 
 \describe{
 \item{\code{cap_hist}.}{Capture history (10, 01, or 11). Note that
-$n_{10}=n_1-m_2$; $n_{01}=n_2-m_2$; and $n_{11}=m2$}
+\eqn{n_{10}=n_1-m_2}{n10=n1-m2}; \eqn{n_{01}=n_2-m_2}{n01=n2-m2}; and \eqn{n_{11}=m_2}{n11=m2}}
 \item{\code{freq}.}{Number of fish with this history}
 }
 }
@@ -24,9 +24,9 @@ Ricker (1975) gives an example of work by Knut Dahl on estimating the number of 
 (\emph{Salmo truitta}) in some small Norwegian tarns. Between 100 and 200 trout were caught by
 seining, marked by removing a fin (an example of a batch mark) and distributed
 in a systematic fashion around the tarn to encourage mixing.
-A total of $n_1=109$ fish were
+A total of \eqn{n_1}{n1}=109 fish were
 captured, clipped and released,
-$n_2=177$ fish were captured at the second occasion, and $m_2=57$
+\eqn{n_2}{n2}=177 fish were captured at the second occasion, and \eqn{m_2}{m2}=57
 marked fish were recovered.
 }
 \keyword{datasets}

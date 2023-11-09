@@ -40,12 +40,12 @@ We suppose that we can temporally stratify the data into, for example, weeks, wh
 capture-probabilities are (mostly) homogeneous at each wheel in each week. Furthermore, suppose that
 fish captured and marked in each week tend to migrate together so that they are
 captured in a single subsequent stratum. For example,
-suppose that in each julian week $j$, $n1_j$ fish are marked and released above the rotary screw trap.
-Of these, $m2_j$ are recaptured. All recaptures take place in the week of release,
+suppose that in each julian week \eqn{j}{j}, \eqn{n1_j}{n1_j} fish are marked and released above the rotary screw trap.
+Of these, \eqn{m2_j}{m2_j} are recaptured. All recaptures take place in the week of release,
 i.e. the matrix of releases and recoveries is diagonal.
-The $n1_j$ and $m2_j$ establish the capture efficiency of the second trap in julian week $j$.
+The \eqn{n1_j}{n1_j} and \eqn{m2_j}{m2_j} establish the capture efficiency of the second trap in julian week \eqn{j}{j}.
 
-At the same time, $u2_j$ unmarked fish are captured at the screw trap.
+At the same time, \eqn{u2_j}{u2_j} unmarked fish are captured at the screw trap.
 
 Capture-efficiency may be related to flow, so the log(flow) is also recorded.
 }

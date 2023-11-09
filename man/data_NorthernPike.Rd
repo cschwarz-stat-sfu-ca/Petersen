@@ -11,7 +11,7 @@ A data frame with many rows and 4 columns
 
 \describe{
 \item{\code{cap_hist}.}{Capture history (10, 01, or 11). Note that
-$n_{10}=n_1-m_2$; $n_{01}=n_2-m_2$; and $n_{11}=m2$}
+\eqn{n_{10}=n_1-m_2}{n10=n1-m2}; \eqn{n_{01}=n_2-m_2}{n01=n2-m2}; and \eqn{n_{11}=m2}{n11=m2}}
 \item{\code{freq}.}{Number of fish with this history. Always 1}
 \item{\code{Sex}.}{Sex of the fish. M=Male; F=Female}
 \item{\code{Length}}{Length of the fish in inches.}
