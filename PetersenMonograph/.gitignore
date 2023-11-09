@@ -1,4 +1,4 @@
-PetersenMonograph*.html
+# PetersenMonograph*.html
 CODA*
 coda*
 data.txt
@@ -6,4 +6,5 @@ inits*
 model.txt
 .DS_Store
 mark*
-PetersenMonograph*.pdf
+# PetersenMonograph*.pdf
+Images/*.Rdata
