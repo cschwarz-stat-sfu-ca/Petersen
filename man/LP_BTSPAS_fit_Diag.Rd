@@ -81,14 +81,14 @@ in the MCMC iterations.}
 
 \item{remove_MCMC_files}{Should the temporary MCMC files (init.txt, data.text, model.txt, CODA*txt) removed after the fit.}
 
-\item{Suppress}{all console messages that occur during the fit. This includes the progress bar
+\item{quietly}{Suppress all console messages that occur during the fit. This includes the progress bar
 when a model that requires MCMC is fit (\emph{LP_BTSPAS_fit_Diag} and \emph{LP_BTSPAS_fit_NonDiag}), or
 a trace of the likelihood during the fit (\emph{LP_SPAS_fit}).}
 }
 \value{
 An list object of class \emph{LP_BTSPAS_fit_Diag} with the following elements
 \itemize{
-\item \strong{summary} A data frame  with the information on the number of observtions in the fit
+\item \strong{summary} A data frame  with the information on the number of observations in the fit
 \item \strong{data} Data used in the fit
 \item \strong{p_model}, \strong{p_model_cov} Information on modelling the capture probabilities at the second occasion
 \item \strong{fit} n MCMC object with samples from the posterior distribution. A

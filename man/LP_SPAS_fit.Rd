@@ -48,7 +48,7 @@ row.pool.in=c(123,123,123,4), then the same pooling is done, but the matrix rows
 
 \item{min.rows, min.cols}{Minimum number or rows and columns after pooling}
 
-\item{Suppress}{all console messages that occur during the fit. This includes the progress bar
+\item{quietly}{Suppress all console messages that occur during the fit. This includes the progress bar
 when a model that requires MCMC is fit (\emph{LP_BTSPAS_fit_Diag} and \emph{LP_BTSPAS_fit_NonDiag}), or
 a trace of the likelihood during the fit (\emph{LP_SPAS_fit}).}
 }

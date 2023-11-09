@@ -12,14 +12,14 @@ LP_IS_print(IS.results)
 \value{
 A nicely formatted report showing the results of the fit.
 \itemize{
-\item Model information (summary of arguments, model name, negative log-likelihood, number of parambers, AICc)
-\item Raw data used in the fit (history, frequencey,categories)
+\item Model information (summary of arguments, model name, negative log-likelihood, number of parameters, AICc)
+\item Raw data used in the fit (history, frequency,categories)
 \item Initial values used in the optimization of the likelihood for the parameters
 \item Design matrix and offset values for the parameters
 \item Maximum likelihood estimates for the parameters and estimated abundance by category
 \item SE for the above
 \item Observed and expected counts for each capture history
-\item Residual plot constructed rom the previous observed and expected counts
+\item Residual plot constructed from the previous observed and expected counts
 }
 }
 \description{
