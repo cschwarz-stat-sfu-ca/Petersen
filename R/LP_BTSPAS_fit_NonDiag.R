@@ -22,6 +22,7 @@
 #' @param InitialSeed Numeric value used to initialize the random numbers used
 #' in the MCMC iterations.
 #' @param trace  Internal tracing flag.
+#' @template param.MCMC.parms
 #' @template param.remove_MCMC_files
 #' @template param.quietly
 
@@ -59,8 +60,8 @@
 #' * **datetime** Date and time the fit was done
 
 #' @examples
-#' \dontrun{
-#' # THis example takes more than 30 seconds to execute, and so is not run here.
+#' \donttest{
+#' # This example takes more than 30 seconds to execute, and so is not run here.
 #' data(data_btspas_nondiag1)
 #' temp<- cbind(data_btspas_nondiag1,
 #'              split_cap_hist( data_btspas_nondiag1$cap_hist,
@@ -74,6 +75,9 @@
 #'   temp,
 #'   p_model=~1,
 #'   InitialSeed=23943242,
+#'   # the number of chains and iterations are too small to be useful
+#'   # they are set to a small number to pare execution time to <5 seconds for an example
+#'   n.chains=2, n.iter=20000, n.burnin=1000, n.sims=100,
 #'   quietly=TRUE
 #' )
 #' fit$summary
@@ -106,6 +110,7 @@ LP_BTSPAS_fit_NonDiag <- function(
      jump.after=NULL,
      logitP.fixed=NULL, logitP.fixed.values=NULL,
      InitialSeed=ceiling(stats::runif(1,min=0, max=1000000)),
+     n.chains=3, n.iter=200000, n.burnin=100000, n.sims=2000,
      trace=FALSE,
      remove_MCMC_files=TRUE,
      quietly=FALSE){
@@ -128,6 +133,12 @@ LP_BTSPAS_fit_NonDiag <- function(
      if(!all(temp))stop("p_model refers to variables not in data :",
                      paste(p_model_vars[!temp],sep=", ", collapse=""))
   }
+
+  check.numeric(n.chains, min.value=2,    max.value=4,   req.length=1, check.whole=TRUE)
+  check.numeric(n.iter,   min.value=5000, max.value=Inf, req.length=1, check.whole=TRUE)
+  check.numeric(n.burnin, min.value=1000, max.value=Inf, req.length=1, check.whole=TRUE)
+  check.numeric(n.sims  , min.value=100,  max.value=Inf, req.length=1, check.whole=TRUE)
+
 
   # Extract the values needed for the call to BTSPAS
   data.aug <- cbind(data, split_cap_hist(data$cap_hist, sep="..", prefix="..ts", make.numeric=TRUE))
@@ -158,7 +169,7 @@ LP_BTSPAS_fit_NonDiag <- function(
       bad.n1=c(), bad.m2=c(), bad.u2=c(),
       logitP.cov= logitP.cov,
       logitP.fixed=logitP.fixed, logitP.fixed.values=logitP.fixed.values,
-      n.chains=3, n.iter=200000, n.burnin=100000, n.sims=2000,
+      n.chains=n.chains, n.iter=n.iter, n.burnin=n.burnin, n.sims=n.sims,
       tauU.alpha=1, tauU.beta=.05, taueU.alpha=1, taueU.beta=.05,
       prior.beta.logitP.mean = c(logit(sum(nmu$m2,na.rm=TRUE)/sum(nmu$n1,na.rm=TRUE)),
                                  rep(0,  ncol(as.matrix(logitP.cov))-1)),
@@ -184,7 +195,7 @@ LP_BTSPAS_fit_NonDiag <- function(
            bad.n1=c(), bad.m2=c(), bad.u2=c(),
            logitP.cov= logitP.cov,
            logitP.fixed=logitP.fixed, logitP.fixed.values=logitP.fixed.values,
-           n.chains=3, n.iter=200000, n.burnin=100000, n.sims=2000,
+           n.chains=n.chains, n.iter=n.iter, n.burnin=n.burnin, n.sims=n.sims,
            tauU.alpha=1, tauU.beta=.05, taueU.alpha=1, taueU.beta=.05,
            prior.beta.logitP.mean = c(logit(sum(nmu$m2,na.rm=TRUE)/sum(nmu$n1,na.rm=TRUE)),
                                     rep(0,  ncol(as.matrix(logitP.cov))-1)),
@@ -235,9 +246,13 @@ LP_BTSPAS_fit_NonDiag <- function(
     file.remove(files)
   }
 
-  # close the stdout connection (this should likely be done in BTSPAS)
-  #closeAllConnections()
+  # close any open connection from BTSPAS
+  temp <- showConnections(all=TRUE)
+  if(sum(temp[,"class"]=="textConnection")>0){
+    close(getConnection(which.max(temp[,"class"]=="textConnection")))
+  }
 
+  # return results
   res
 }
 

@@ -6,6 +6,9 @@
 \usage{
 fit_classes()
 }
+\value{
+NOTHING. This is not a function, but ony documents how I use "classes".
+}
 \description{
 We assign a "class" (one of the classes above) to the results from one of the fitting methods. This class
 designation is \strong{only used to ensure that estimation routines have the correct type of fit when finding estimates of abundace},

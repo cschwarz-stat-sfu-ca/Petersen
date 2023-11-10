@@ -13,6 +13,10 @@ LP_BTSPAS_fit_NonDiag(
   logitP.fixed = NULL,
   logitP.fixed.values = NULL,
   InitialSeed = ceiling(stats::runif(1, min = 0, max = 1e+06)),
+  n.chains = 3,
+  n.iter = 2e+05,
+  n.burnin = 1e+05,
+  n.sims = 2000,
   trace = FALSE,
   remove_MCMC_files = TRUE,
   quietly = FALSE
@@ -65,6 +69,14 @@ as -50 because numerical problems could occur when this is converted to the 0-1 
 \item{InitialSeed}{Numeric value used to initialize the random numbers used
 in the MCMC iterations.}
 
+\item{n.chains}{Number of chains to fit in the MCMC}
+
+\item{n.iter}{Total number of iterations}
+
+\item{n.burnin}{Number of burnin iterations}
+
+\item{n.sims}{Total number of simulations to keep in output (implies a thinning)}
+
 \item{trace}{Internal tracing flag.}
 
 \item{remove_MCMC_files}{Should the temporary MCMC files (init.txt, data.text, model.txt, CODA*txt) removed after the fit.}
@@ -116,8 +128,8 @@ value of the temporal strata seen as the first stratum and will interpolate for 
 without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 }
 \examples{
-\dontrun{
-# THis example takes more than 30 seconds to execute, and so is not run here.
+\donttest{
+# This example takes more than 30 seconds to execute, and so is not run here.
 data(data_btspas_nondiag1)
 temp<- cbind(data_btspas_nondiag1,
              split_cap_hist( data_btspas_nondiag1$cap_hist,
@@ -131,6 +143,9 @@ fit <- Petersen::LP_BTSPAS_fit_NonDiag(
   temp,
   p_model=~1,
   InitialSeed=23943242,
+  # the number of chains and iterations are too small to be useful
+  # they are set to a small number to pare execution time to <5 seconds for an example
+  n.chains=2, n.iter=20000, n.burnin=1000, n.sims=100,
   quietly=TRUE
 )
 fit$summary

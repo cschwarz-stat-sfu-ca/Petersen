@@ -24,6 +24,7 @@
 #' - you can obtain estimates of overall abundance, subsets of the population (e.g., sex or other strata) from the same fit, and
 #' so you don't need to do several fits to get several estimates of abundance.
 
+#' @return NOTHING. This is not a function, but ony documents how I use "classes".
 #' @export fit_classes
 #'
 

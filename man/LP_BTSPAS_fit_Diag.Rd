@@ -128,7 +128,6 @@ value of the temporal strata seen as the first stratum and will interpolate for 
 without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 }
 \examples{
-\dontrun{
 # This example takes more than 30 seconds to run, so is not run as an example.
 data(data_btspas_diag1)
 # extract the strata of interest
@@ -142,6 +141,9 @@ fit <- Petersen::LP_BTSPAS_fit_Diag(
   temp,
   p_model=~1,
   InitialSeed=23943242,
+  # the number of chains and iterations are too small to be useful
+  # they are set to a small number to pare execution time to <5 seconds for an example
+  n.chains=2, n.iter=20000, n.burnin=1000, n.sims=100,
   quietly=TRUE
 )
 fit$summary
@@ -149,7 +151,6 @@ fit$summary
 # now get the estimates of abundance
 est <-  Petersen::LP_BTSPAS_est (fit)
 est$summary
-}
 }
 \references{
 Bonner, S. J. and Schwarz, C. J. (2021). BTSPAS: Bayesian Time Stratified Petersen Analysis System.R package version 2021.11.2.

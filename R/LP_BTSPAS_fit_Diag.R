@@ -51,7 +51,6 @@
 #'  without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 
 #' @examples
-#' \dontrun{
 #' # This example takes more than 30 seconds to run, so is not run as an example.
 #' data(data_btspas_diag1)
 
@@ -67,6 +66,9 @@
 #'   temp,
 #'   p_model=~1,
 #'   InitialSeed=23943242,
+#'   # the number of chains and iterations are too small to be useful
+#'   # they are set to a small number to pare execution time to <5 seconds for an example
+#'   n.chains=2, n.iter=20000, n.burnin=1000, n.sims=100,
 #'   quietly=TRUE
 #' )
 #' fit$summary
@@ -74,7 +76,6 @@
 #' # now get the estimates of abundance
 #' est <-  Petersen::LP_BTSPAS_est (fit)
 #' est$summary
-#' }
 #
 #' @returns An list object of class *LP_BTSPAS_fit_Diag* with the following elements
 #' * **summary** A data frame  with the information on the number of observations in the fit
@@ -128,6 +129,11 @@ LP_BTSPAS_fit_Diag <- function(
      if(!all(temp))stop("p_model refers to variables not in data :",
                      paste(p_model_vars[!temp],sep=", ", collapse=""))
   }
+
+  check.numeric(n.chains, min.value=2,    max.value=4,   req.length=1, check.whole=TRUE)
+  check.numeric(n.iter,   min.value=5000, max.value=Inf, req.length=1, check.whole=TRUE)
+  check.numeric(n.burnin, min.value=1000, max.value=Inf, req.length=1, check.whole=TRUE)
+  check.numeric(n.sims  , min.value=100,  max.value=Inf, req.length=1, check.whole=TRUE)
 
   nmu <- cap_hist_to_n_m_u(data)
   if(trace)browser()
@@ -221,14 +227,15 @@ LP_BTSPAS_fit_Diag <- function(
     file.remove(files)
   }
 
-  # close the stdout connection (this should likely be done in BTSPAS)
+  # close the stdout text connection connection (this should likely be done in BTSPAS)
   #  https://stackoverflow.com/questions/46351610/do-text-connections-always-have-to-be-closed
   #browser()
-  #temp <- showConnections(all=TRUE)
-  #if(sum(temp[,"class"]=="textConnection")>0){
-  #  close(getConnection(which.min(temp[,"class"]=="textConnection")))
-  #}
-  # final resuts
+  temp <- showConnections(all=TRUE)
+  if(sum(temp[,"class"]=="textConnection")>0){
+    close(getConnection(which.max(temp[,"class"]=="textConnection")))
+  }
+
+  # final results
 
   res
 }

@@ -1,6 +1,37 @@
 ## 2023.12.1 Release
 
 Initial release - resubmission
+
+> Please add \value to .Rd files regarding exported methods and explain
+> the functions results in the documentation. Please write about the
+> structure of the output (class) and also what the output means. (If a
+> function does not return a value, please document that too, e.g.
+> \value{No return value, called for side effects} or similar)
+> Missing Rd-tags:
+>      fit_classes.Rd:  \value
+
+Fixed, but this is NOT a useable function, but only documents how I use "classes"
+to ensure that objects of different "types" are not mixed in AICc computations, etc.
+Is there a better way to add a helpful on a topic other than a vignette?
+
+
+> \dontrun{} should only be used if the example really cannot be executed
+> (e.g. because of missing additional software, missing API keys, ...) by
+> the user. That's why wrapping examples in \dontrun{} adds the comment
+> ("# Not run:") as a warning for the user.
+> Does not seem necessary.
+> Please unwrap the examples if they are executable in < 5 sec, or replace
+> \dontrun{} with \donttest{}.
+
+Examples take about 30 seconds to run. Reduced number of MCMC iterations
+to reduce execution time, but now results are not properly mixed etc.
+Added a warning to the example about this. Dealt with problem of un-closed connections
+from the BTSPAS package.
+
+
+
+
+
 Large documentation object has been moved to GitHub repository with link from Vignettes
 
 > Please reduce the length of the title to less than 65 characters.
