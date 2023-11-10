@@ -12,7 +12,6 @@ Initial release - resubmission
 
 Fixed, but this is NOT a useable function, but only documents how I use "classes"
 to ensure that objects of different "types" are not mixed in AICc computations, etc.
-Is there a better way to add a helpful on a topic other than a vignette?
 
 
 > \dontrun{} should only be used if the example really cannot be executed
@@ -26,7 +25,7 @@ Is there a better way to add a helpful on a topic other than a vignette?
 Examples take about 30 seconds to run. Reduced number of MCMC iterations
 to reduce execution time, but now results are not properly mixed etc.
 Added a warning to the example about this. Dealt with problem of un-closed connections
-from the BTSPAS package.
+from the BTSPAS package that also prevented examples from running.
 
 
 
