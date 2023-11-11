@@ -2,6 +2,39 @@
 
 Initial release - resubmission
 
+> If I understand correctly, your \dontrun{} example is wrapped in
+> \dontrun{} for its long run time? If it is otherwise executable, please
+> wrap it in \donttest{}. That way the example is run if the user calls
+> examples() but won't be tested regularly. If you think \dontrun{} is the
+> correct wrapper, please let us know why so we can publish your package.
+> Otherwise, please fix and resubmit.
+
+Ok...I removed \dontrun and\donttest from the MCMC examples (calls to BTSPAS package).
+I've cut down the examples so they run in < 5 seconds on my Mac, 
+but they take a litte longer on Windows machines:
+
+2 notes
+Examples with CPU (user + system) or elapsed time > 10s  <- win_release()
+                       user system elapsed
+LP_BTSPAS_fit_NonDiag 17.54   0.04   17.59
+LP_BTSPAS_fit_Diag    10.60   0.02   10.83
+
+or
+
+Examples with CPU (user + system) or elapsed time > 10s  <- win_devel()
+                       user system elapsed
+LP_BTSPAS_fit_NonDiag 14.57   0.02   14.60
+LP_BTSPAS_fit_Diag     9.61   0.01   10.28
+
+I added some comments to the examples, indicating that a real analysis likely
+needs different MCMC parameter values for the number of iterations etc to 
+ensure proper mixing.
+
+I hope this is now ok.
+
+
+
+
 > Please add \value to .Rd files regarding exported methods and explain
 > the functions results in the documentation. Please write about the
 > structure of the output (class) and also what the output means. (If a
