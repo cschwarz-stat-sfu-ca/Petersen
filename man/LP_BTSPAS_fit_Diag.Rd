@@ -128,7 +128,13 @@ value of the temporal strata seen as the first stratum and will interpolate for 
 without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 }
 \examples{
-# This example takes more than 30 seconds to run, so is not run as an example.
+# NOTE. To keep execution time to a small value as required by CRAN
+# I've made a very small example.
+# Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
+# small values. Proper mixing may not have occurred yet.
+# When using this routine, you likely want to the use the default values
+# for these MCMC parameters.
+
 data(data_btspas_diag1)
 # extract the strata of interest
 temp<- cbind(data_btspas_diag1,

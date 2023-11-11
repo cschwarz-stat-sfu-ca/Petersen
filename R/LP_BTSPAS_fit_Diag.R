@@ -51,7 +51,13 @@
 #'  without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 
 #' @examples
-#' # This example takes more than 30 seconds to run, so is not run as an example.
+#' # NOTE. To keep execution time to a small value as required by CRAN
+#' # I've made a very small example.
+#' # Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
+#' # small values. Proper mixing may not have occurred yet.
+#' # When using this routine, you likely want to the use the default values
+#' # for these MCMC parameters.
+#'
 #' data(data_btspas_diag1)
 
 #' # extract the strata of interest
@@ -229,10 +235,11 @@ LP_BTSPAS_fit_Diag <- function(
 
   # close the stdout text connection connection (this should likely be done in BTSPAS)
   #  https://stackoverflow.com/questions/46351610/do-text-connections-always-have-to-be-closed
-  #browser()
+  # browser()
   temp <- showConnections(all=TRUE)
   if(sum(temp[,"class"]=="textConnection")>0){
-    close(getConnection(which.max(temp[,"class"]=="textConnection")))
+    index <- which.max(temp[,"class"]=="textConnection" & temp[,"description"]=="stdout")
+    try(close(getConnection(index)), silent=TRUE)
   }
 
   # final results

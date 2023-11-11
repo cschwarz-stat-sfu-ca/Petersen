@@ -60,8 +60,12 @@
 #' * **datetime** Date and time the fit was done
 
 #' @examples
-#' \donttest{
-#' # This example takes more than 30 seconds to execute, and so is not run here.
+#' # NOTE. To keep execution time to a small value as required by CRAN
+#' # I've made a very small example.
+#' # Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
+#' # small values. Proper mixing may not have occurred yet.
+#' # When using this routine, you likely want to the use the default values
+#' # for these MCMC parameters.
 #' data(data_btspas_nondiag1)
 #' temp<- cbind(data_btspas_nondiag1,
 #'              split_cap_hist( data_btspas_nondiag1$cap_hist,
@@ -85,7 +89,7 @@
 #' # now get the estimates of abundance
 #' est <-  Petersen::LP_BTSPAS_est (fit)
 #' est$summary
-#' }
+#'
 
 #' @importFrom stats runif var sd
 #' @importFrom BTSPAS TimeStratPetersenNonDiagErrorNP_fit
@@ -248,9 +252,12 @@ LP_BTSPAS_fit_NonDiag <- function(
 
   # close any open connection from BTSPAS
   temp <- showConnections(all=TRUE)
+  #browser()
   if(sum(temp[,"class"]=="textConnection")>0){
-    close(getConnection(which.max(temp[,"class"]=="textConnection")))
+    index <- which.max(temp[,"class"]=="textConnection" & temp[,"description"]=="stdout")
+    try(close(getConnection(index)), silent=TRUE)
   }
+
 
   # return results
   res

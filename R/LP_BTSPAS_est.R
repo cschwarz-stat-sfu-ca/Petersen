@@ -9,8 +9,13 @@
 #' @param parm Which parameter from the BTSPAS fix is to be extracted?
 #'
 #' @examples
-#' \dontrun{
-#' # THis example takes too long to run.
+#' # NOTE. To keep execution time to a small value as required by CRAN
+#' # I've made a very small example.
+#' # Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
+#' # small values. Proper mixing may not have occurred yet.
+#' # When using this routine, you likely want to the use the default values
+#' # for these MCMC parameters.
+#'
 #' data(data_btspas_diag1)
 
 #' # extract the strata of interest
@@ -24,14 +29,18 @@
 #' fit <- Petersen::LP_BTSPAS_fit_Diag(
 #'   temp,
 #'   p_model=~1,
-#'   InitialSeed=23943242
+#'   InitialSeed=23943242,
+#'   # the number of chains and iterations are too small to be useful
+#'   # they are set to a small number to pare execution time to <5 seconds for an example
+#'   n.chains=2, n.iter=20000, n.burnin=1000, n.sims=100,
+#'   quietly=TRUE
 #' )
 #' fit$summary
 #'
 #' # now get the estimates of abundance
 #' est <-  Petersen::LP_BTSPAS_est (fit)
 #' est$summary
-#' }
+#
 #'
 #'
 #' @returns An list object of class *LP_BTSPAS_est* with the following elements

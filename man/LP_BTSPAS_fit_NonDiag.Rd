@@ -128,8 +128,12 @@ value of the temporal strata seen as the first stratum and will interpolate for 
 without any data. Temporal strata labels should be numeric, i.e., do NOT use A, B, C etc.
 }
 \examples{
-\donttest{
-# This example takes more than 30 seconds to execute, and so is not run here.
+# NOTE. To keep execution time to a small value as required by CRAN
+# I've made a very small example.
+# Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
+# small values. Proper mixing may not have occurred yet.
+# When using this routine, you likely want to the use the default values
+# for these MCMC parameters.
 data(data_btspas_nondiag1)
 temp<- cbind(data_btspas_nondiag1,
              split_cap_hist( data_btspas_nondiag1$cap_hist,
@@ -153,7 +157,7 @@ fit$summary
 # now get the estimates of abundance
 est <-  Petersen::LP_BTSPAS_est (fit)
 est$summary
-}
+
 }
 \references{
 Bonner, S. J. and Schwarz, C. J. (2021). BTSPAS: Bayesian Time Stratified Petersen Analysis System.R package version 2021.11.2.
