@@ -9,6 +9,7 @@
 #' @param parm Which parameter from the BTSPAS fix is to be extracted?
 #'
 #' @examples
+#' \donttest{
 #' # NOTE. To keep execution time to a small value as required by CRAN
 #' # I've made a very small example.
 #' # Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
@@ -40,7 +41,7 @@
 #' # now get the estimates of abundance
 #' est <-  Petersen::LP_BTSPAS_est (fit)
 #' est$summary
-#
+#' }
 #'
 #'
 #' @returns An list object of class *LP_BTSPAS_est* with the following elements

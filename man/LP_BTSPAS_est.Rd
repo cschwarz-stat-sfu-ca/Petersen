@@ -26,6 +26,7 @@ An list object of class \emph{LP_BTSPAS_est} with the following elements
 This will take a previous fit and return estimates of abundance.
 }
 \examples{
+\donttest{
 # NOTE. To keep execution time to a small value as required by CRAN
 # I've made a very small example.
 # Additionally, I've set the number of MCMC chains, iterations, burning, simulation to save to
@@ -55,6 +56,7 @@ fit$summary
 # now get the estimates of abundance
 est <-  Petersen::LP_BTSPAS_est (fit)
 est$summary
+}
 
 
 }

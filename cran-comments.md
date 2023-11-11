@@ -2,6 +2,11 @@
 
 Initial release - resubmission
 
+
+Added \donttest{] to examples that have large CPU time.}
+No more NOTES from local, win_release() or win_devel() checks other than a
+NEW submission.
+
 > If I understand correctly, your \dontrun{} example is wrapped in
 > \dontrun{} for its long run time? If it is otherwise executable, please
 > wrap it in \donttest{}. That way the example is run if the user calls
