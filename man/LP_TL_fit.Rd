@@ -37,7 +37,8 @@ all combination of sampling events (\code{..time}) and a stratification variable
 also needs to be in the data frame.
 
 For some models (e.g., tag loss models), the \code{..time} variable cannot be used because
-the models only have one capture probability (e.g., only for event 1).}
+the conditional models (on being captured at the second event) end up having
+only have one capture probability (e.g., only for event 1) because of the conditioning process.}
 
 \item{rho_model}{Model for retention probabilities}
 

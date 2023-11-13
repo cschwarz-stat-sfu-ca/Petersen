@@ -43,13 +43,7 @@
 #' @importFrom stats as.formula model.matrix coef
 #' @importFrom bbmle mle2
 
-#' @examples
-#'
-#' data(data_rodli)
-#' fit <- Petersen::LP_fit(data=data_rodli, p_model=~..time)
-#' fit$summary
-#' res <- Petersen::LP_est(fit, N_hat=~1)
-#' res$summary
+#' @example man-roxygen/ex.LP.R
 #'
 #' @export LP_fit
 #'
