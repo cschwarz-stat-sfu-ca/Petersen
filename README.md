@@ -15,6 +15,10 @@ devtools::install_github("cschwarz-stat-sfu-ca/Petersen", dependencies = TRUE,
 
 ## Features
 
+Extensive user manual available at:  
+
+https://github.com/cschwarz-stat-sfu-ca/Petersen/tree/master/PetersenMonograph
+
 The Petersen-method is the simplest of more general capture-recapture
 methods which are extensively reviewed in Williams et al. (2002).
 Despite the Petersen method's simplicity, many of the properties of the estimator, 

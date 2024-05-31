@@ -20,9 +20,9 @@ data(data_lfc_reverse)
 \description{
 This is the data provided by Kaitlyn Dionne, DFO.
 Arbeider et al (2020) proposed to estimate the run size of Lower Fraser River Coho (LFC) using a geographically stratified reverse-capture
-method. Briefly, a LFC coho swim upstream, they are sampled near New Westminister, BC, which is downstream from several major rivers upwhich
+method. Briefly, a LFC coho swim upstream, they are sampled near New Westminister, BC, which is downstream from several major rivers up which
 are large spawning populations. These sample fish are assigned to the spawning population using genetic and other methods. These
-spawning populations are identified as the Chilliwack Hatchery (denoted \emph{C}), the Lilloet River natural spawning population (deonted \emph{L}),
+spawning populations are identified as the Chilliwack Hatchery (denoted \emph{C}), the Lilloet River natural spawning population (denoted \emph{L}),
 the Nicomen Slough population (denote \emph{N}) and all other population (denoted as \emph{0}). Notice that the sample fish at New Westminister
 are NOT physically tagged, and population assignment is through genetic and other measures.
 The upstream migration extends over two months (September to October) and is divided into 3 temporal strata corresponding

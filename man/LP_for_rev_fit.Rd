@@ -32,7 +32,7 @@ in the model fitting.}
 
 \item{G.SE}{SE of the estimated stock proportion.}
 
-\item{min.G}{Mimumum acceptable stock proportion during the bootstrap estimation of uncertainty}
+\item{min.G}{Miniumum acceptable stock proportion during the bootstrap estimation of uncertainty}
 
 \item{n.boot}{Number of bootstrap samples used to estimate the uncertainty}
 
@@ -54,6 +54,7 @@ EXPERIMENTAL. This will take a data frame of capture histories, frequencies, and
 additional covariates (e.g., strata and/or continuous covariates) for a simple forward Petersen
 estimate plus estimates of escapement
 and associated stock proportions with SE for backwards estimation.
+DO NOT USE YET.
 }
 \details{
 The frequency variable (\code{freq} in the \code{data} argument) is the number of animals with the corresponding capture history.

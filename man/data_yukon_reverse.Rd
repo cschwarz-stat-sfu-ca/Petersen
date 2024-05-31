@@ -27,7 +27,7 @@ This is the data from the 2011 data in Table 2 of the above paper.
 Estimated that total escapement to Canada (plus  harvest)
 was 66,225 (SE 1574)
 Estimated that proportion of stock that was Canadian was .34644 (SE .030)
-We converted this into a "sample size" and number of fish with Cdn genetics
+We converted this into a "sample size" and number of fish with Canadian genetics
 that gave the same SE.
 }
 \keyword{datasets}

@@ -7,11 +7,11 @@
 fit_classes()
 }
 \value{
-NOTHING. This is not a function, but ony documents how I use "classes".
+NOTHING. This is not a function, but only documents how I use "classes".
 }
 \description{
 We assign a "class" (one of the classes above) to the results from one of the fitting methods. This class
-designation is \strong{only used to ensure that estimation routines have the correct type of fit when finding estimates of abundace},
+designation is \strong{only used to ensure that estimation routines have the correct type of fit when finding estimates of abundance},
 and \strong{model averaging only considers models of comparable class} when creating the
 model averaging results of abundance.
 }
