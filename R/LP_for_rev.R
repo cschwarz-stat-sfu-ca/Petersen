@@ -4,6 +4,7 @@
 #' additional covariates (e.g., strata and/or continuous covariates) for a simple forward Petersen
 #' estimate plus estimates of escapement
 #' and associated stock proportions with SE for backwards estimation.
+#' DO NOT USE YET.
 #'
 
 #' @template param.data
@@ -11,7 +12,7 @@
 #' @param E.SE SE of the estimates of escapement
 #' @param G Estimated proportion of the stock at the first capture location estimated using GSI and other methods
 #' @param G.SE SE of the estimated stock proportion.
-#' @param min.G Mimumum acceptable stock proportion during the bootstrap estimation of uncertainty
+#' @param min.G Miniumum acceptable stock proportion during the bootstrap estimation of uncertainty
 #' @param n.boot Number of bootstrap samples used to estimate the uncertainty
 #' @param trace Should intermediate tracing be enabled (e.g. browser() stops)
 

@@ -400,7 +400,7 @@
 #' Estimated that total escapement to Canada (plus  harvest)
 #' was 66,225 (SE 1574)
 #' Estimated that proportion of stock that was Canadian was .34644 (SE .030)
-#' We converted this into a "sample size" and number of fish with Cdn genetics
+#' We converted this into a "sample size" and number of fish with Canadian genetics
 #' that gave the same SE.
 
 #' @format `data_yukon_reverse`
@@ -424,9 +424,9 @@
 #' This is the data provided by Kaitlyn Dionne, DFO.
 
 #' Arbeider et al (2020) proposed to estimate the run size of Lower Fraser River Coho (LFC) using a geographically stratified reverse-capture
-#' method. Briefly, a LFC coho swim upstream, they are sampled near New Westminister, BC, which is downstream from several major rivers upwhich
+#' method. Briefly, a LFC coho swim upstream, they are sampled near New Westminister, BC, which is downstream from several major rivers up which
 #' are large spawning populations. These sample fish are assigned to the spawning population using genetic and other methods. These
-#' spawning populations are identified as the Chilliwack Hatchery (denoted *C*), the Lilloet River natural spawning population (deonted *L*),
+#' spawning populations are identified as the Chilliwack Hatchery (denoted *C*), the Lilloet River natural spawning population (denoted *L*),
 #' the Nicomen Slough population (denote *N*) and all other population (denoted as *0*). Notice that the sample fish at New Westminister
 #' are NOT physically tagged, and population assignment is through genetic and other measures.
 
