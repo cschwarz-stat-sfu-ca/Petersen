@@ -4,7 +4,7 @@
 \alias{LP_fit}
 \title{Fit a Lincoln-Petersen Model using conditional likelihood}
 \usage{
-LP_fit(data, p_model, p_beta.start = NULL, trace = FALSE)
+LP_fit(data, p_model = ~..time, p_beta.start = NULL, trace = FALSE)
 }
 \arguments{
 \item{data}{Data frame containing the variables:

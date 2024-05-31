@@ -54,7 +54,7 @@
 
 #'
 
-LP_fit <- function(data, p_model, p_beta.start=NULL, trace=FALSE){
+LP_fit <- function(data, p_model=~..time, p_beta.start=NULL, trace=FALSE){
   # Fit a model for the capture probability using conditional likelihood
 
   # check the data frame
