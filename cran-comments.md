@@ -1,6 +1,10 @@
-## 2024.01.01 Release
+
+
+## 2024.6.1 Release
 
 Fixed some typos in the documentation. No new functionality added.
+Added foward and reverse example.
+Added example of using multimark in user manual.
 
 
 ## Test environments
