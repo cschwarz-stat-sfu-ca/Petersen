@@ -29,7 +29,7 @@
 #'
 #' @returns An list object of class *LP_fit* with abundance estimates and other information with the following elements
 #' * **summary** A data frame with the model for the capture probabilities;
-#' the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+#' the conditional log-likelihood; the number of parameters; and method used to fit the model
 #' * **data** A data frame with the raw data used in the fit
 #' * **fit** Results of the fit from the optimizer
 #' * **datetime** Date and time the fit was done

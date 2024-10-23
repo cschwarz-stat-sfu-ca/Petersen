@@ -11,4 +11,7 @@
 #' the conditional models (on being captured at the second event) end up having
 #' only have one capture probability (e.g., only for event 1) because of the conditioning process.
 #'
+#' For the Bailey Binomial model, the \code{..time} variable cannot be used because
+#' the conditional model ends up having only one capture probability (i.e., only for event 2).
+#'
 
