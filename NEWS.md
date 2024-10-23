@@ -1,3 +1,6 @@
+Petersen 2024.11.01
+-------------------
+* Corrected example flagged by CRAN
 
 Petersen 2024.06.01
 -------------------

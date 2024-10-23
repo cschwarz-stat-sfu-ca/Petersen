@@ -1,4 +1,6 @@
+## 2024.11.1 Release
 
+Fixed example flagged by CRAN
 
 ## 2024.6.1 Release
 
