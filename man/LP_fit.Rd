@@ -26,7 +26,10 @@ also needs to be in the data frame.
 
 For some models (e.g., tag loss models), the \code{..time} variable cannot be used because
 the conditional models (on being captured at the second event) end up having
-only have one capture probability (e.g., only for event 1) because of the conditioning process.}
+only have one capture probability (e.g., only for event 1) because of the conditioning process.
+
+For the Bailey Binomial model, the \code{..time} variable cannot be used because
+the conditional model ends up having only one capture probability (i.e., only for event 2).}
 
 \item{p_beta.start}{Initial values for call to optimization routine for the beta parameters (on the logit scale).
 The values will be replicated to match
@@ -38,7 +41,7 @@ the number of initial beta parameters needed. Some care is needed here!}
 An list object of class \emph{LP_fit} with abundance estimates and other information with the following elements
 \itemize{
 \item \strong{summary} A data frame with the model for the capture probabilities;
-the conditional log-likelihood; the number of parameters; the number of parameters, and method used to fit the model
+the conditional log-likelihood; the number of parameters; and method used to fit the model
 \item \strong{data} A data frame with the raw data used in the fit
 \item \strong{fit} Results of the fit from the optimizer
 \item \strong{datetime} Date and time the fit was done
