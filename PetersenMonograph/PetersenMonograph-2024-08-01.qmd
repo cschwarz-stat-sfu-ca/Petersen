@@ -49,10 +49,10 @@ library(VGAM)
 ft_aictab <- function(aictab, widths=NULL){
    # make a flex table from aic table
   
-  ft <- flextable(aictab)
-  if(!is.null(widths))ft <- width(ft, j=as.numeric(names(widths)), width = widths)
-  ft <- colformat_double(ft, j=c("AICc","Delta","AICcWt"), digits=2)
-  ft <- set_header_labels(ft, "cond.ll"='Conditional log-likelihood',
+  ft <- flextable::flextable(aictab)
+  if(!is.null(widths))ft <- flextable::width(ft, j=as.numeric(names(widths)), width = widths)
+  ft <- flextable::colformat_double(ft, j=c("AICc","Delta","AICcWt"), digits=2)
+  ft <- flextable::set_header_labels(ft, "cond.ll"='Conditional log-likelihood',
                             'n.parms'='# parms',
                             'nobs'   ='# obs',
                             'weight'='Model weight',
@@ -67,7 +67,7 @@ ft_aictab <- function(aictab, widths=NULL){
 #| echo: false
 #| warning: false
 #| message: false
-
+#| include: false
 
 # We need to run the aictab function before lots of math, other wise it crashes.
 # This is a quick and dirty run.
@@ -1904,9 +1904,9 @@ nop.sumstat.all$Sex <- "ALL"
 nop.sumstat.sex <- plyr::rbind.fill(nop.sumstat.sex,
                                     nop.sumstat.all)
 
-ft <- flextable(nop.sumstat.sex)
-ft <- colformat_double(ft, j=c("p.recap","mf"), digits=3)
-ft <- set_header_labels(ft, "p.recap"="P(recapture)", 
+ft <- flextable::flextable(nop.sumstat.sex)
+ft <- flextable::colformat_double(ft, j=c("p.recap","mf"), digits=3)
+ft <- flextable::set_header_labels(ft, "p.recap"="P(recapture)", 
                               "mf"     ="Marked fraction")
 ft
 
@@ -1947,10 +1947,10 @@ temp <- as.data.frame(cbind(nop.equal.mf.sex$table, nop.equal.mf.sex$table.prop)
 temp$status <- c("Not seen at t1","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
-ft <- flextable(temp)
-ft <- colformat_double(ft, j=c(4:5), digits=3)
-ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,2,2))
-ft <- set_header_labels(ft, "F.1"="F", "M.1"="M")
+ft <- flextable::flextable(temp)
+ft <- flextable::colformat_double(ft, j=c(4:5), digits=3)
+ft <- flextable::add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,2,2))
+ft <- flextable::set_header_labels(ft, "F.1"="F", "M.1"="M")
 ft
 ```
 
@@ -2002,10 +2002,10 @@ temp <- as.data.frame(cbind(nop.equal.recap.sex$table, nop.equal.recap.sex$table
 temp$status <- c("Never seen","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
-ft <- flextable(temp)
-ft <- colformat_double(ft, j=c(4:5), digits=3)
-ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,2,2))
-ft <- set_header_labels(ft, "F.1"="F", "M.1"="M")
+ft <- flextable::flextable(temp)
+ft <- flextable::colformat_double(ft, j=c(4:5), digits=3)
+ft <- flextable::add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,2,2))
+ft <- flextable::set_header_labels(ft, "F.1"="F", "M.1"="M")
 ft
 
 
@@ -2153,11 +2153,13 @@ nop.sex.ma.N_hat_all<- LP_modavg(
 vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_all)
 temp <- nop.sex.ma.N_hat_all[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -2210,11 +2212,14 @@ nop.sex.ma.N_hat_sex<- LP_modavg(
 vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, #"N_hat_conf_level", "N_hat_LCL", "N_hat_UCL"
 #vars %in% names(nop.sex.ma.N_hat_sex)
 temp <- nop.sex.ma.N_hat_sex[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
+ft <- flextable::hline(ft, i=select[-length(select)]  )
 
 ft
 ```
@@ -2286,9 +2291,9 @@ nop.sumstat.length.class <- plyr::rbind.fill(nop.sumstat.length.class,
 
 #nop.sumstat.length.class
 
-ft <- flextable(nop.sumstat.length.class)
-ft <- colformat_double(ft, j=c("p.recap","mf"), digits=3)
-ft <- set_header_labels(ft, "p.recap"="P(recapture)", 
+ft <- flextable::flextable(nop.sumstat.length.class)
+ft <- flextable::colformat_double(ft, j=c("p.recap","mf"), digits=3)
+ft <- flextable::set_header_labels(ft, "p.recap"="P(recapture)", 
                               "mf"     ="Marked fraction")
 ft
 ```
@@ -2330,14 +2335,14 @@ temp <- as.data.frame(cbind(nop.equal.mf.length.class$table, nop.equal.mf.length
 temp$status <- c("Not seen at t1","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
-ft <- flextable(temp)
-ft <- colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
-ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
-ft <- align(ft, i = 1, j = NULL, align = "center", part = "header")
+ft <- flextable::flextable(temp)
+ft <- flextable::colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
+ft <- flextable::add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
+ft <- flextable::align(ft, i = 1, j = NULL, align = "center", part = "header")
 ft <- flextable::compose(ft, i=2,
                          j=2:(2*nc+1), part="header", 
                          value=as_paragraph(as_chunk(c(catnames,catnames))))
-ft <- set_header_labels(ft, "F.1"="F", "M.1"="M")
+ft <- flextable::set_header_labels(ft, "F.1"="F", "M.1"="M")
 ft
 ```
 
@@ -2389,14 +2394,14 @@ temp <- as.data.frame(cbind(nop.equal.recap.length.class$table, nop.equal.recap.
 temp$status <- c("Not recaptured","Recaptured")
 temp <- temp[,c(ncol(temp),1:(ncol(temp)-1))]
 names(temp) <- make.names(names(temp), unique=TRUE) 
-ft <- flextable(temp)
-ft <- colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
-ft <- add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
-ft <- align(ft, i = 1, j = NULL, align = "center", part = "header")
+ft <- flextable::flextable(temp)
+ft <- flextable::colformat_double(ft, j=c((nc+2):(2*nc+1)), digits=3)
+ft <- flextable::add_header_row(ft, top = TRUE, values = c("", "Number of fish", "Proportions"), colwidths = c(1,nc,nc))
+ft <- flextable::align(ft, i = 1, j = NULL, align = "center", part = "header")
 ft <- flextable::compose(ft, i=2,
                          j=2:(2*nc+1), part="header", 
                          value=as_paragraph(as_chunk(c(catnames,catnames))))
-ft <- set_header_labels(ft, "F.1"="F", "M.1"="M")
+ft <- flextable::set_header_labels(ft, "F.1"="F", "M.1"="M")
 ft
 ```
 
@@ -2532,11 +2537,13 @@ nop.length.class.ma.N_hat_all<- LP_modavg(
 vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_all)
 temp <- nop.length.class.ma.N_hat_all[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -2586,11 +2593,14 @@ vars <- c(#"N_hat_f",
           "N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
+ft <- flextable::hline(ft, i=select[-length(select)])
 
 ft
 ```
@@ -2847,11 +2857,13 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -3029,11 +3041,13 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- nop.length.class.ma.N_hat_length.class[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -3450,13 +3464,13 @@ The code is
 #| echo: true
 #| message: false
 #| warning: true
-#| include: false
+#| include: true
 
 
 mod..2 <- Petersen::LP_SPAS_fit(data_spas_harrison, model.id="Pooling every second row",
                        row.pool.in=c("12","12","34","44","56","56"),
                        col.pool.in=c(1,2,3,4,5,6))
-mod..2$summary
+#mod..2$summary
 ```
 
 Notice how we specify the pooling for rows and columns and the choice of
@@ -3493,13 +3507,13 @@ The code is
 #| echo: true
 #| message: false
 #| warning: true
-#| include: false
+#| include: true
 
 
 mod..3 <- Petersen::LP_SPAS_fit(data_spas_harrison, model.id="Pooling early vs. late",
                        row.pool.in=c("123","123","123","456","456","456"),
                        col.pool.in=c(1,2,3,4,5,6))
-mod..3$summary
+#mod..3$summary
 ```
 
 Notice how we specify the pooling for rows and columns and the choice of
@@ -3535,12 +3549,11 @@ estimator. The code and output follow:
 #| echo: false
 #| warning: false
 #| message: false
-#| include: false
-
+#| include: true
 mod..4 <- Petersen::LP_SPAS_fit(data_spas_harrison, model.id="A single row",
                        row.pool.in=rep(1,6),
                        col.pool.in=c(1,2,3,4,5,6))
-mod..4$summary
+#mod..4$summary
 SPAS.print.model(mod..4$fit)
 ```
 
@@ -3614,7 +3627,6 @@ spas.ma <- LP_modavg(mod..1, mod..2, mod..3, mod..4)
 
 ```{r}
 #| echo: false
-#| warning: false
 #| message: false
 #| collapse: true
 #| tbl-cap: "Model averaged estimates of abundance from different SPAS poolings"
@@ -3624,11 +3636,13 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- spas.ma[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -5201,11 +5215,13 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")# ,"N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- ma.table[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -5233,12 +5249,14 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")# ,"N_hat_conf_level", "N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- ma.table[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
-
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
+ft <- flextable::hline(ft, i=select[-length(select)])
 ft
 ```
 
@@ -5826,11 +5844,13 @@ vars <- c(#"N_hat_f","N_hat_rn",
           "Modnames","AICcWt","Estimate","SE")# , "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.length.class.ma.N_hat_length.class)
 temp <- sim.twoD.ma.N_hat[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=2, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=2, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c("N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
@@ -6036,11 +6056,13 @@ nop.TL.modavg <- Petersen::LP_modavg (
 vars <- c("N_hat_f","N_hat_rn","Modnames","AICcWt","Estimate","SE")#, "N_hat_conf_level","N_hat_LCL", "N_hat_UCL")
 #vars %in% names(nop.sex.ma.N_hat_all)
 temp <- nop.TL.modavg[,vars]
-ft <- flextable(temp)
-ft <- width(ft, j="Modnames", width=3, unit="in")
-ft <- colformat_double(ft, j="AICcWt", digits=2)
-ft <- colformat_double(ft, j=c("Estimate","SE"), digits=0)
-#ft <- colformat_double(ft, j=c(""N_hat_LCL","N_hat_UCL"), digits=0)
+ft <- flextable::flextable(temp)
+ft <- flextable::width(ft, j="Modnames", width=3, unit="in")
+ft <- flextable::colformat_double(ft, j="AICcWt", digits=2)
+ft <- flextable::colformat_double(ft, j=c("Estimate","SE"), digits=0)
+#ft <- flextable::colformat_double(ft, j=c(""N_hat_LCL","N_hat_UCL"), digits=0)
+select <- which(tolower(temp$Modnames) == "model averaged")
+ft <- flextable::hline(ft, i=select-1)
 
 ft
 ```
