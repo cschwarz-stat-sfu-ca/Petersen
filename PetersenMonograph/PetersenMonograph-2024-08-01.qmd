@@ -169,8 +169,8 @@ intuitive understanding of the larger class of studies.
 The purpose of this monograph is to bring together a wide body of older
 and newer literature on the design and analysis of the "simple"
 two-sample capture-recapture study. This monograph builds upon the
-comprehensive summaries found in Ricker (1975), Seber (1982), and
-William et al (2002), and incorporates newer works that have not yet
+comprehensive summaries found in Ricker (1975), Seber (1982), Seber and Schofield (2023),
+and William et al (2002), and incorporates newer works that have not yet
 summarized. While the primary emphasis is on the application to
 fisheries management, the methods are directly applicable to many other
 situations.
@@ -624,6 +624,16 @@ Additional columns can be present in the data frame for attributes of the fish s
 
 The data frame can have a separate row for each fish (each with *freq=1*), or a summary as shown above.
 
+You can construct the capture histories from the summary statistics as shown below:
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+cap_hist <- Petersen::n1_n2_m2_to_cap_hist( n1=109, n2=177, m2=57)
+cap_hist
+```
 
 ### Petersen estimate {#sec-petersen-rodli-mt}
 
@@ -1916,6 +1926,21 @@ ft
 The recapture probabilities are similar across the two sexes as are the
 marked fractions. However, with a large sample size, small differences
 in capture probabilities may be detected.
+
+The analysis will be done using the capture histores for individual fish, but 
+you can construct the capture histories from the summary statistics as shown below:
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+cap_hist <- n1_n2_m2_to_cap_hist(n1=c(4045,2777), 
+                                 n2=c(613,527), 
+                                 m2=c(89,68),
+                                 strata=c("F","M"),stratum_var="Sex")
+cap_hist
+```
 
 ### Test for equal marked fractions by sex
 
@@ -8501,9 +8526,15 @@ https://doi.org/10.1139/f97-238
 Seber, G. A. F. (1982). The Estimation of Animal Abundance and Related
 Parameters. 2nd ed. London: Griffin.
 
+
 Seber, G. A. F., and R. Felton. (1981). Tag Loss and the Petersen
 Mark-Recapture Experiment. 
 Biometrika 68, 211--19.
+
+Seber, G.A. F. and  M. R. Schofield (2023), 
+Estimating Presence and Abundance of Closed Populations, 
+Statistics for Biology and Health, Springer, New York.
+https://doi.org/10.1007/978-3-031-39834-6_1
 
 Sprott, D. A. (1981). Maximum Likelihood Applied to a Capture-Recapture
 Model. Biometrics 37, 371--375.

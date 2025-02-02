@@ -1,3 +1,7 @@
+## 2025.02.1 Release
+
+Add new function to generate capture histories from summary statistics.
+
 ## 2024.11.1 Release
 
 Fixed example flagged by CRAN

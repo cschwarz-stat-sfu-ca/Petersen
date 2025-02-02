@@ -1,3 +1,7 @@
+Petersen 2025.02.01
+-------------------
+* Added n1_n2_m2_to_cap_hist() function to generate capture histories from n1, n2, and m2 summary statistics.
+
 Petersen 2024.11.01
 -------------------
 * Corrected example flagged by CRAN
