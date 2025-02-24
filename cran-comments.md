@@ -18,10 +18,11 @@ Added example of using multimark in user manual.
 * local OS X install, R 4.4.2
 * devtools::check_win_release()
 * devtools::check_win_devel()
-* devtools::check_rhub()
+* rhub::rhub_check()
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
+There were no ERRORs or WARNINGs in local OS X install, win_release(), win_devel().
+Rhub_check() often fails when trying to install rjags and jags. I don't think I can "fix" those issues.
 
 ## Reverse dependencies
 

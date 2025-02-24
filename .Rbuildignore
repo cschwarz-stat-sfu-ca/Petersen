@@ -8,3 +8,4 @@ cran-comments*
 CRAN-SUBMISSION
 ^CRAN-SUBMISSION$
 revdep
+.github
