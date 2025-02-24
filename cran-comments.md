@@ -1,6 +1,7 @@
-## 2025.02.1 Release
+## 2025.3.1 Release
 
 Add new function to generate capture histories from summary statistics.
+Update monograph on GitHub site
 
 ## 2024.11.1 Release
 

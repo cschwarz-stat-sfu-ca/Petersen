@@ -1,8 +1,8 @@
 Package: Petersen
 Type: Package
 Title: Estimators for Two-Sample Capture-Recapture Studies
-Version: 2025.2.1
-Date: 2025-02-01
+Version: 2025.3.1
+Date: 2025-03-01
 Authors@R: person("Carl", "Schwarz", email = "cschwarz.stat.sfu.ca@gmail.com", role = c("aut", "cre"))
 Description: A comprehensive implementation of Petersen-type estimators
     and its many variants for two-sample capture-recapture studies.
