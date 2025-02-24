@@ -15,7 +15,7 @@ Added example of using multimark in user manual.
 
 
 ## Test environments
-* local OS X install, R 4.3.2
+* local OS X install, R 4.4.2
 * devtools::check_win_release()
 * devtools::check_win_devel()
 * devtools::check_rhub()
