@@ -46,8 +46,9 @@ est <- Petersen::LP_est(fit, N_hat=~1)
 est$summary
 
 #stratified example - Northern Pike stratified by sex
-cap_hist <- n1_n2_m2_to_cap_hist(n1=c(4045,2777), n2=c(613,527), m2=c(89,68), strata=c("F","M"))
-
+cap_hist <- n1_n2_m2_to_cap_hist(n1=c(4045,2777), n2=c(613,527), m2=c(89,68),
+                strata=c("F","M"),stratum_var="Sex")
+cap_hist
 
 }
 \author{
