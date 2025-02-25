@@ -126,6 +126,7 @@ extdata.list
 
 change.csv <- textConnection(
 "Date,Item,Changes
+2025-03-01, a, Added n1_n2_m2_to_cap_hist() function to generate capture histories summary statistics
 2024-06-01, a, Added new example of forward-reverse capture-recapture (lower Fraser coho)
 2024-06-01, b, Added chapter on use of multimark when you have left and right photographs and cannot match left and right to the same animal.
 2023-12-01, a, Updates for CRAN submission. No new functionality or examples.
@@ -180,7 +181,7 @@ workbook accompanies this monograph to assist in the
 design and analysis of the Petersen studies. As well, the *Petersen* package in *R* 
 is available for download.
 
-Following Stigler's law of eponymy (https://en.wikipedia.org/wiki/Stigler%27s_law_of_eponymy), Goudie and Goudie (2007)
+Following Stigler's law of eponymy <https://en.wikipedia.org/wiki/Stigler%27s_law_of_eponymy>, Goudie and Goudie (2007)
 investigated the origin of the Petersen estimator and identified additional scientists whose early work
 on marking and estimating fish populations deserves more credit than it has received.
 
@@ -8044,7 +8045,7 @@ The number of unique adults recaptured can be derived from @tbl-tgMR-summary1
 by treating multiple recaptures of the same adult genotype as single capture event.
 This give $R_{unique}$ = `r Ru`.
 
-Similarly, the number of unique adult genotypes seen for the first time is also determined from @tbl-tgMR-summary.
+Similarly, the number of unique adult genotypes seen for the first time is also determined from @tbl-tgMR-summary1.
 For this study this gives $C_{unique}$ = `r Cu`.
 
 This gives an estimate of  `r round(N_hat_Ch)` (SE `r round(N_hat_Ch.se)`) fish.
@@ -8330,7 +8331,7 @@ Terminal Run and Escapement to the
 Lower Fraser Management Unit.
 Report prepared for the Pacific Salmon Commission, dated 2020-02-21.
 Available at: 
-https://www.psc.org/fund-project/feasibility-of-estimating-aggregate-coho-salmon-escapement-to-the-lower-fraser-management-unit/
+<https://www.psc.org/fund-project/feasibility-of-estimating-aggregate-coho-salmon-escapement-to-the-lower-fraser-management-unit/>
 
 
 Arnason, A. N., and K. H. Mills. (1981). Bias and Loss of Precision Due
@@ -8349,7 +8350,7 @@ Biometrika 38, 293--306.
 Bailey, N. T. J. (1952). 
 Improvements in the interpretation of recapture data.
 Journal of Animal Ecology 21, 120--127.
-https://doi.org/10.2307/1913
+<https://doi.org/10.2307/1913>
 
 Beverton, R. J. H., and Holt, S. J. (1957). On the dynamics of exploited
 fish populations. Fish. Invest. Minist. Mar. Fish. Minist. Agric., Fish.
@@ -8360,7 +8361,7 @@ method for analysis of stratified mark-recapture data from small
 populations, with application to estimating abundance of smolts from
 outmigrant trap data. Administrative Report SC-00-02, National Marine
 Fisheries Service. Available at:
-http://swfsc.noaa.gov/publications/FED/00116.pdf, Accessed 2009-07-28.
+<http://swfsc.noaa.gov/publications/FED/00116.pdf>, Accessed 2009-07-28.
 
 Bonner Simon, J. and Schwarz Carl, J. (2011). Smoothing Population Size
 Estimates for Time-Stratified Mark Recapture Experiments Using Bayesian
@@ -8370,7 +8371,7 @@ Biometrics, 67, 1498--1507.
 Bonner, S. J., & Holmberg, J. (2013). 
 Mark-Recapture with Multiple, Non-Invasive Marks. 
 Biometrics, 69, 766–-775. 
-http://www.jstor.org/stable/24538143
+<http://www.jstor.org/stable/24538143>
 
 Bonner, S. J. and Schwarz, C. J. (2023). BTSPAS: Bayesian Time
 Stratified Petersen Analysis System. R package version 2021.11.2.
@@ -8397,17 +8398,17 @@ York: Wiley.
 Cowen, Laura, and Schwarz, C. J. (2006). The Jolly-Seber Model with Tag
 Loss. 
 Biometrics 62, 699--705.
-https://doi.org/10.1111/j.1541-0420.2006.00523.x.
+<https://doi.org/10.1111/j.1541-0420.2006.00523.x>.
 
 Darroch, J. N. (1961). The two-sample capture-recapture census when
 tagging and sampling are stratified. 
 Biometrika, 48, 241--260.
-https://www.jstor.org/stable/2332748
+<https://www.jstor.org/stable/2332748>
 
 Goudie, I. B. J., and M. Goudie. (2007). 
 Who Captures the Marks for the Petersen Estimator? 
 Journal of the Royal Statistical Society. Series A (Statistics in Society), 170, 825–-839.
-http://www.jstor.org/stable/4623202
+<http://www.jstor.org/stable/4623202>
 
 Gulland, J. A. (1963). On the Analysis of Double-Tagging Experiments.
 Special Publication ICNAF No. 3, 228--29.
@@ -8421,7 +8422,7 @@ Hyun, S.-Y., Reynolds.J.H., and Galbreath, P.F. (2012). Accounting for
 Tag Loss and Its Uncertainty in a Mark--Recapture Study with a Mixture
 of Single and Double Tags. 
 Transactions of the American Fisheries Society, 141, 11--25.
-http://dx.doi.org/10.1080/00028487.2011.639263
+<http://dx.doi.org/10.1080/00028487.2011.639263>
 
 Huggins, R. M. 1989. On the Statistical Analysis of Capture Experiments.
 Biometrika 76: 133--40.
@@ -8436,7 +8437,7 @@ Estimates Based on Selective Samples. I.C.N.A.F. Special Publication No.
 Laake J (2013). 
 RMark: An R Interface for Analysis of Capture-Recapture Data with MARK. 
 AFSC Processed Rep. 2013-01, Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., Seattle, WA.
-https://apps-afsc.fisheries.noaa.gov/Publications/ProcRpt/PR2013-01.pdf.
+<https://apps-afsc.fisheries.noaa.gov/Publications/ProcRpt/PR2013-01.pdf>.
 
 
 Laplace, P. S. (1786). Sur Les Naissances, Les Mariages et Les Morts.
@@ -8460,7 +8461,7 @@ Biometrics 61, 46--54.
 McClintock, B.T., Conn, P.B., Alonso, R.S. and Crooks, K.R. (2013), 
 Integrated modeling of bilateral photo-identification data in mark–recapture analyses. 
 Ecology, 94, 1464--1471. 
-https://doi.org/10.1890/12-1613.1
+<https://doi.org/10.1890/12-1613.1>
 
 McClintock, B. T. (2015) 
 multimark: an R package for analysis of capture-recapture data consisting of multiple "noninvasive" marks.
@@ -8478,7 +8479,7 @@ Biometrics 65, 237–-246
 McClintock, B.T., White, G.C. (2012)
 From NOREMARK to MARK: software for estimating demographic parameters using mark–resight methodology. 
 J Ornithol 152 (Suppl 2), 641–-650. 
-https://doi.org/10.1007/s10336-010-0524-x
+<https://doi.org/10.1007/s10336-010-0524-x>
 
 McDonald, T. L., S. C. Amstrup, and B. F. J. Manly. (2003). Tag Loss Can
 Bias Jolly-Seber Capture-Recapture Estimates. 
@@ -8491,18 +8492,18 @@ Report Danish Biological Station 6, 1--48.
 Plante, N., L.-P Rivest, and G. Tremblay. (1988). Stratified
 Capture-Recapture Estimation of the Size of a Closed Population.
 Biometrics 54, 47--60. 
-https://www.jstor.org/stable/2533994
+<https://www.jstor.org/stable/2533994>
 
 Premarathna, W.A.L., Schwarz, C.J., Jones, T.S. (2018) Partial
 stratification in two-sample capture--recapture experiments.
 Environmetrics, 29:e2498. 
-https://doi.org/10.1002/env.2498
+<https://doi.org/10.1002/env.2498>
 
 Rawding, D.J., Sharpe, C.S. and Blankenship, S.M. (2014), 
 Genetic-Based Estimates of Adult Chinook Salmon Spawner Abundance from 
 Carcass Surveys and Juvenile Out-Migrant Traps. 
 Transactions of the American Fisheries Society, 143, 55--67. 
-https://doi.org/10.1080/00028487.2013.829122
+<https://doi.org/10.1080/00028487.2013.829122>
 
 Rajwani, K., and Schwarz, C.J. (1997). Adjusting for Missing Tags in
 Salmon Escapement Surveys. 
@@ -8515,13 +8516,13 @@ Bull Fish Res Board Can 191.
 Robson, D. S., and H. A. Regier. (1964). 
 Sample Size in Petersen Mark-Recapture Experiments. 
 Transactions of the American Fish Society 93, 215--26.
-https://doi.org/10.1577/1548-8659(1964)93[215:SSIPME]2.0.CO;2
+<https://doi.org/10.1577/1548-8659(1964)93[215:SSIPME]2.0.CO;2>
 
 Rosenbaum, S. W., May, S. A., Shedd, K. R., Cunningham, C. J., Peterson, R. L., Elliot, B. W., & McPhee, M. V. (2024). 
 Reliability of trans-generational genetic mark–recapture (tGMR) 
 for enumerating Pacific salmon. 
 Evolutionary Applications, 17, e13647. 
-https://doi.org/10.1111/eva.13647
+<https://doi.org/10.1111/eva.13647>
 
 Schwarz, C. J. (2023). SPAS: Stratified-Petersen Analysis System. R
 package version 2023.3.31.
@@ -8539,7 +8540,7 @@ stratified-Petersen estimator in fisheries management: estimating the
 number of pink salmon (Oncorhynchus gorbuscha) that spawn in the Fraser
 River. 
 Canadian Journal of Fisheries and Aquatic Sciences 55, 281--297.
-https://doi.org/10.1139/f97-238
+<https://doi.org/10.1139/f97-238>
 
 Seber, G. A. F. (1982). The Estimation of Animal Abundance and Related
 Parameters. 2nd ed. London: Griffin.
@@ -8552,7 +8553,7 @@ Biometrika 68, 211--19.
 Seber, G.A. F. and  M. R. Schofield (2023), 
 Estimating Presence and Abundance of Closed Populations, 
 Statistics for Biology and Health, Springer, New York.
-https://doi.org/10.1007/978-3-031-39834-6_1
+<https://doi.org/10.1007/978-3-031-39834-6_1>
 
 Sprott, D. A. (1981). Maximum Likelihood Applied to a Capture-Recapture
 Model. Biometrics 37, 371--375.
@@ -8560,7 +8561,7 @@ Model. Biometrics 37, 371--375.
 Wang, J., & Santure, A. W. (2009). 
 Parentage and Sibship in- ference from multilocus genotype data under polygamy. 
 Genetics, 181(4), 1579–-1594. 
-https://doi.org/10.1534/genet ics.108.100214
+<https://doi.org/10.1534/genetics.108.100214>
 
 
 Weatherall, J. A. (1982). Analysis of Double Tagging Experiments.
@@ -8577,7 +8578,7 @@ Yee, T.W., Stoklosa, J., and Huggins, R.J. (2015). The VGAM Package for
 Capture-Recapture Data Using the Conditional Likelihood. 
 Journal of Statistical Software, 65, 1--33. 
 DOI: 10.18637/jss.v065.i05. URL
-https://www.jstatsoft.org/article/view/v065i05/.
+<https://www.jstatsoft.org/article/view/v065i05/>.
 
 
 papers by Rivest on the proper constant to add to the Petersen to make
