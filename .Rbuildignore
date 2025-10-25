@@ -9,3 +9,4 @@ CRAN-SUBMISSION
 ^CRAN-SUBMISSION$
 revdep
 .github
+vignettes/*_files

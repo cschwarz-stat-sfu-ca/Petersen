@@ -10,3 +10,5 @@ coda*
 inits*.txt
 data.txt
 model.txt
+*_files
+vignettes

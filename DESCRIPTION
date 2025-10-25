@@ -1,8 +1,8 @@
 Package: Petersen
 Type: Package
 Title: Estimators for Two-Sample Capture-Recapture Studies
-Version: 2025.3.1
-Date: 2025-03-01
+Version: 2025.11.1
+Date: 2025-11-01
 Authors@R: person("Carl", "Schwarz", email = "cschwarz.stat.sfu.ca@gmail.com", role = c("aut", "cre"))
 Description: A comprehensive implementation of Petersen-type estimators
     and its many variants for two-sample capture-recapture studies.
@@ -14,7 +14,7 @@ Description: A comprehensive implementation of Petersen-type estimators
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 Imports:
     AICcmodavg,
@@ -44,6 +44,7 @@ Suggests:
 VignetteBuilder: 
     knitr,
     rmarkdown,
-    R.rsp
+    R.rsp,
+    quarto
 URL: https://github.com/cschwarz-stat-sfu-ca/Petersen
 BugReports: https://github.com/cschwarz-stat-sfu-ca/Petersen/issues

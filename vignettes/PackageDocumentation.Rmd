@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 The user manual for this package is too large to be stored with the package, so you will need to access the user manual
 via the following link to the GitHub repository:
 
+https://cschwarz-stat-sfu-ca.github.io
 
+You can download a *.pdf, or *.html document.
+The quarto document that generated this monograph is found at:
 https://github.com/cschwarz-stat-sfu-ca/Petersen/tree/master/PetersenMonograph
-
-You can download a *.pdf, or *.html, or a Quarto (*.qmd) document.
